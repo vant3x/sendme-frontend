@@ -28,20 +28,23 @@ const Dropzone = () => {
         uploadFile(formData, acceptedFiles[0].path);
     }, []);
 
-    const maxSize = auth ? 1000000000 : 10000000;
+    const adminMaxSize = user?.role > 0 ? 30000000000 : 1000000000;  
+    const maxSize = auth ? adminMaxSize  : 10000000;
 
      // extraer contenido de dropzone
     const { getRootProps, getInputProps, isDragActive, acceptedFiles } = useDropzone({onDropAccepted, onDropRejected, maxSize});
+    // 
 
     const files = acceptedFiles.map( file => (
         <li className="bg-white flex-1 p-3 mt-4 mb-4 shadow-lg rounded" key={file.lastModified}>
            <p className="text-lg">
+       
             {file.path.split('.')[0].length > 40 ? file.path.split('.')[0].slice(0, 30) + '...' : file.path.split('.')[0]}<span className="text-blue-400">.{file.path.split('.')[1]}</span>
             </p>
             <p className="text-sm text-gray-500 "> { (file.size / Math.pow(1024, 2)).toFixed(2) } MB </p>
         </li>
     ));
-
+     
     return (
         <div className="md:flex-1 mb-3 mx-2 mt-16 lg:mt-0  flex flex-col items-center justify-center border-dashed border-gray-400 border-2 bg-gray-100 px-4">
 

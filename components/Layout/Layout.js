@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import Header from "./../Header";
+import Link from "next/link";
 
 const Layout = ({ children }) => {
   return (
@@ -64,11 +65,15 @@ const Layout = ({ children }) => {
           <a
             href="https://twitter.com/alevant3X"
             target="_blank"
-            className="text-red-500 underline hover:text-red-700"
+            className="text-red-500 hover:text-red-700"
           >
             {" "}
             &copy; 2021 by Alevante 🇨🇴
           </a>
+          <br/>
+          <Link href="/privacidad" >
+            <a  className="underline mt-2 text-gray-800 hover:text-red-500">Políticas de Privacidad</a>
+          </Link>
         </footer>
       </div>
     </>

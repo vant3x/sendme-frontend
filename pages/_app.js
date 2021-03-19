@@ -16,4 +16,4 @@ const MyApp = ({ Component, pageProps }) => {
         </AuthState>
     )
 }
-export default MyApsp;
+export default MyApp;
