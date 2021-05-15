@@ -55,6 +55,23 @@ const HeaderDropdowns = (props) => {
                 <i className="fas fa-link"></i> Ver mis enlaces
               </a>
             </Link>
+            <Link href="/folders">
+            <a
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              role="menuitem"
+            >
+            <i className="fas fa-folder"></i> Ver Carpetas
+            </a>
+          </Link>
+            <Link href="/links">
+            <a
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              role="menuitem"
+            >
+            <i className="fas fa-folder-plus"></i> Nueva Carpeta
+            </a>
+          </Link>
+
           </div>
           <div className="py-1">
             <a

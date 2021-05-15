@@ -4,6 +4,7 @@ import appContext from '../../context/app/appContext';
 import authContext from '../../context/auth/authContext';
 import DownloadForm from '../DownloadForm';
 import PasswordFileForm from '../PasswordFileForm';
+import FolderFileContainerInput from '../FolderFileContainerInput';
 import Loader from '../Loader/Loader';
 
 const Dropzone = () => {
@@ -59,7 +60,8 @@ const Dropzone = () => {
                      auth ? (
                          <div className="w-full mt-16">
                             <DownloadForm/> 
-                            <PasswordFileForm/>                           
+                            <PasswordFileForm/>                     
+                            <FolderFileContainerInput user={user} />
                          </div>
                      ) : "" 
                  }

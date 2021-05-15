@@ -4,26 +4,27 @@ import axiosClient from '../../config/axios';
 import appContext from './../../context/app/appContext';
 import authContext from './../../context/auth/authContext';
 import Alert from './../../components/Alerts/Alert';
-
+import { NotFoundError } from 'next/error';
 
 export async function getServerSideProps({params}) {
-    
     const { link } = params;
 
     const response = await axiosClient.get(`/api/link/${link}`);
-  
     return {
         props: {
             link: response.data
         }
     }
+
+
 }
 
 export async function getServerSidePaths() {
-    const links = await axiosClient.get('/api/links')
+
+    const links = await axiosClient.get('/api/links');
     return {
         paths: links.data.links.map( link => ({
-            params: { link: link.url }
+            params: { link: link.url}
         })),
         fallback: false
     }
@@ -31,8 +32,7 @@ export async function getServerSidePaths() {
 
 
 
-export default ({link}) => {
-
+export default ({link, linkInfo}) => {
     // definir el context auth
     const AuthContext = useContext(authContext);
     const { user, auth  } = AuthContext;
@@ -111,7 +111,10 @@ export default ({link}) => {
                         link.originalName.includes('.mp4')  || link.originalName.includes('.mov')  ?  <i className="my-2 text-5xl  fas fa-photo-video text-red-500 ml-2"></i> : null
         
                       }
-
+                      {
+                        link.originalName.includes('.mp3')  || link.originalName.includes('.wav') || link.originalName.includes('.mid') || link.originalName.includes('.ac3') ?  <i className="text-xl  fas fa-music text-red-500 ml-2"></i> : null
+        
+                      }
                       {
                         link.originalName.includes('.pdf')   ?  <i className="my-2 text-5xl  far fa-file-pdf text-red-500 ml-2"></i> : null
         

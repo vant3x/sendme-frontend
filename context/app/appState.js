@@ -12,6 +12,7 @@ import {
      NEW_LINK_ERROR,
      RESET_STATE,
      SET_PASSWORD,
+     SET_FOLDER,
      SET_DOWNLOADS
 } from '../../types';
 import axiosClient from '../../config/axios';
@@ -25,6 +26,7 @@ const AppState = ({children}) => {
         loading: null,
         downloads: 10,
         password: '',
+        folder:null,
         author: null,
         url:''
     }
@@ -76,6 +78,7 @@ const AppState = ({children}) => {
            original_name: state.original_name,
            download_limit: state.downloads,
            password: state.password,
+           folder: state.folder,
            author: state.author
        }
 
@@ -104,6 +107,16 @@ const AppState = ({children}) => {
         })
     }
 
+
+    //  Agregue el folder
+    const setFolder = folder => {
+        dispatch({
+            type: SET_FOLDER,
+            payload: folder
+        })
+    }
+
+
     // agregar un numero de descargas
     const setDownloads = downloads => {
         dispatch({
@@ -122,6 +135,7 @@ const AppState = ({children}) => {
                 loading: state.loading,
                 downloads: state.downloads,
                 password: state.password,
+                folder: state.folder,
                 author: state.author,
                 url: state.url,
                 showAlert,
@@ -129,6 +143,7 @@ const AppState = ({children}) => {
                 newLink,
                 resetState,
                 setPassword,
+                setFolder,
                 setDownloads
             }}
         >

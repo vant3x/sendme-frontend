@@ -20,4 +20,5 @@ export const NEW_LINK_ERROR = 'NEW_LINK_ERROR';
 export const RESET_STATE = 'RESET_STATE';
 
 export const SET_PASSWORD = 'SET_PASSWORD';
+export const SET_FOLDER = 'SET_FOLDER';
 export const SET_DOWNLOADS = 'SET_DOWNLOADS';

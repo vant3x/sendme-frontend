@@ -8,6 +8,7 @@ import {
      NEW_LINK_ERROR,
      RESET_STATE,
      SET_PASSWORD,
+     SET_FOLDER,
      SET_DOWNLOADS
 } from '../../types';
 
@@ -56,6 +57,7 @@ export default ( state, action) => {
                 loading: null,
                 downloads: 10,
                 password: '',
+                folder:null,
                 author: null,
                 url:''
             }
@@ -63,6 +65,11 @@ export default ( state, action) => {
             return {
                 ...state,
                 password: action.payload
+            }
+        case SET_FOLDER: 
+            return {
+                ...state,
+                folder: action.payload
             }
         case SET_DOWNLOADS:
             return {

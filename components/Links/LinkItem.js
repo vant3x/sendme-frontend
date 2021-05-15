@@ -28,6 +28,10 @@ const LinkItem = ({link}) => {
 
               }
               {
+                link.originalName.includes('.mp3')  || link.originalName.includes('.wav') || link.originalName.includes('.mid') || link.originalName.includes('.ac3') ?  <i className="text-xl  fas fa-music text-red-500 ml-2"></i> : null
+
+              }
+              {
                 link.originalName.includes('.pdf')   ?  <i className="text-xl   far fa-file-pdf text-red-500 ml-2"></i> : null
 
               }
@@ -57,7 +61,14 @@ const LinkItem = ({link}) => {
         <a href="#" className="text-blue-400 hover:text-blue-500">
           Editar
         </a>
+        
       </td>
+      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium sm:visible invisible">
+      <a href="#" className="bg-red-500 px-2 text-gray-400 hover:text-gray-500">
+        ...
+      </a>
+      
+    </td>
     </tr>
   );
 };
