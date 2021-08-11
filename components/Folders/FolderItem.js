@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import { Menu, Transition } from '@headlessui/react'
+import { ChevronDownIcon } from '@heroicons/react/solid'
+import FolderOptionsMenu from './FolderOptionsMenu';
 
 const FolderItem = ({ styles, folder }) => {
+
+  const [folderOptions, setFolderOptions] = useState(false);
+  const [showFolderOptons, setShowFolderOptions] = useState(false);
+
+  const showFolderOptions = () => {
+    setFolderOptions(true);
+    console.log('funciona')
+  }
+
+
   return (
-    <article className="flex flex-col ">
+    <article className="flex flex-col  hover:text-red-500 mb-4 mt-2 mr-2" 
+      onMouseEnter={()=> showFolderOptions(true)} 
+      onMouseLeave={()=> setFolderOptions(false)} 
+      >
       <Link href={`/folders/${folder._id}`}>
         <a>
           <i
@@ -11,12 +27,23 @@ const FolderItem = ({ styles, folder }) => {
           ></i>
         </a>
       </Link>
-      <Link href={`/folders/${folder._id}`}>
+      <div>
+      <p className="ml-4 cursor-pointer  hover:text-red-500 hover">
+        <Link href={`/folders/${folder._id}`}>
         <a>
-          <p className="ml-4 cursor-pointer">{folder.folderName}</p>
+        {folder.folderName}
         </a>
       </Link>
+      {
+        folderOptions ? (
+          <FolderOptionsMenu folder={folder} setShowOptionFolder={setShowFolderOptions} />
+        ) : null
+      }
+      </p>
+      </div>
+  
     </article>
+
   );
 };
 

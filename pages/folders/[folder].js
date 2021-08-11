@@ -5,6 +5,7 @@ import authContext from "./../../context/auth/authContext";
 import Link from "next/link";
 import FolderItem from "../../components/Folders/FolderItem";
 import FolderFilesContainer from "../../components/Folders/FolderFilesContainer";
+import FilesInfoSidebar from "../../components/FilesInfoSidebar/FilesInfoSidebar";
 
 export async function getServerSideProps({ params }) {
   const { folder } = params;
@@ -39,10 +40,21 @@ export default ({ folder }) => {
               / {folderById.folderName}
             </span>
 
+            <div className="md:float-right sm:text-center">
+            <button className="ml-4 btn bg-gray-400 px-2 py-1 rounded" >
+            <i className="fas fa-pen mr-2"></i>
+
+            Editar Carpeta</button>
+            <button className="ml-4 btn bg-red-400 text-white px-2 py-1 rounded">
+            <i className="fas fa-trash  mr-2 "></i>
+
+            Eliminar Carpeta</button>
+            </div>
+
           </div>
 
           <FolderFilesContainer files={folderById.files} />
-
+          <FilesInfoSidebar/>
         </div>
 
    

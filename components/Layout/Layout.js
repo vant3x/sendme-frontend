@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import Head from "next/head";
-import Header from "./../Header";
 import Link from "next/link";
+import Header from "./../Header";
+import NewFolderModal from "../Folders/NewFolderModal";
 
 const Layout = ({ children }) => {
+  const [newFolder, setNewFolder] = useState(false);
+
+
+  const showNewFolderModal = () => {
+    setNewFolder(!newFolder);
+  }
+
+
   return (
     <>
       <Head>
@@ -27,11 +36,11 @@ const Layout = ({ children }) => {
         />
         <meta
           name="keywords"
-          content="Sendme, Sendmefiles, sendmefiles.cloud, sendme cloud, SendMe, send-me, send-files, Send-Me, Send Me, Send Files, Compartir archivos, nube privada, compartir archivos privados, archivos seguros, limite de descarga, archivos, archivos encriptados"
+          content="Sendme, Sendmefiles, www.sendmefiles.cloud, sendmefiles.cloud, sendme cloud, SendMe, send-me, send-files, Send-Me, Send Me, Send Files, Compartir archivos, nube privada, compartir archivos privados, archivos seguros, limite de descarga, archivos, archivos encriptados"
         />
         {/* OG for Facebook  */}
         <meta property="og:url" content="https://sendmefiles.cloud" />
-        <meta property="og:type" content="website" />
+        <meta property="og:type" content= "website" />
         <meta property="og:title" content="SendMe" />
         <meta
           property="og:description"
@@ -58,7 +67,7 @@ const Layout = ({ children }) => {
       </Head>
       <div className="bg-gray-100 min-h-screen">
         <div className="container mx-auto">
-          <Header />
+          <Header newFolder={showNewFolderModal} />
           <div className="mt-20">{children}</div>
         </div>
 
@@ -76,6 +85,9 @@ const Layout = ({ children }) => {
             <a  className="underline mt-2 text-gray-800 hover:text-red-500">Políticas de Privacidad</a>
           </Link>
         </footer>
+        { newFolder &&
+         <NewFolderModal/>
+        }
       </div>
     </>
   );

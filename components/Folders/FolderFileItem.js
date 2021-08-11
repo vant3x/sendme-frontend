@@ -3,6 +3,7 @@ import Link from "next/link";
 
 const FolderFileItem = ({ styles, file }) => {
   const { fileName, downloadLimit, originalName, url, _id } = file.file;
+
   return (
     <article className="flex flex-col mr-4">
       <Link href={`/links/${url}`}>
@@ -19,7 +20,7 @@ const FolderFileItem = ({ styles, file }) => {
           originalName.includes(".wav") ||
           originalName.includes(".mid") ||
           originalName.includes(".ac3") ? (
-            <i className="text-4xl  fas fa-music text-red-500 mr-1 mb-2 hover:text-red-600"></i>
+            <i className="mt-2 text-5xl  fas fa-music text-red-500 mr-1 mb-2 hover:text-red-600"></i>
           ) : null}
           {originalName.includes(".pdf") ? (
             <i className="my-2 text-5xl  far fa-file-pdf text-red-500 ml-2 hover:text-red-600"></i>
@@ -31,7 +32,7 @@ const FolderFileItem = ({ styles, file }) => {
       </Link>
       <Link href={`/links/${url}`}>
         <a className="">
-          <span className="hover:text-red-500"> {fileName}</span>
+          <span className="hover:text-red-500"> {originalName.split('.')[0].slice(0,30)}</span><span className="text-red-500">.{originalName.split('.')[originalName.split('.').length - 1]}</span>
         </a>
       </Link>
     </article>

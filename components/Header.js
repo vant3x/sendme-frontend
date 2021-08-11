@@ -5,8 +5,8 @@ import authContext  from '../context/auth/authContext';
 import appContext  from '../context/app/appContext';
 import { useRouter } from 'next/router';
 import HeaderDropdowns from './HeaderDrowpdown';
-    
-const Header = () => {
+
+const Header = ({newFolder}) => {
 
   // routing
   const router = useRouter();
@@ -43,7 +43,7 @@ const Header = () => {
                     <p className="mr-2">Hola {user.name ? user.name : null}</p>
 
             
-                    <HeaderDropdowns user={user} logout={logout} />
+                    <HeaderDropdowns  user={user} newFolder={newFolder} logout={logout}  />
 
                    {/* <button 
                         className="bg-black px-5 py-3 rounded text-white font-bold uppercase ml-2 hover:bg-gray-800 sm:visible invisible" 
