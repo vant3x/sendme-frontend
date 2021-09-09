@@ -45,6 +45,22 @@ a {
 .lds-ripple div:nth-child(2) {
   animation-delay: -0.5s;
 }
+
+.text-auth-horizontal {
+  width: 100%; 
+  text-align: center; 
+  border-bottom: 1px solid #2d3748; 
+  line-height: 0.1em;
+  margin: 30px 0px; 
+  color:#2d3748;
+  
+}
+
+.text-auth-horizontal span {
+  background:#f7fafc; 
+  padding:0 10px; 
+}
+
 @keyframes lds-ripple {
   0% {
     top: 36px;

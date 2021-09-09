@@ -1,0 +1,29 @@
+.login-btn-container-item {
+    border: 1px solid #000;
+    padding:10px;
+    display:flex;
+    justify-content:center;
+    background:#fff;
+    align-items:center;
+    margin:0px 10px;
+    transition: all 0.3s ease;
+
+}
+
+
+.login-btn-container-item:hover {
+  color:#fff;   
+  background: #000;
+}
+
+@media screen and (max-width:1024px) {
+
+  .login-btn-container-item {
+    margin:10px 0px;
+  }
+}
+
+.title-btn {
+  margin: 0px 10px;
+
+}

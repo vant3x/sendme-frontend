@@ -63,12 +63,11 @@ const Home = () => {
                 <h2 className="md:text-4xl text-2xl font-sans font-bold text-gray-800 my-4">
                   Compartir archivos de forma fácil y privada
                 </h2>
-                <p className="text-lg leading-loose">
+                <p className="text-lg leading-looseñ">
                   <span className="text-red-500 font-bold">SendMe</span> te
-                  permite compartir archivos con cifrado de extremo a extremo,
+                  permite compartir archivos de forma segura,
                   archivos protegidos por contraseña, archivos con un limite de
-                  descargas y tambien te permite compartir archivos con un
-                  tiempo limite para ser borrados.
+                  descargas y mucho más
                 </p>
                 {!user ? (
                   <>

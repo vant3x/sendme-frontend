@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import authContext from '../context/auth/authContext';
 import Alert from './../components/Alerts/Alert';
+import BtnSocialAuth from '../components/LoginAndSignupButtons/SocialAuthBtn';
 import { useRouter } from 'next/router';
 
 const Login = () => {
@@ -46,6 +47,15 @@ const Login = () => {
           Iniciar Sesión
         </h2>
         { message &&  <Alert/> }
+
+        <div className="lg:flex lg:justify-center ">
+        <BtnSocialAuth  title="Google" type="google" />
+        <BtnSocialAuth title="Twitter" type="twitter" />
+        <BtnSocialAuth title="Github" type="github" />
+
+        </div>
+        <h2 className="text-auth-horizontal"><span>O inicia con tu correo</span></h2>
+
         <div className="flex justify-center mt-5">
           <div className="w-full max-w-lg">
             <form
@@ -102,7 +112,10 @@ const Login = () => {
                   </div>
                 ) : null}
               </div>
+                  <div className="text-center">
+                  <a href="" className="underline hover:text-red-500">¿Has olvidado tu contraseña?</a>
 
+                  </div>
               <input
                 type="submit"
                 className="bg-red-500  mt-4 hover:bg-gray-900 w-full p-2 text-white uppercase font-bold cursor-pointer"

@@ -1,17 +1,15 @@
-import React, { useState, useEffect,  useContext } from 'react';
-import appContext from '../context/app/appContext';
+import React, { useState, useEffect, useContext } from "react";
+import appContext from "../context/app/appContext";
 import axiosClient from "../config/axios";
 
-const FolderFileContainerInput = ({user}) => {
+const FolderFileContainerInput = ({ user }) => {
+  // context de la app
+  const AppContext = useContext(appContext);
+  const { setFolder } = AppContext;
 
-    // context de la app
-    const AppContext = useContext(appContext);
-    const { setFolder } = AppContext;
+  const [hasFolder, setHasFolder] = useState(false);
+  const [foldersByUser, setFolders] = useState([]);
 
-    const [hasFolder, setHasFolder] = useState(false);
-    const [foldersByUser, setFolders] = useState([]);
-
-    
   useEffect(() => {
     fetchFolders(user);
   }, [user]);
@@ -25,18 +23,25 @@ const FolderFileContainerInput = ({user}) => {
     }
   };
 
-    return (
-        <div>
-         <div className="flex justify-betweens items-center mt-4">
-            <label className="text-lg text-gray-800 mr-2">Selecciona un folder para el archivo:</label>
-            <input 
-                onChange={(()=> setHasFolder(!hasFolder))}
-                type="checkbox"
-            />
-        </div>
+  return (
+    <div>
+     <div>
+     <div className="flex justify-betweens items-center mt-4">
+        <label className="text-lg text-gray-800 mr-2">
+          Selecciona un folder para el archivo:
+        </label>
+      
+        <input onChange={() => setHasFolder(!hasFolder)} type="checkbox" />
 
-        { hasFolder ? (
-            <>
+      </div>
+      <p  className="text-lg text-gray-800 mr-2">
+          Por defecto los archivos se suben al folder principal  
+        </p>
+     </div>
+
+
+      {hasFolder ? (
+        <>
           {/*  <input
             placeholder="/home"
             type="text" 
@@ -44,23 +49,26 @@ const FolderFileContainerInput = ({user}) => {
             onChange={e => setFolder(e.target.value)}
           /> */}
 
-            <select
-            onChange={e => setFolder(e.target.value)}
-             className="py-3 px-4 pr-4 appearance-none w-full bg-white mt-4  mr- border border-gray-400 text-black  rounded leading-none focus:outline-none focus:border-gray-500">
-                <option defaultValue selected disabled > -- Selecciona una carpeta -- </option>
-                {
-                    foldersByUser ? foldersByUser.map((folder, index) => (
-                        <option value={folder._id} key={index}>{folder.folderName}</option>
-                    )) : null
-                }
-             
-            </select>
-            </>
-
-        ) : null }
-
-        </div>
-    )
-}
+          <select
+            onChange={(e) => setFolder(e.target.value)}
+            className="py-3 px-4 pr-4 appearance-none w-full bg-white mt-4  mr- border border-gray-400 text-black  rounded leading-none focus:outline-none focus:border-gray-500"
+          >
+            <option defaultValue selected disabled>
+              {" "}
+              -- Selecciona una carpeta --{" "}
+            </option>
+            {foldersByUser
+              ? foldersByUser.map((folder, index) => (
+                  <option value={folder._id} key={index}>
+                    {folder.folderName}
+                  </option>
+                ))
+              : null}
+          </select>
+        </>
+      ) : null}
+    </div>
+  );
+};
 
 export default FolderFileContainerInput;

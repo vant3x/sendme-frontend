@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
-import FolderOptionsMenu from './FolderOptionsMenu';
+//import FolderOptionsMenu from './FolderOptionsMenu';
 
 const FolderItem = ({ styles, folder }) => {
 
@@ -35,9 +35,10 @@ const FolderItem = ({ styles, folder }) => {
         </a>
       </Link>
       {
-        folderOptions ? (
+       /* folderOptions ? (
           <FolderOptionsMenu folder={folder} setShowOptionFolder={setShowFolderOptions} />
-        ) : null
+        ) : null */ 
+        // arreglame putito
       }
       </p>
       </div>

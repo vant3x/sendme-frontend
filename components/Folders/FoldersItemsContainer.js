@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import FolderItem from "./FolderItem";
+import FolderFileItem from "../../components/Folders/FolderFileItem";
 import styles from "./../../styles/Folders.module.css";
 import axiosClient from "../../config/axios";
 
-const FoldersItemsContainer = ({ user }) => {
+const FoldersItemsContainer = ({ user, files }) => {
   const [foldersByUser, setFolders] = useState([]);
 
   useEffect(() => {
@@ -21,8 +22,9 @@ const FoldersItemsContainer = ({ user }) => {
 
   return (
     <div className="py-12 bg-white mb-8 rounded-lg md:shadow-lg">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
-        <div>
+           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
+
+    <div>
             <span className="text-gray-800 ml-4">
             <span><i className="fas fa-home"></i></span>  / 
             </span>
@@ -35,10 +37,15 @@ const FoldersItemsContainer = ({ user }) => {
             {foldersByUser.map((folder, index) => (
               <FolderItem key={index} folder={folder} styles={styles} />
             ))}
+      { files ? 
+        files.map((file, index) => (
+          <FolderFileItem  file={file} key={index} />
+        )) 
+      : null }
           </div>
         )}
+        </div>
       </div>
-    </div>
   );
 };
 

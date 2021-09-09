@@ -66,8 +66,10 @@ const Layout = ({ children }) => {
         />
       </Head>
       <div className="bg-gray-100 min-h-screen">
+      <Header newFolder={showNewFolderModal} />
+
         <div className="container mx-auto">
-          <Header newFolder={showNewFolderModal} />
+        {/* --- original  <Header newFolder={showNewFolderModal} /> */} 
           <div className="mt-20">{children}</div>
         </div>
 
@@ -78,7 +80,7 @@ const Layout = ({ children }) => {
             className="text-red-500 hover:text-red-700"
           >
             {" "}
-            &copy; 2021 by Alevante 🇨🇴
+            &copy; 2021 by Alevante  	&#127464;&#127476;
           </a>
           <br/>
           <Link href="/privacidad" >
