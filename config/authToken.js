@@ -1,5 +1,4 @@
 import axiosClient from './axios';
-import axiosCliente from './axios';
 
 const authToken = token => {
     if (token) {

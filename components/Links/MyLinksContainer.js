@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import Links from './Links';
-import authContext  from '../../context/auth/authContext';
 import axiosClient from '../../config/axios';
 
 
@@ -18,12 +17,15 @@ const MyLinksContainer = ({user, links}) => {
 
     useEffect(()=> {
         fetchLinks(user);
-       
        } , [user]);
+       
       
    const fetchLinks = async (usuario) => {
-        try {   
-            const response = await axiosClient.get(`/api/links/${user.id}`); 
+    
+    
+
+    try {   
+            const response = await axiosClient.get(`/api/links/${user.id||user?._id}`); 
             setLinks(response.data.links);
      
         } catch (error) {

@@ -11,16 +11,40 @@ const Login = () => {
 
   // definir el context
   const AuthContext = useContext(authContext);
-  const { message, auth, login  } = AuthContext;
+  const { message, auth, userOauth, login  } = AuthContext;
 
   // next router
   const router = useRouter();
+ 
 
   useEffect(() => {
     if (auth) {
       router.push('/');
     }
+  
   }, [auth]);
+
+
+  useEffect(() => {
+    if (auth) {
+      router.push('/');
+    }
+    userOauth();
+  }, []);
+
+  // login redes sociales
+  const googleLogin = () => {
+    window.open("http://localhost:4000/api/auth/google", "_blank",  "_self");
+    if (window.location.pathname === "http://localhost:3000/#");
+    window.close();
+  }
+
+  const twitterLogin = () => {
+    window.open("http://localhost:4000/api/auth/twitter", "_blank",  "_self");
+    if (window.location.pathname === "http://localhost:3000/#");
+    window.close();
+  }
+
 
   // formulario y validacion con formik y yup
   const formik = useFormik({
@@ -40,21 +64,22 @@ const Login = () => {
     },
   });
 
+  
   return (
     <Layout>
       <div className="md:w-4/5 xl:w-3/5 mx-auto mb-32">
         <h2 className="text-4xl font-sans font-bold text-gray-800 text-center my-4">
           Iniciar Sesión
         </h2>
-        { message &&  <Alert/> }
 
         <div className="lg:flex lg:justify-center ">
-        <BtnSocialAuth  title="Google" type="google" />
-        <BtnSocialAuth title="Twitter" type="twitter" />
+        <BtnSocialAuth  onClick={googleLogin} title="Google" type="google" />
+        <BtnSocialAuth  onClick={twitterLogin}  title="Twitter" type="twitter" />
         <BtnSocialAuth title="Github" type="github" />
 
         </div>
         <h2 className="text-auth-horizontal"><span>O inicia con tu correo</span></h2>
+        {message &&  <Alert/> }
 
         <div className="flex justify-center mt-5">
           <div className="w-full max-w-lg">

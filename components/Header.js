@@ -5,6 +5,7 @@ import authContext from "../context/auth/authContext";
 import appContext from "../context/app/appContext";
 import { useRouter } from "next/router";
 import HeaderDropdowns from "./HeaderDrowpdown";
+import axiosClient from "../config/axios";
 
 const Header = ({ newFolder }) => {
   // routing
@@ -27,6 +28,18 @@ const Header = ({ newFolder }) => {
     resetState();
   };
 
+  
+  const logoutOauth = () => {
+    axiosClient.get("http://localhost:4000/api/auth/logout", {
+        withCredentials: true
+    }).then((res) => {
+        if (res.data === "done") {
+            window.location.href = "/"
+        }
+    })
+}
+
+
   return (
     <header className="py-4 lg:px-4 flex flex-col md:flex-row items-center bg-white shadow justify-between">
       <span
@@ -43,12 +56,12 @@ const Header = ({ newFolder }) => {
       <nav>
         {user ? (
           <div className="flex items-center">
-            <p className="mr-2">Hola {user.name ? user.name : null}</p>
+            <p className="mr-2">Hola {user.name  ? user.name  :  user.username ? user.username : null}</p>
 
             <HeaderDropdowns
               user={user}
               newFolder={newFolder}
-              logout={logout}
+              logout={user.googleId || user.twitterId || user.githubId  ? logoutOauth :  logout}
             />
 
             {/* <button 

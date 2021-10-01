@@ -4,17 +4,25 @@ import Layout from "./../components/Layout/Layout";
 import MyLinksContainer from "../components/Links/MyLinksContainer";
 import authContext from "../context/auth/authContext";
 import NewFolderModal from "../components/Folders/NewFolderModal";
+import { useRouter } from 'next/router';
 
 const MyLinks = () => {
   // Extraer el usuario autenticado del storage
   const AuthContext = useContext(authContext);
-  const { user, userAuthtenticate, logout } = AuthContext;
+  const { user, userOauth, auth, userAuthtenticate, logout } = AuthContext;
   
   const [newFolder, setNewFolder] = useState(false);
+  const [oauth, setOauth] = useState(false);
+
+  const router = useRouter();
 
   useEffect(() => {
     userAuthtenticate();
+    userOauth();
+ 
   }, []);
+
+
 
   const ShowNewFolderModal = (value) => {
       setNewFolder(!newFolder);

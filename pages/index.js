@@ -10,17 +10,21 @@ import Link from "next/link";
 const Home = () => {
   // Extraer el usuario autenticado del storage
   const AuthContext = useContext(authContext);
-  const { userAuthtenticate, user } = AuthContext;
+  const { userAuthtenticate, userOauth,  user } = AuthContext;
 
   // extraer el mensaje de error del archivo
   const AppContext = useContext(appContext);
   const { fileMessage, url } = AppContext;
 
   useEffect(() => {
+    userOauth();
+
     const token = localStorage.getItem("token");
     if (token) {
       userAuthtenticate();
+
     }
+   console.log(user)
   }, []);
 
   return (
