@@ -45,6 +45,11 @@ const Login = () => {
     window.close();
   }
 
+  const githubLogin = () => {
+    window.open("http://localhost:4000/api/auth/github", "_blank",  "_self");
+    if (window.location.pathname === "http://localhost:3000/#");
+    window.close();
+  }
 
   // formulario y validacion con formik y yup
   const formik = useFormik({
@@ -75,7 +80,7 @@ const Login = () => {
         <div className="lg:flex lg:justify-center ">
         <BtnSocialAuth  onClick={googleLogin} title="Google" type="google" />
         <BtnSocialAuth  onClick={twitterLogin}  title="Twitter" type="twitter" />
-        <BtnSocialAuth title="Github" type="github" />
+        <BtnSocialAuth onClick={githubLogin} title="Github" type="github" />
 
         </div>
         <h2 className="text-auth-horizontal"><span>O inicia con tu correo</span></h2>

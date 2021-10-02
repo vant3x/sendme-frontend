@@ -24,7 +24,7 @@ const Home = () => {
       userAuthtenticate();
 
     }
-   console.log(user)
+   console.log(user);
   }, []);
 
   return (

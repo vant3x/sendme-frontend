@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
 import styles from "./../styles/Header.module.css";
 import authContext from "../context/auth/authContext";
@@ -15,12 +15,16 @@ const Header = ({ newFolder }) => {
   const AuthContext = useContext(authContext);
   const { user, userAuthtenticate, logout } = AuthContext;
 
+  const [googleUserState, setGoogleUserState] = useState();
   // Extraer el contex de la app
   const AppContext = useContext(appContext);
   const { resetState } = AppContext;
 
   useEffect(() => {
     userAuthtenticate();
+
+    console.log(user)
+
   }, []);
 
   const redirect = () => {
@@ -56,12 +60,12 @@ const Header = ({ newFolder }) => {
       <nav>
         {user ? (
           <div className="flex items-center">
-            <p className="mr-2">Hola {user.name  ? user.name  :  user.username ? user.username : null}</p>
+            <p className="mr-2">Hola {user.name ? user.name  :  user.username ? user.username  : user.twitterId ? 1 : null}</p>
 
             <HeaderDropdowns
               user={user}
               newFolder={newFolder}
-              logout={user.googleId || user.twitterId || user.githubId  ? logoutOauth :  logout}
+              logout={user.googleId  || user.twitterId || user.githubId  ? logoutOauth :  logout}
             />
 
             {/* <button 
