@@ -16,7 +16,7 @@ const FolderFileContainerInput = ({ user }) => {
 
   const fetchFolders = async (usuario) => {
     try {
-      const response = await axiosClient.get(`/api/folders/${user.id}`);
+      const response = await axiosClient.get(`/api/folders/${user.id ? user.id : user._id}`);
       setFolders(response.data.folders);
     } catch (error) {
       // console.error(error);

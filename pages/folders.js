@@ -4,6 +4,8 @@ import FoldersItemsContainer from "../components/Folders/FoldersItemsContainer";
 import FolderFilesContainer from "../components/Folders/FolderFilesContainer";
 import authContext from "../context/auth/authContext";
 import axiosClient from "../config/axios";
+import styles from './../styles/MenuContext.module.css';
+
 
 const Folders = () => {
   // Extraer el usuario autenticado del storage
@@ -16,7 +18,7 @@ const Folders = () => {
   }, []);
 
   useEffect(() => {
-    getRootFiles(user?.id);
+    getRootFiles(user?.id || user?._id);
   }, [user]);
 
   /*| useEffect(() => {
@@ -24,7 +26,7 @@ const Folders = () => {
     }, [user]);*/
 
   const getRootFiles = async (id) => {
-    const filesRoot = await axiosClient.get(`/api/folder/root/${user?.id}`);
+    const filesRoot = await axiosClient.get(`/api/folder/root/${user?.id || user?._id}`);
     console.log(filesRoot.data.folder);
 
     const filesRootFormated = filesRoot.data.folder.map((file) => {
@@ -43,7 +45,9 @@ const Folders = () => {
           {/*  <i className="fas fa-folder  text-red-400 text-4xl mb-4 mr-2"></i> */}
           Mis Carpetas
         </h2>
+
       </div>
+
           <FoldersItemsContainer user={user} files={files} />
          {/* <FolderFilesContainer files={files} /> */}
     

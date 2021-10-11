@@ -8,7 +8,7 @@ const ProfileForm = ({ user }) => {
 
   useEffect(async () => {
     const userInfo = await axiosClient.get(
-      `/api/user/profile/${user ? user.id : null}`
+      `/api/user/profile/${user && user.id ? user.id : user && user._id ? user._id : null}`
     );
     setUserProfile(userInfo.data.user);
   }, [user]);

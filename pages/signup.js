@@ -11,6 +11,26 @@ const Signup = () => {
   const AuthContext = useContext(authContext);
   const { signup, message, token } = AuthContext;
 
+    // signup redes sociales
+    const googleSignup = () => {
+      window.open("http://localhost:4000/api/auth/google", "_blank",  "_self");
+      if (window.location.pathname === "http://localhost:3000/#");
+      window.close();
+    }
+  
+    const twitterSignup= () => {
+      window.open("http://localhost:4000/api/auth/twitter", "_blank",  "_self");
+      if (window.location.pathname === "http://localhost:3000/#");
+      window.close();
+    }
+  
+    const githubSignup = () => {
+      window.open("http://localhost:4000/api/auth/github", "_blank",  "_self");
+      if (window.location.pathname === "http://localhost:3000/#");
+      window.close();
+    }
+  
+
   // formulario y validacion con formik y yup
   const formik = useFormik({
     initialValues: {
@@ -45,9 +65,9 @@ const Signup = () => {
           Crear Cuenta
         </h2>
         <div className="lg:flex lg:justify-center ">
-          <BtnSocialAuth title="Google" type="google" action="Sign Up" />
-          <BtnSocialAuth title="Twitter" type="twitter"action="Sign Up"  />
-          <BtnSocialAuth title="Github" type="github" action="Sign Up" />
+          <BtnSocialAuth onClick={googleSignup} title="Google" type="google" action="Sign Up" />
+          <BtnSocialAuth onClick={twitterSignup} title="Twitter" type="twitter"action="Sign Up"  />
+          <BtnSocialAuth onClick={githubSignup} title="Github" type="github" action="Sign Up" />
         </div>
         <h2 className="text-auth-horizontal">
           <span>O registrate con tu correo</span>

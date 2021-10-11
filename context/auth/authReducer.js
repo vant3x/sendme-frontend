@@ -7,7 +7,7 @@ import { LOGIN_SUCCESS } from "../../types";
 import { LOGIN_ERROR } from "../../types";
 import { LOGOUT } from "../../types";
 
-export default (state, action) => {
+const authReducer = (state, action) => {
   switch (action.type) {
     case SIGNUP_SUCCESS:
     case SIGNUP_ERROR:
@@ -52,3 +52,5 @@ export default (state, action) => {
       return state;
   }
 };
+
+export default authReducer;

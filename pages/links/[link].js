@@ -6,10 +6,10 @@ import authContext from "./../../context/auth/authContext";
 import Alert from "./../../components/Alerts/Alert";
 import { NotFoundError } from "next/error";
 import Link from "next/link";
+import { useRouter } from 'next/router';
 
 export async function getServerSideProps({ params }) {
   const { link } = params;
-
   const response = await axiosClient.get(`/api/link/${link}`);
   return {
     props: {
@@ -28,11 +28,11 @@ export async function getServerSidePaths() {
   };
 }
 
-export default ({ link, linkInfo }) => {
+export default ({ link, linkInfo}) => {
   // definir el context auth
   const AuthContext = useContext(authContext);
   const { user, auth } = AuthContext;
-
+  const router = useRouter();  
   // context de la app
   const AppContext = useContext(appContext);
   const { showAlert, fileMessage } = AppContext;
@@ -52,6 +52,16 @@ export default ({ link, linkInfo }) => {
       showAlert(error.response.data.message);
     }
   };
+
+
+  const generateQR = () => {
+    router.push({
+      pathname: '/escanear-qr',
+      query: {
+        link: router.query.link
+      }
+    })
+  }
   return (
     <Layout>
       {hasPassword && user?.id !== link.author ? (
@@ -159,12 +169,10 @@ export default ({ link, linkInfo }) => {
               <div></div>
             </div>
             <div className="mt-6 text-center">
-                <Link href="/escanear-qr">
-              <a className="text-center py-4 px-12 text-red-500 rounded uppercase font-bold cursor-pointer shadow hover:bg-gray-200">
+              <a onClick={generateQR} className="text-center py-4 px-12 text-red-500 rounded uppercase font-bold cursor-pointer shadow hover:bg-gray-200">
                 Generar QR
-                  <i class="ml-2 fas fa-qrcode"></i>
+                  <i className="ml-2 fas fa-qrcode"></i>
               </a>
-              </Link>
             </div>
           </div>
         </div>

@@ -10,6 +10,7 @@ import FolderFilesContainer from "../../components/Folders/FolderFilesContainer"
 export async function getServerSideProps({ params }) {
   const { folder } = params;
   const response = await axiosClient.get(`/api/folder/${folder}`);
+
   return {
     props: {
       folder: response.data,
@@ -19,7 +20,6 @@ export async function getServerSideProps({ params }) {
 
 export default ({ folder }) => {
   const folderById = folder.folder;
-  //console.log(folderById);
   return (
     <Layout>
       <div className="py-12 bg-white mb-8 rounded-lg md:shadow-lg">

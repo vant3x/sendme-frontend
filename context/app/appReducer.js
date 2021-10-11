@@ -13,7 +13,7 @@ import {
 } from '../../types';
 
 
-export default ( state, action) => {
+const appReducer =  ( state, action) => {
     switch(action.type) {
         case SHOW_ALERTS:
             return {
@@ -80,3 +80,5 @@ export default ( state, action) => {
            return state
     }
 }
+
+export default appReducer;

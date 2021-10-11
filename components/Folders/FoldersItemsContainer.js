@@ -8,12 +8,13 @@ const FoldersItemsContainer = ({ user, files }) => {
   const [foldersByUser, setFolders] = useState([]);
 
   useEffect(() => {
+    console.log(user);
     fetchFolders(user);
   }, [user]);
   // todo revisar param usuario cambiar nombre y ver si es necesario
   const fetchFolders = async (usuario) => {
     try {
-      const response = await axiosClient.get(`/api/folders/${usuario.id}`);
+      const response = await axiosClient.get(`/api/folders/${usuario.id ? usuario.id : usuario._id}`);
       setFolders(response.data.folders);
     } catch (error) {
       // console.error(error);
@@ -23,7 +24,6 @@ const FoldersItemsContainer = ({ user, files }) => {
   return (
     <div className="py-12 bg-white mb-8 rounded-lg md:shadow-lg">
            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ">
-
     <div>
             <span className="text-gray-800 ml-4">
             <span><i className="fas fa-home"></i></span>  / 

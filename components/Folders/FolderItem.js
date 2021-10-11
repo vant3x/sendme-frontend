@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 //import FolderOptionsMenu from './FolderOptionsMenu';
+import MenuFolders from './../common/ContextMenu/Menu';
 
 const FolderItem = ({ styles, folder }) => {
 
@@ -42,7 +43,7 @@ const FolderItem = ({ styles, folder }) => {
       }
       </p>
       </div>
-  
+      <MenuFolders/>
     </article>
 
   );
