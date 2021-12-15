@@ -13,19 +13,19 @@ const Signup = () => {
 
     // signup redes sociales
     const googleSignup = () => {
-      window.open("http://localhost:4000/api/auth/google", "_blank",  "_self");
+      window.open(`${process.env.apiURL}/api/auth/google`, "_blank",  "_self");
       if (window.location.pathname === "http://localhost:3000/#");
       window.close();
     }
   
     const twitterSignup= () => {
-      window.open("http://localhost:4000/api/auth/twitter", "_blank",  "_self");
+      window.open(`${process.env.apiURL}/api/auth/twitter`, "_blank",  "_self");
       if (window.location.pathname === "http://localhost:3000/#");
       window.close();
     }
   
     const githubSignup = () => {
-      window.open("http://localhost:4000/api/auth/github", "_blank",  "_self");
+      window.open(`${process.env.apiURL}/api/auth/github`, "_blank",  "_self");
       if (window.location.pathname === "http://localhost:3000/#");
       window.close();
     }

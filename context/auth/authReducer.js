@@ -23,13 +23,14 @@ const authReducer = (state, action) => {
         token: action.payload,
         auth: true,
       };
-    case USER_AUTHENTICATE:
+    case USER_AUTHENTICATE:      
       return {
         ...state,
         user: action.payload,
         auth: true,
       };
     case USER_OAUTH:
+      localStorage.setItem("token", action.payload);
       return {
         ...state,
         user: action.payload,

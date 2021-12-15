@@ -19,7 +19,7 @@ const Dropzone = () => {
 
 
     const onDropRejected = () => {
-        showAlert('No se pudo subir el archivo, el limite es 5MB, crea una cuenta para subir archivos más grandes.');
+        showAlert('No se pudo subir el archivo, el limite es 500MB, crea una cuenta para subir archivos más grandes.');
     }
 
     const onDropAccepted = useCallback( async (acceptedFiles) => {
@@ -29,9 +29,9 @@ const Dropzone = () => {
         uploadFile(formData, acceptedFiles[0].path);
     }, []);
 
-    const adminMaxSize = user?.role > 0 ? 30000000000 : 1000000000;  
-    const maxSize = auth ? adminMaxSize  : 10000000;
-
+    const adminMaxSize = user && user?.role > 0 ? 30000000000 : 3000000000;  
+    const maxSize = auth ? adminMaxSize  :  500000000;
+    console.log(maxSize);
      // extraer contenido de dropzone
     const { getRootProps, getInputProps, isDragActive, acceptedFiles } = useDropzone({onDropAccepted, onDropRejected, maxSize});
     // 

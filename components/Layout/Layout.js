@@ -48,7 +48,7 @@ const Layout = ({ children }) => {
         />
         <meta
           property="og:image"
-          content="https://sendmefiles.cloud/assets/img/landing-playa.jpg"
+          content="https://sendmefiles.cloud/assets/img/landing-playa-screen.png"
         />
 
         {/* -Twitter card */}
@@ -62,7 +62,7 @@ const Layout = ({ children }) => {
         <meta name="twitter:description" content="Comparte tus archivos de forma fácil, segura y privada, tambien puedes agregar una contraseña y un limite de descargas a tus enlaces" />
         <meta
           name="twitter:image"
-          content="https://sendmefiles.cloud/assets/img/landing-playa2.jpg"
+          content="https://sendmefiles.cloud/assets/img/landing-playa-screen.png"
         />
       </Head>
       <div className="bg-gray-100 min-h-screen">

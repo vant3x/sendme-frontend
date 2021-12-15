@@ -9,10 +9,12 @@ const FolderItem = ({ styles, folder }) => {
 
   const [folderOptions, setFolderOptions] = useState(false);
   const [showFolderOptons, setShowFolderOptions] = useState(false);
+  const [folderId, setFolderId] = useState();
 
   const showFolderOptions = () => {
     setFolderOptions(true);
     console.log('funciona')
+    setFolderId(folder._id);
   }
 
 
@@ -43,7 +45,9 @@ const FolderItem = ({ styles, folder }) => {
       }
       </p>
       </div>
-      <MenuFolders/>
+        {
+          folder._id === folderId && <MenuFolders/>
+        }
     </article>
 
   );

@@ -4,7 +4,6 @@ import FoldersItemsContainer from "../components/Folders/FoldersItemsContainer";
 import FolderFilesContainer from "../components/Folders/FolderFilesContainer";
 import authContext from "../context/auth/authContext";
 import axiosClient from "../config/axios";
-import styles from './../styles/MenuContext.module.css';
 
 
 const Folders = () => {

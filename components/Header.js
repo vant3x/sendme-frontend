@@ -13,7 +13,7 @@ const Header = ({ newFolder }) => {
 
   // Extraer el usuario autenticado del storage
   const AuthContext = useContext(authContext);
-  const { user, userAuthtenticate, logout } = AuthContext;
+  const { user, userAuthtenticate,  userOauth, logout } = AuthContext;
 
   const [googleUserState, setGoogleUserState] = useState();
   // Extraer el contex de la app
@@ -21,8 +21,14 @@ const Header = ({ newFolder }) => {
   const { resetState } = AppContext;
 
   useEffect(() => {
-    userAuthtenticate();
+    const token = localStorage.getItem("token");
+    if (token) {
 
+    userAuthtenticate();
+    userOauth();
+  } else {
+
+  }
     console.log(user)
 
   }, []);
@@ -41,11 +47,13 @@ const Header = ({ newFolder }) => {
             window.location.href = "/"
         }
     })
+
+    localStorage.removeItem('token');
 }
 
 
   return (
-    <header className="py-4 lg:px-4 flex flex-col md:flex-row items-center bg-white shadow justify-between">
+    <header className="py-4 lg:px-4 mb-6 flex flex-col md:flex-row items-center bg-white shadow justify-between">
       <span
         onClick={() => redirect()}
         className={`cursor-pointer sm:mb-4 mb-4 md:mb-0 lg:mb-0`}
@@ -57,7 +65,7 @@ const Header = ({ newFolder }) => {
         </h1>
       </span>
 
-      <nav>
+      <nav className="sm:mb-0 mb-4"> {/*  ------- TODO: revisar margin en desktop -- */}
         {user ? (
           <div className="flex items-center">
             <p className="mr-2">Hola {user.name ? user.name  :  user.username ? user.username  : user.twitterId ? 1 : null}</p>
@@ -80,12 +88,12 @@ const Header = ({ newFolder }) => {
         ) : (
           <>
             <Link href="/login">
-              <a className="bg-red-500 px-5 py-3 rounded text-white font-bold uppercase">
+              <a className=" bg-red-500 px-5 py-3 rounded text-white font-bold uppercase">
                 Iniciar Sesión
               </a>
             </Link>
             <Link href="/signup ">
-              <a className="bg-black px-5 py-3 rounded text-white font-bold uppercase ml-2 ">
+              <a className=" bg-black px-5 py-3 rounded text-white font-bold uppercase ml-2 ">
                 Crear Cuenta
               </a>
             </Link>

@@ -6,6 +6,7 @@ import authContext from '../context/auth/authContext';
 import Alert from './../components/Alerts/Alert';
 import BtnSocialAuth from '../components/LoginAndSignupButtons/SocialAuthBtn';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 
 const Login = () => {
 
@@ -29,24 +30,31 @@ const Login = () => {
     if (auth) {
       router.push('/');
     }
-    userOauth();
+
+    
+    const token = localStorage.getItem("token");
+    if (token) {
+      userOauth();  
+
+    } else {
+    }
   }, []);
 
   // login redes sociales
   const googleLogin = () => {
-    window.open("http://localhost:4000/api/auth/google", "_blank",  "_self");
+    window.open(`${process.env.apiURL}/api/auth/google`, "_blank",  "_self");
     if (window.location.pathname === "http://localhost:3000/#");
     window.close();
   }
 
   const twitterLogin = () => {
-    window.open("http://localhost:4000/api/auth/twitter", "_blank",  "_self");
+    window.open(`${process.env.apiURL}/api/auth/twitter`, "_blank",  "_self");
     if (window.location.pathname === "http://localhost:3000/#");
     window.close();
   }
 
   const githubLogin = () => {
-    window.open("http://localhost:4000/api/auth/github", "_blank",  "_self");
+    window.open(`${process.env.apiURL}/api/auth/github`, "_blank",  "_self");
     if (window.location.pathname === "http://localhost:3000/#");
     window.close();
   }
@@ -143,8 +151,10 @@ const Login = () => {
                 ) : null}
               </div>
                   <div className="text-center">
-                  <a href="" className="underline hover:text-red-500">¿Has olvidado tu contraseña?</a>
+                  <Link href="/recuperar-password">
+                  <a className="underline hover:text-red-500">¿Has olvidado tu contraseña?</a>
 
+                  </Link>
                   </div>
               <input
                 type="submit"

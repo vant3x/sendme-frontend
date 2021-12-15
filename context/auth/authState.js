@@ -100,22 +100,28 @@ const AuthState = ({ children }) => {
 
   // redes sociales auth
   const userOauth = async () => {
-
+    const token = localStorage.getItem("token");
+    if (token) {
+      authToken(token);
+    }
     try {
-      await axiosClient.get("/api/auth/social-user", {
-        withCredentials: true
-          }).then((res) => {
-        console.log(res);
-        setOauthUser(res.data);
-        if (res.data) {
-            dispatch({
-              type: USER_OAUTH,
-              payload: res.data,
-            });
-          }
-
+      if (!token) {
+        await axiosClient.get("/api/auth/social-user", {
+          withCredentials: true
+            }).then((res) => {
           console.log(res);
-      });
+          setOauthUser(res.data);
+          console.log(res.data)
+          if (res.data) {
+              dispatch({
+                type: USER_OAUTH,
+                payload: res.data,
+              });
+            }
+  
+            console.log(res);
+        });
+      }
 
 
     } catch (error) {

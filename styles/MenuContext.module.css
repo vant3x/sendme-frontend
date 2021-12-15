@@ -20,7 +20,7 @@
 
 .menu {
   font-size: 14px;
-  background-color: #fff;
+  background-color: rgb(41, 38, 38);
   border-radius: 2px;
   padding: 5px 0 5px 0;
   width: 150px;
@@ -52,3 +52,5 @@
   border-bottom: 1px solid #eee;
   margin: 10px 0;
 }
+
+
