@@ -1,6 +1,7 @@
 import React, { useReducer, useState } from "react";
 import authContext from "./authContext";
 import authReducer from "./authReducer";
+import Router from 'next/router'
 
 import {
   SIGNUP_SUCCESS,
@@ -8,6 +9,7 @@ import {
   REMOVE_ALERTS,
   LOGIN_SUCCESS,
   LOGIN_ERROR,
+  SESSION_ERROR,
   USER_AUTHENTICATE,
   USER_OAUTH,
   LOGOUT,
@@ -22,11 +24,13 @@ const AuthState = ({ children }) => {
     auth: null,
     user: null,
     message: null,
+    errorSession: null
   };
 
   // definir reducer
   const [state, dispatch] = useReducer(authReducer, initialState);
   const [oautUser, setOauthUser] = useState();
+  const [errorState, setErrorState] = useState();
 
   // registrar nuevos usuarios
   const signup = async (values) => {
@@ -54,15 +58,18 @@ const AuthState = ({ children }) => {
   const login = async (values) => {
     try {
       const response = await axiosClient.post("/api/auth", values);
+      
       dispatch({
         type: LOGIN_SUCCESS,
         payload: response.data,
       });
+      
     } catch (error) {
       dispatch({
         type: LOGIN_ERROR,
         payload: error.response.data.message,
       });
+      console.log(error)
     }
     // limpia la alerta
     setTimeout(() => {
@@ -80,58 +87,78 @@ const AuthState = ({ children }) => {
     }
 
     try {
-      const response = await axiosClient.get("/api/auth");
-      if (response.data.user) {
-        dispatch({
-          type: USER_AUTHENTICATE,
-          payload: response.data.user,
-        });
-      }
-    } catch (error) {
-        console.log(error);
-      dispatch({
-        type: LOGIN_ERROR,
-        payload: {
-          message: error.response?.data.message
-        },
+      const response = await axiosClient.get("/api/auth").then((res) => {
+        console.log(res)
+        console.log(res.data)
+        if (res.data.user) {
+          dispatch({
+            type: USER_AUTHENTICATE,
+            payload: res.data.user,
+          });
+        }
+      //  return res;
+      }).catch((err) => {
+      setErrorState(err.response.data);
+      throw err;
+     
+      //return err
+     
       });
+    } catch (error) {
+      console.log(error.response.data)
+ 
+       /* dispatch({
+          type: LOGIN_ERROR,
+          payload: {
+           // message: error.response?.data.message 
+            message: error?.response.data.message,
+          },
+        });*/
+        dispatch({
+          type: SESSION_ERROR,
+          payload: error?.response.data
+        });
+
     }
   };
 
   // redes sociales auth
   const userOauth = async () => {
     const token = localStorage.getItem("token");
+    
     if (token) {
       authToken(token);
     }
     try {
       if (!token) {
         await axiosClient.get("/api/auth/social-user", {
-          withCredentials: true
+          withCredentials: false
             }).then((res) => {
-          console.log(res);
           setOauthUser(res.data);
-          console.log(res.data)
           if (res.data) {
+            
               dispatch({
                 type: USER_OAUTH,
                 payload: res.data,
               });
+              window.close();
+              Router.reload(window.location.pathname);
+              window.opener.location.reload();
             }
   
-            console.log(res);
+            console.log(res.data);
         });
       }
-
+      
 
     } catch (error) {
-     /* dispatch({
+     dispatch({
         type: LOGIN_ERROR,
         payload: {
           message: error.response
         },
-      });*/
-      console.log(error);
+      });
+ 
     }
   };
 
@@ -149,6 +176,7 @@ const AuthState = ({ children }) => {
         auth: state.auth,
         user: state.user,
         message: state.message,
+        errorSession: state.errorSession,
         signup,
         login,
         userAuthtenticate,

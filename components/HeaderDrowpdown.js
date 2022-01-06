@@ -4,9 +4,6 @@ import Link from "next/link";
 const HeaderDropdowns = (props) => {
   const [showModal, setShowModal] = useState(false);
 
-
-
-
   return (
     <div className="relative inline-block text-left">
       <div>
@@ -67,27 +64,23 @@ const HeaderDropdowns = (props) => {
                 <i className="fas fa-folder"></i> Ver Carpetas
               </a>
             </Link>
-         
-              <button
-                className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                role="menuitem"
-                onClick={()=> props.newFolder()}
 
-              >
-                <i className="fas fa-folder-plus"></i> Nueva Carpeta
-              </button>
-          
-          </div>
-          <div className="py-1">
-            <a
-              onClick={() => props.logout()}
-              href="#"
+            <button
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               role="menuitem"
+              onClick={() => props.newFolder()}
             >
-              <i className="fas fa-sign-out-alt"></i> Cerrar Sesión
-            </a>
+              <i className="fas fa-folder-plus"></i> Nueva Carpeta
+            </button>
           </div>
+          <button
+            onClick={() => props.logout()}
+            href="#"
+            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+            role="menuitem"
+          >
+            <i className="fas fa-sign-out-alt"></i> Cerrar Sesión
+          </button>
         </div>
       )}
     </div>

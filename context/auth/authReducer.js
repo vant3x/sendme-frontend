@@ -5,6 +5,7 @@ import { SIGNUP_ERROR } from "../../types";
 import { REMOVE_ALERTS } from "../../types";
 import { LOGIN_SUCCESS } from "../../types";
 import { LOGIN_ERROR } from "../../types";
+import { SESSION_ERROR } from "../../types";
 import { LOGOUT } from "../../types";
 
 const authReducer = (state, action) => {
@@ -15,6 +16,11 @@ const authReducer = (state, action) => {
       return {
         ...state,
         message: action.payload,
+      };
+    case SESSION_ERROR: 
+      return {
+        ...state, 
+        errorSession: action.payload
       };
     case LOGIN_SUCCESS:
       localStorage.setItem("token", action.payload);

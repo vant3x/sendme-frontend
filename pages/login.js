@@ -4,15 +4,19 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import authContext from '../context/auth/authContext';
 import Alert from './../components/Alerts/Alert';
+import AlertExpired from './../components/Alerts/AlertExpired';
 import BtnSocialAuth from '../components/LoginAndSignupButtons/SocialAuthBtn';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import Error from 'next/error';
 
 const Login = () => {
 
+
+
   // definir el context
   const AuthContext = useContext(authContext);
-  const { message, auth, userOauth, login  } = AuthContext;
+  const { message, auth, userOauth, login, errorSession  } = AuthContext;
 
   // next router
   const router = useRouter();
@@ -22,7 +26,7 @@ const Login = () => {
     if (auth) {
       router.push('/');
     }
-  
+
   }, [auth]);
 
 
@@ -31,15 +35,16 @@ const Login = () => {
       router.push('/');
     }
 
-    
     const token = localStorage.getItem("token");
     if (token) {
       userOauth();  
-
     } else {
+      // validar token expirado y error
     }
+    console.log(auth);
   }, []);
 
+  
   // login redes sociales
   const googleLogin = () => {
     window.open(`${process.env.apiURL}/api/auth/google`, "_blank",  "_self");
@@ -80,6 +85,11 @@ const Login = () => {
   
   return (
     <Layout>
+      {
+        errorSession && errorSession.statusCode === 401 ?  
+           <AlertExpired statusCode={errorSession.statusCode} /> : null
+          
+      }
       <div className="md:w-4/5 xl:w-3/5 mx-auto mb-32">
         <h2 className="text-4xl font-sans font-bold text-gray-800 text-center my-4">
           Iniciar Sesión
@@ -168,4 +178,7 @@ const Login = () => {
     </Layout>
   );
 };
+
+
+
 export default Login;

@@ -6,6 +6,7 @@ const NewFolderModal = (props) => {
   const [hideModal, setModal] = useState(false);
   const [folderName, setFolderName] = useState("");
   const [disabledNewFolder, setDisabledNewFolder] = useState(false);
+  const [errorState, setError] = useState({});
 
   const router = useRouter();
 
@@ -21,11 +22,23 @@ const NewFolderModal = (props) => {
     };
     try {
       const response = await axiosClient.post(`/api/folders`, data);
+      console.log(response)
+      console.log(response.data)
       setDisabledNewFolder(false);
       router.push("/folders");
+      hideFolderModal();
     } catch (error) {
+       console.log(error)
+       console.log(error.response.data)
+       setError(error.response.data);
+       console.log({stateError: errorState})
       // showAlert(error.response.data.message);
     }
+
+      setTimeout(() => {
+        setDisabledNewFolder(false);
+      } , 3000);
+
   };
 
   return !hideModal ? (
@@ -43,7 +56,7 @@ const NewFolderModal = (props) => {
         x{" "}
         <span
           className="hidden sm:inline-block sm:align-middle sm:h-screen"
-          aria-hidden="true"
+          aria-hidden="true"  
         >
           &#8203;
         </span>
@@ -80,11 +93,16 @@ const NewFolderModal = (props) => {
                         name="folderName"
                         id="folderName"
                         value={folderName}
-                        onChange={(e) => setFolderName(e.target.value)}
+                        onChange={(e) => {setFolderName(e.target.value);  setError(false); }}
                         className="shadow appereance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         placeholder="Ingresa un nombre"
                       />
                     </div>
+                    {
+                      errorState && errorState.statusCode === 403 && (
+                        <div className="text-red-500 text-sm">{errorState.message}</div>
+                      )
+                    }
                   </div>
                 </div>
               </div>
@@ -96,8 +114,9 @@ const NewFolderModal = (props) => {
                 className={`w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 ${
                   !disabledNewFolder ? "bg-red-600" : "bg-gray-400"
                 }  ${
-                  !disabledNewFolder ? "cursor-pointer" : "bcursor-not-allowed"
-                } text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm`}
+                  !disabledNewFolder ? "cursor-pointer" : "cursor-not-allowed"
+                } text-base font-medium text-white  ${
+                  !disabledNewFolder ? "hover:bg-red-700" : "hover:bg-gray-400"} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm`}
               >
                 Crear Carpeta
               </button>

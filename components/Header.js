@@ -27,9 +27,8 @@ const Header = ({ newFolder }) => {
     userAuthtenticate();
     userOauth();
   } else {
-
+      
   }
-    console.log(user)
 
   }, []);
 
@@ -44,12 +43,14 @@ const Header = ({ newFolder }) => {
         withCredentials: true
     }).then((res) => {
         if (res.data === "done") {
-            window.location.href = "/"
+            window.location.href = "/";
         }
     })
 
     localStorage.removeItem('token');
-}
+    router.reload(window.location.pathname);
+
+  }
 
 
   return (

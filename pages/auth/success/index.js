@@ -12,19 +12,26 @@ const Success = () => {
         if (token) {
     
           userAuthtenticate();
-
+          console.log(1)
         } else {
             userOauth();
-            window.close();
+            console.log(2)
+
+            //window.close();
 
         }   
 
-        authSuccess();
+      //  authSuccess();
     }, []);
+
+    useEffect(() => { 
+    //  alert('login success');
+
+    }, [ user]);
 
 
     const authSuccess = async () => {
-      const response = await           axiosClient.get('/api/auth/success');
+      const response = await  axiosClient.get('/api/auth/success');
       console.log(response)
     }
  
