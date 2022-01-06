@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import axiosClient from "../../config/axios";
 import { useRouter } from "next/router";
+import appContext from "../../context/app/appContext";
 
-const NewFolderModal = (props) => {
+const NewFolderModal = ({valueModal}) => {
   const [hideModal, setModal] = useState(false);
   const [folderName, setFolderName] = useState("");
   const [disabledNewFolder, setDisabledNewFolder] = useState(false);
   const [errorState, setError] = useState({});
+
+  const AppContext = useContext(appContext);
+  const { setFolderModal, folderModal } = AppContext;
 
   const router = useRouter();
 
@@ -40,6 +44,10 @@ const NewFolderModal = (props) => {
       } , 3000);
 
   };
+
+  useEffect(() => {
+    console.log(valueModal);
+   }, [valueModal]);
 
   return !hideModal ? (
     <div
@@ -123,7 +131,7 @@ const NewFolderModal = (props) => {
               <button
                 type="button"
                 onClick={() => {
-                  hideFolderModal();
+                  setFolderModal(false)
                 }}
                 className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
               >

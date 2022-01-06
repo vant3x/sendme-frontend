@@ -31,9 +31,9 @@ const ProfileForm = ({ user }) => {
           <form action="#" method="POST">
             <div className="shadow overflow-hidden sm:rounded-md">
               <div className="px-4 py-5 bg-white sm:p-6">
-                <h3 className="text-3xl text-gray-800 text-center mb-4">
+                {/*<h3 className="text-3xl text-gray-800 text-center mb-4">
                   Mi Cuenta
-                </h3>
+                 </h3>*/}
 
                 <div className="flex">
                   <UserIconContainer className="bg-gray-100 border">

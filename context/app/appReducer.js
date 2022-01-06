@@ -9,6 +9,7 @@ import {
      RESET_STATE,
      SET_PASSWORD,
      SET_FOLDER,
+     SET_FOLDER_MODAL,
      SET_DOWNLOADS
 } from '../../types';
 
@@ -70,6 +71,11 @@ const appReducer =  ( state, action) => {
             return {
                 ...state,
                 folder: action.payload
+            }
+        case SET_FOLDER_MODAL:
+            return {
+                ...state,
+                folderModal: action.payload
             }
         case SET_DOWNLOADS:
             return {

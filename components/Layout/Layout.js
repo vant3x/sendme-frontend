@@ -1,17 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import Header from "./../Header";
 import NewFolderModal from "../Folders/NewFolderModal";
+import appContext from "../../context/app/appContext";
 
 const Layout = ({ children }) => {
-  const [newFolder, setNewFolder] = useState(false);
-
-
-  const showNewFolderModal = () => {
-    setNewFolder(!newFolder);
-  }
-
+  const AppContext = useContext(appContext);
+  const { setFolderModal, folderModal } = AppContext;
 
   return (
     <>
@@ -66,7 +62,7 @@ const Layout = ({ children }) => {
         />
       </Head>
       <div className="bg-gray-100 min-h-screen">
-      <Header newFolder={showNewFolderModal} />
+      <Header />
 
         <div className="container mx-auto">
         {/* --- original  <Header newFolder={showNewFolderModal} /> */} 
@@ -87,7 +83,7 @@ const Layout = ({ children }) => {
             <a  className="underline mt-2 text-gray-800 hover:text-red-500">Políticas de Privacidad</a>
           </Link>
         </footer>
-        { newFolder &&
+        { folderModal &&
          <NewFolderModal/>
         }
       </div>

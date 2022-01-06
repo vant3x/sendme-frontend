@@ -13,7 +13,8 @@ import {
      RESET_STATE,
      SET_PASSWORD,
      SET_FOLDER,
-     SET_DOWNLOADS
+     SET_DOWNLOADS,
+     SET_FOLDER_MODAL
 } from '../../types';
 import axiosClient from '../../config/axios';
 
@@ -28,7 +29,8 @@ const AppState = ({children}) => {
         password: '',
         folder:null,
         author: null,
-        url:''
+        url:'',
+        folderModal: false
     }
 
     // crear dispatch y state
@@ -116,6 +118,14 @@ const AppState = ({children}) => {
         })
     }
 
+    // ocultar o motrar modal folder
+    const setFolderModal = folderModal => {
+        dispatch({
+            type: SET_FOLDER_MODAL,
+            payload: folderModal
+        })
+    }
+
 
     // agregar un numero de descargas
     const setDownloads = downloads => {
@@ -138,12 +148,14 @@ const AppState = ({children}) => {
                 folder: state.folder,
                 author: state.author,
                 url: state.url,
+                folderModal: state.folderModal,
                 showAlert,
                 uploadFile,
                 newLink,
                 resetState,
                 setPassword,
                 setFolder,
+                setFolderModal,
                 setDownloads
             }}
         >

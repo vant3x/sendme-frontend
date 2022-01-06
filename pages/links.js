@@ -3,6 +3,7 @@ import Link from "next/link";
 import Layout from "./../components/Layout/Layout";
 import MyLinksContainer from "../components/Links/MyLinksContainer";
 import authContext from "../context/auth/authContext";
+import appContext from "../context/app/appContext";
 import NewFolderModal from "../components/Folders/NewFolderModal";
 import { useRouter } from 'next/router';
 
@@ -11,7 +12,9 @@ const MyLinks = () => {
   const AuthContext = useContext(authContext);
   const { user, userOauth, auth, userAuthtenticate, logout } = AuthContext;
   
-  const [newFolder, setNewFolder] = useState(false);
+  const AppContext = useContext(appContext);
+  const { setFolderModal, folderModal } = AppContext
+  
   const [oauth, setOauth] = useState(false);
 
   const router = useRouter();
@@ -21,12 +24,6 @@ const MyLinks = () => {
     userOauth();
  
   }, []);
-
-
-
-  const ShowNewFolderModal = (value) => {
-      setNewFolder(!newFolder);
-  }
 
   return (
     <Layout>
@@ -43,7 +40,7 @@ const MyLinks = () => {
           </a>
         </Link>
         <button
-          onClick={()=> ShowNewFolderModal(true)}
+          onClick={()=> setFolderModal(true)}
           className="float-right btn bg-red-500 text-white  p-2 rounded-lg"
         >
           Nueva Carpeta{" "}
@@ -54,7 +51,7 @@ const MyLinks = () => {
       </div>
       <MyLinksContainer user={user} />
       {
-        newFolder && <NewFolderModal/>
+        folderModal && <NewFolderModal />
       }
     </Layout>
   );

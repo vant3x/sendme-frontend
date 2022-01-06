@@ -23,4 +23,5 @@ export const RESET_STATE = 'RESET_STATE';
 
 export const SET_PASSWORD = 'SET_PASSWORD';
 export const SET_FOLDER = 'SET_FOLDER';
+export const SET_FOLDER_MODAL = 'SET_FOLDER_MODAL';
 export const SET_DOWNLOADS = 'SET_DOWNLOADS';

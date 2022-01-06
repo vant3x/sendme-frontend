@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Link from "next/link";
+import appContext from "./../context/app/appContext";
 
 const HeaderDropdowns = (props) => {
   const [showModal, setShowModal] = useState(false);
+  const AppContext = useContext(appContext);
+  const { setFolderModal, folderModal } = AppContext;
 
   return (
     <div className="relative inline-block text-left">
@@ -68,7 +71,7 @@ const HeaderDropdowns = (props) => {
             <button
               className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               role="menuitem"
-              onClick={() => props.newFolder()}
+              onClick={() => setFolderModal(true)}
             >
               <i className="fas fa-folder-plus"></i> Nueva Carpeta
             </button>
