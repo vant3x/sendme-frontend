@@ -41,7 +41,7 @@ const NewFolderModal = ({valueModal}) => {
 
       setTimeout(() => {
         setDisabledNewFolder(false);
-      } , 3000);
+      } , 2000);
 
   };
 

@@ -45,9 +45,7 @@ const FolderItem = ({ styles, folder }) => {
       }
       </p>
       </div>
-        {
-          folder._id === folderId && <MenuFolders/>
-        }
+  
     </article>
 
   );

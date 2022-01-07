@@ -13,7 +13,7 @@ const FolderFileItem = ({ styles, file }) => {
           originalName.includes(".png") ? (
             <i className=" my-2 text-5xl fas fa-images text-red-500 ml-2 hover:text-red-600"></i>
           ) : null}
-          {originalName.includes(".mp4") || originalName.includes(".mov") ? (
+          {originalName.includes(".mp4") || originalName.includes(".MP4")   || originalName.includes(".mov") ? (
             <i className="my-2 text-5xl  fas fa-photo-video text-red-500 ml-2 hover:text-red-600"></i>
           ) : null}
           {originalName.includes(".mp3") ||
@@ -28,6 +28,12 @@ const FolderFileItem = ({ styles, file }) => {
           {originalName.includes(".zip") || originalName.includes(".rar") ? (
             <i className="my-2 text-5xl   fas fa-file-archive  text-red-500 ml-2 hover:text-red-600"></i>
           ) : null}
+          {
+            originalName.includes(".txt") ? <i className="my-2 text-5xl   fas fa-file-alt  text-red-500 ml-2 hover:text-red-600"></i> : null      
+          }
+          {
+            originalName.includes('torrent') ? <i className="my-2 text-5xl   fas fa-file-download  text-red-500 ml-2 hover:text-red-600"></i> : null
+          }
         </a>
       </Link>
       <Link href={`/links/${url}`}>

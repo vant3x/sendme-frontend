@@ -25,7 +25,12 @@ const Layout = ({ children }) => {
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
         />
-        
+
+      <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo-icon/apple-touch-icon.png"/>
+      <link rel="icon" type="image/png" sizes="32x32" href="/assets/logo-icon/favicon-32x32.png"/>
+      <link rel="icon" type="image/png" sizes="16x16" href="/assets/logo-icon/favicon-16x16.png"/>
+      <link rel="manifest" href="/assets/logo-icon/site.webmanifest"/>
+  
         <meta
           name="description"
           content="Comparte tus archivos de forma fácil, segura y privada, tambien puedes agregar una contraseña y un limite de descargas a tus enlaces"

@@ -24,7 +24,7 @@ const LinkItem = ({link}) => {
                 link.originalName.includes('.jpg') || link.originalName.includes('.jpeg') || link.originalName.includes('.png')  ?  <i className="text-xl fas fa-images text-red-500 ml-2"></i> : null
               }
               {
-                link.originalName.includes('.mp4')  || link.originalName.includes('.mov')  ?  <i className="text-xl  fas fa-photo-video text-red-500 ml-2"></i> : null
+                link.originalName.includes('.mp4')  || link.originalName.includes('.mov')  || link.originalName.includes('.MP4') ?  <i className="text-xl  fas fa-photo-video text-red-500 ml-2"></i> : null
 
               }
               {
