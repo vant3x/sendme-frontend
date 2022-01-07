@@ -27,10 +27,8 @@ const ScanQR = () => {
       userAuthtenticate();
 
     }
-   console.log(user);
   }, []);
   
-  console.log(router);
   
 
 

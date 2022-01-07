@@ -69,7 +69,6 @@ const AuthState = ({ children }) => {
         type: LOGIN_ERROR,
         payload: error.response.data.message,
       });
-      console.log(error)
     }
     // limpia la alerta
     setTimeout(() => {
@@ -88,8 +87,6 @@ const AuthState = ({ children }) => {
 
     try {
       const response = await axiosClient.get("/api/auth").then((res) => {
-        console.log(res)
-        console.log(res.data)
         if (res.data.user) {
           dispatch({
             type: USER_AUTHENTICATE,
@@ -146,7 +143,6 @@ const AuthState = ({ children }) => {
               window.opener.location.reload();
             }
   
-            console.log(res.data);
         });
       }
       

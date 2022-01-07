@@ -26,14 +26,12 @@ const Folders = () => {
 
   const getRootFiles = async (id) => {
     const filesRoot = await axiosClient.get(`/api/folder/root/${user?.id || user?._id}`);
-    console.log(filesRoot.data.folder);
 
     const filesRootFormated = filesRoot.data.folder.map((file) => {
       let fileRoot = {};
       fileRoot["file"] = file;
       return fileRoot;
     });
-    console.log(filesRootFormated);
     setFiles(filesRootFormated);
   };
 
@@ -49,7 +47,7 @@ const Folders = () => {
 
           <FoldersItemsContainer user={user} files={files} />
          {/* <FolderFilesContainer files={files} /> */}
-    
+
     </Layout>
   );
 };

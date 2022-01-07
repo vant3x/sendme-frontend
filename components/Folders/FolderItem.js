@@ -1,27 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 //import FolderOptionsMenu from './FolderOptionsMenu';
 import MenuFolders from './../common/ContextMenu/Menu';
+import useContextMenu from "../hooks/useContextMenuClick";
 
 const FolderItem = ({ styles, folder }) => {
+
+  const { onMouseUp } = useContextMenu();
 
   const [folderOptions, setFolderOptions] = useState(false);
   const [showFolderOptons, setShowFolderOptions] = useState(false);
   const [folderId, setFolderId] = useState();
 
+
   const showFolderOptions = () => {
     setFolderOptions(true);
-    console.log('funciona')
     setFolderId(folder._id);
   }
+
+  const leaveFolder = () => {
+    setFolderOptions(false);
+    onMouseUp();
+    setFolderId(null);
+  }
+
 
 
   return (
     <article className="flex flex-col  hover:text-red-500 mb-4 mt-2 mr-2" 
       onMouseEnter={()=> showFolderOptions(true)} 
-      onMouseLeave={()=> setFolderOptions(false)} 
+      onMouseLeave={()=> leaveFolder()} 
       >
       <Link href={`/folders/${folder._id}`}>
         <a>
@@ -45,7 +55,9 @@ const FolderItem = ({ styles, folder }) => {
       }
       </p>
       </div>
-  
+        {
+          folder._id === folderId ? <MenuFolders folder={folder} />  : null
+       }
     </article>
 
   );

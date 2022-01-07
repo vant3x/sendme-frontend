@@ -1,29 +1,23 @@
-import { useEffect, useCallback, useState, useRef } from "react";
+import { useEffect, useCallback, useState } from "react";
 
 const useContextMenu = () => {
   const [anchorPoint, setAnchorPoint] = useState({ x: 0, y: 0 });
   const [show, setShow] = useState(false);
-  const containerMenu = useRef();
 
   const handleContextMenu = useCallback(
     (event) => {
       event.preventDefault();
-      containerMenu.style.top = `${event.offsetY}px`; 
-      containerMenu.style.left = `${event.offsetX}px`; 
-      containerMenu.classList.add("active");
       setAnchorPoint({ x: event.pageX, y: event.pageY });
       setShow(true);
     },
     [setShow, setAnchorPoint]
   );
 
-  const handleClick = useCallback(() => {
-      if (show) { 
-          setShow(false); 
-          containerMenu.classList.remove("active");
-     }}, [show]);
+  const handleClick = useCallback(() => (show ? setShow(false) : null), [show]);
 
-  useEffect(() => { 
+  const onMouseUp =  useCallback(() => (show ? setShow(false) : null), [show]);
+
+  useEffect(() => {
     document.addEventListener("click", handleClick);
     document.addEventListener("contextmenu", handleContextMenu);
     return () => {
@@ -32,7 +26,7 @@ const useContextMenu = () => {
     };
   });
 
-  return { anchorPoint, show, containerMenu };
+  return { anchorPoint, show, onMouseUp };
 };
 
 export default useContextMenu;

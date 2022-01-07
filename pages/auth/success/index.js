@@ -12,10 +12,8 @@ const Success = () => {
         if (token) {
     
           userAuthtenticate();
-          console.log(1)
         } else {
             userOauth();
-            console.log(2)
 
             //window.close();
 

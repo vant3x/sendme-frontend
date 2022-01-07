@@ -3,6 +3,7 @@ import FolderItem from "./FolderItem";
 import FolderFileItem from "../../components/Folders/FolderFileItem";
 import styles from "./../../styles/Folders.module.css";
 import axiosClient from "../../config/axios";
+import MenuFolders from "../../components/common/ContextMenu/Menu";
 
 const FoldersItemsContainer = ({ user, files }) => {
   const [foldersByUser, setFolders] = useState([]);
@@ -45,6 +46,7 @@ const FoldersItemsContainer = ({ user, files }) => {
           </div>
         )}
         </div>
+       {/* <MenuFolders />*/}
       </div>
   );
 };

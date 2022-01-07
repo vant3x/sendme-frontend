@@ -41,7 +41,6 @@ const Login = () => {
     } else {
       // validar token expirado y error
     }
-    console.log(auth);
   }, []);
 
   

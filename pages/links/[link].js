@@ -121,7 +121,7 @@ export default ({ link, linkInfo}) => {
               link.originalName.includes(".png") ? (
                 <i className=" my-2 text-5xl fas fa-images text-red-500 ml-2"></i>
               ) : null}
-              {link.originalName.includes(".mp4") ||
+              {link.originalName.includes(".mp4") || link.originalName.includes(".MP4") ||
               link.originalName.includes(".mov") ? (
                 <i className="my-2 text-5xl  fas fa-photo-video text-red-500 ml-2"></i>
               ) : null}
