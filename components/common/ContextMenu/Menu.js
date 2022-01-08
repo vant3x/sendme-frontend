@@ -3,9 +3,13 @@ import useContextMenu from "../../hooks/useContextMenuClick";
 import styles from './../../../styles/MenuContext.module.css';
 import Link from "next/link";
 
-const Menu = ({folder}) => {
+const Menu = ({folder,  showFolderDelete, showFolderRename}) => {
   const { anchorPoint, show } = useContextMenu();
   console.log(folder)
+
+  const folderUrl =  `${process.env.frontendUrl}/folders/${folder._id}`;
+
+
   if (show) {
     return (
       <ul className={styles.menu} style={{ top: anchorPoint.y, left: anchorPoint.x }}>
@@ -15,13 +19,18 @@ const Menu = ({folder}) => {
         </li>
         </Link>
         <li className={styles.menu__list}>
-          Share
+          <i className="fa fa-info-circle mr-2"></i> Información
+        </li>
+        <hr />
+        <li className={styles.menu__list} onClick={() => navigator.clipboard.writeText(folderUrl)}>
+        <i className="fas fa-link mr-2"></i> Obtener enlace
         </li>
         <li className={styles.menu__list}>
-          Copy to
+        <i className="fas fa-share mr-2"></i> Compartir
+
         </li>
         <li className={styles.menu__list}>
-          Descargar
+        <i className="fas fa-cloud-download-alt mr-2"></i>   Descargar
           <div className={`${styles.menu__submenu_container} ${styles.menu}`}>
 							<ol>
 								<li  className={styles.menu__list}><label><span></span> Descarga todos los archivos</label></li>
@@ -32,12 +41,17 @@ const Menu = ({folder}) => {
 					
 						</div>
         </li>
-        <hr />
         <li className={styles.menu__list}>
-          Refresh
+        <i className="fas fa-qrcode mr-2"></i> Compartir con QR
+
         </li>
-        <li className={styles.menu__list}>
-          Delete
+        <hr />
+        <li className={styles.menu__list} onClick={()=> showFolderRename(folder) }>
+        <i className="fas fa-edit mr-2"></i> Renombrar 
+        </li>
+        <hr />
+        <li className={styles.menu__list} onClick={()=>  showFolderDelete(folder)}>
+        <i className="fas fa-trash-alt mr-2"></i> Borrar
         </li>
       </ul>
     );
