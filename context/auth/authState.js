@@ -102,7 +102,6 @@ const AuthState = ({ children }) => {
      
       });
     } catch (error) {
-      console.log(error.response.data)
  
        /* dispatch({
           type: LOGIN_ERROR,

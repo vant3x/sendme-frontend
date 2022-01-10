@@ -5,7 +5,7 @@ import appContext from "../../context/app/appContext";
 
 const RenameFolderModal = ({valueModal, renameFolder, showFolderRename}) => {
   const [hideModal, setModal] = useState(false);
-  const [folderName, setFolderName] = useState("");
+  const [folderName, setFolderName] = useState(renameFolder?.folderName);
   const [disabledNewFolder, setDisabledNewFolder] = useState(false);
   const [errorState, setError] = useState({});
 
@@ -86,8 +86,7 @@ const RenameFolderModal = ({valueModal, renameFolder, showFolderRename}) => {
                   </h3>
                   <div className="mt-2">
                     <p className="text-sm text-gray-500">
-                      Puedes agrupar los archivos por carpetas y categorías,
-                      también puedes agregar subcarpetas
+                    Ingresa el nuevo nombe de tu carpeta
                     </p>
                   </div>
                   <div>
@@ -102,7 +101,7 @@ const RenameFolderModal = ({valueModal, renameFolder, showFolderRename}) => {
                         type="text"
                         name="folderName"
                         id="folderName"
-                        value={renameFolder.folderName}
+                        value={folderName}
                         onChange={(e) => {setFolderName(e.target.value);  setError(false); }}
                         className="shadow appereance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         placeholder="Ingresa un nombre"
