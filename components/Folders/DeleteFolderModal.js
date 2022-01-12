@@ -19,7 +19,6 @@ const DeleteFolderModal = ({ valueModal, deleteFolder, updateListFolders, showFo
     try {
       const response = await axiosClient.delete(`/api/folder/delete/${deleteFolder._id}`);
       showFolderDelete(false);
-      console.log(response)
       updateListFolders(true);
     } catch (error) {
       console.log(error)

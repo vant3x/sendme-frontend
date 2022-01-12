@@ -26,8 +26,6 @@ const RenameFolderModal = ({valueModal, renameFolder, showFolderRename}) => {
     };
     try {
       const response = await axiosClient.post(`/api/folders`, data);
-      console.log(response)
-      console.log(response.data)
       setDisabledNewFolder(false);
       router.push("/folders");
       hideFolderModal();

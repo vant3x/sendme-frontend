@@ -15,7 +15,6 @@ const FoldersItemsContainer = ({
   const [foldersByUser, setFolders] = useState([]);
 
   useEffect(() => {
-    console.log(user);
     fetchFolders(user);
   }, [user, updateListFolders]);
   // todo revisar param usuario cambiar nombre y ver si es necesario

@@ -1,9 +1,7 @@
 import React from "react";
 
 const FolderPageOptions = ({folder, showFolderDelete, showFolderRename, deleteFolder, renameFolder}) => {
-  console.log(deleteFolder)
-  console.log(renameFolder)
-  return (
+x  return (
     <div className="md:float-right sm:text-center">
     <button className="ml-4 btn bg-gray-400 px-2 py-1 rounded" onClick={()=> showFolderRename(folder)}>
       <i className="fas fa-pen mr-2"></i>
