@@ -81,7 +81,8 @@ const Layout = ({ children }) => {
             className="text-red-500 hover:text-red-700"
           >
             {" "}
-            &copy; 2021 by Alevante  	&#127464;&#127476;
+           {/* &copy; 2022 by Alevante  	&#127464;&#127476;*/}
+            &copy; 2022 by Alevante  	&#128153;
           </a>
           <br/>
           <Link href="/privacidad" >

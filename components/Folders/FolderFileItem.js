@@ -22,7 +22,7 @@ const FolderFileItem = ({ styles, file }) => {
           originalName.includes(".ac3") ? (
             <i className="mt-2 text-5xl  fas fa-music text-red-500 mr-1 mb-2 hover:text-red-600"></i>
           ) : null}
-          {originalName.includes(".pdf") ? (
+          {originalName.includes(".pdf") || originalName.includes(".PDF") ? (
             <i className="my-2 text-5xl  far fa-file-pdf text-red-500 ml-2 hover:text-red-600"></i>
           ) : null}
           {originalName.includes(".zip") || originalName.includes(".rar") ? (
