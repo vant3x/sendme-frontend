@@ -3,12 +3,12 @@
     "short_name": "SendMe",
     "icons": [
         {
-            "src": "assets/logo-icon/pwa/icon-192x192.png",
+            "src": "assets/logo-icon/icon-192x192.png",
             "sizes": "192x192",
             "type": "image/png"
         },
         {
-            "src": "assets/logo-icon/pwa/icon-512x512.png",
+            "src": "assets/logo-icon/icon-512x512.png",
             "sizes": "512x512",
             "type": "image/png"
         }

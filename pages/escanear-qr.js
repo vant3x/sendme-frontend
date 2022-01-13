@@ -39,7 +39,7 @@ const ScanQR = () => {
         <h1 className="mb-4 ">Aquí está tu QR</h1>
         <QRCode
           id='1'
-          value={ process.env.frontendUrl+'/links/'+router.query.link}
+          value={process.env.frontendUrl+'/links/'+router.query.link}
           size={240}
           className='mb-2'
         />
