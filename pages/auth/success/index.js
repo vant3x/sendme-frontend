@@ -30,7 +30,6 @@ const Success = () => {
 
     const authSuccess = async () => {
       const response = await  axiosClient.get('/api/auth/success');
-      console.log(response)
     }
  
 

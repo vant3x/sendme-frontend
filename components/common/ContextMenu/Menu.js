@@ -3,9 +3,9 @@ import useContextMenu from "../../hooks/useContextMenuClick";
 import styles from './../../../styles/MenuContext.module.css';
 import Link from "next/link";
 
-const Menu = ({folder,  showFolderDelete, showFolderRename}) => {
+const Menu = ({folder,  showFolderDelete, showFolderRename, showInfoFolderDetailsModal, showInfoFolderPrivacyModal}) => {
   const { anchorPoint, show } = useContextMenu();
-  console.log(folder)
+  //console.log(folder)
 
   const folderUrl =  `${process.env.frontendUrl}/folders/${folder._id}`;
 
@@ -18,14 +18,21 @@ const Menu = ({folder,  showFolderDelete, showFolderRename}) => {
           <i className="fa fa-folder-open mr-2"></i>  Abrir Carpeta
         </li>
         </Link>
-        <li className={styles.menu__list}>
+        <li className={styles.menu__list} onClick={()=>  showInfoFolderDetailsModal(folder)}>
           <i className="fa fa-info-circle mr-2"></i> Información
+        </li>
+        <li className={styles.menu__list} onClick={()=>  showInfoFolderDetailsModal(folder)}>
+          <i className="fas fa-heart mr-2"></i> Favorito
         </li>
         <hr />
         <li className={styles.menu__list} onClick={() => navigator.clipboard.writeText(folderUrl)}>
         <i className="fas fa-link mr-2"></i> Obtener enlace
         </li>
-        <li className={styles.menu__list}>
+        {/* TODO: eliminr enlace debe mostrarse dinamicamente */}
+        <li className={styles.menu__list} onClick={() => navigator.clipboard.writeText(folderUrl)}>
+        <i className="fas fa-unlink mr-2"></i> Eliminar enlace
+        </li>
+        <li className={styles.menu__list} onClick={()=> showInfoFolderPrivacyModal(folder)}>
         <i className="fas fa-share mr-2"></i> Compartir
 
         </li>
@@ -41,10 +48,11 @@ const Menu = ({folder,  showFolderDelete, showFolderRename}) => {
 					
 						</div>
         </li>
-        <li className={styles.menu__list}>
+    {/*    <li className={styles.menu__list}>
         <i className="fas fa-qrcode mr-2"></i> Compartir con QR
 
         </li>
+    */}
         <hr />
         <li className={styles.menu__list} onClick={()=> showFolderRename(folder) }>
         <i className="fas fa-edit mr-2"></i> Renombrar 

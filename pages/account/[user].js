@@ -31,7 +31,7 @@ export async function getServerSidePaths() {
 
 
 
-export default ({link}) => {
+const user = ({link}) => {
 
  // Extraer el usuario autenticado del storage
   const AuthContext = useContext(authContext);
@@ -76,3 +76,5 @@ export default ({link}) => {
        </Layout>
     );
 } 
+
+export default user;

@@ -3,32 +3,33 @@ import axiosClient from "../../config/axios";
 import { useRouter } from "next/router";
 import appContext from "../../context/app/appContext";
 
-const RenameFolderModal = ({valueModal, renameFolder, showFolderRename}) => {
+const RenameFolderModal = ({ updateListFolders,valueModal, renameFolder, showFolderRename}) => {
   const [hideModal, setModal] = useState(false);
   const [folderName, setFolderName] = useState(renameFolder?.folderName);
-  const [disabledNewFolder, setDisabledNewFolder] = useState(false);
+  const [disabledUpdateFolder, setDisabledUpdateFolder] = useState(false);
   const [errorState, setError] = useState({});
 
   const AppContext = useContext(appContext);
   const { setFolderModal, folderModal } = AppContext;
-
+  
   const router = useRouter();
 
   const hideFolderModal = () => {
     setModal(true);
   };
 
-  const newFolder = async (e) => {
+  const updateFolder = async (e) => {
     e.preventDefault();
-    setDisabledNewFolder(true);
+    setDisabledUpdateFolder(true);
     const data = {
       folderName,
     };
     try {
-      const response = await axiosClient.post(`/api/folders`, data);
-      setDisabledNewFolder(false);
-      router.push("/folders");
+      const response = await axiosClient.put(`/api/folder/${renameFolder._id}`, data);
+      setDisabledUpdateFolder(false);
       hideFolderModal();
+      updateListFolders(true);
+      showFolderRename(false);
     } catch (error) {
        console.log(error)
        console.log(error.response.data)
@@ -38,14 +39,14 @@ const RenameFolderModal = ({valueModal, renameFolder, showFolderRename}) => {
     }
 
       setTimeout(() => {
-        setDisabledNewFolder(false);
+        setDisabledUpdateFolder(false);
       } , 2000);
 
   };
 
-  useEffect(() => {
+ /* useEffect(() => {
     console.log(valueModal);
-   }, [valueModal]);
+   }, [valueModal]);*/
 
   return  (
     <div
@@ -69,7 +70,7 @@ const RenameFolderModal = ({valueModal, renameFolder, showFolderRename}) => {
           &#8203;
         </span>
         <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-          <form onSubmit={(e) => newFolder(e)}>
+          <form onSubmit={(e) => updateFolder(e)}>
             <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
               <div className="sm:flex sm:items-start">
                 <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
@@ -116,14 +117,14 @@ const RenameFolderModal = ({valueModal, renameFolder, showFolderRename}) => {
             </div>
             <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse ">
               <button
-                disabled={disabledNewFolder}
+                disabled={disabledUpdateFolder}
                 type="submit"
                 className={`w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 ${
-                  !disabledNewFolder ? "bg-red-600" : "bg-gray-400"
+                  !disabledUpdateFolder ? "bg-red-600" : "bg-gray-400"
                 }  ${
-                  !disabledNewFolder ? "cursor-pointer" : "cursor-not-allowed"
+                  !disabledUpdateFolder ? "cursor-pointer" : "cursor-not-allowed"
                 } text-base font-medium text-white  ${
-                  !disabledNewFolder ? "hover:bg-red-700" : "hover:bg-gray-400"} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm`}
+                  !disabledUpdateFolder ? "hover:bg-red-700" : "hover:bg-gray-400"} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm`}
               >
                 Actualizar Carpeta
               </button>

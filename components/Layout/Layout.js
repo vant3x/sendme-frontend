@@ -82,7 +82,7 @@ const Layout = ({ children }) => {
           >
             {" "}
            {/* &copy; 2022 by Alevante  	&#127464;&#127476;*/}
-            &copy; 2022 by Alevante  	&#128153;
+            &copy; 2022 by Alevante  &#127464;&#127476;
           </a>
           <br/>
           <Link href="/privacidad" >

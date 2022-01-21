@@ -36,10 +36,12 @@ const ProfileForm = ({ user }) => {
                  </h3>*/}
 
                 <div className="flex">
+            
+
                   <UserIconContainer className="bg-gray-100 border">
                     <span className="fas fa-user text-4xl text-gray-600"></span>
                   </UserIconContainer>
-                  <button className="border border-gray-800 p-2 border-2">
+                  <button className="border border-gray-800 p-2 h-10 border-2">
                     Subir Avatar
                   </button>
                 </div>
@@ -136,6 +138,7 @@ const ProfileForm = ({ user }) => {
                       Cambiar Contraseña
                     </a>
                   </div>
+   
                 </div>
               </div>
               <div className="px-4 py-3 bg-gray-50 text-right sm:px-6 flex justify-center">

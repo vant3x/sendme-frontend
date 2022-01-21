@@ -27,7 +27,6 @@ const Home = () => {
     } else {
 
     }
-   console.log(user);
   }, []);
 
   return (
@@ -43,7 +42,7 @@ const Home = () => {
             <p className="text-center mb-4">
               <a
                 href={`${process.env.frontendUrl}/links/${url}`}
-                className="text-2xl underline hover:text-red-500"
+                className="lg:text-2xl underline hover:text-red-500"
               >
                 {`${process.env.frontendUrl}/links/${url}`}{" "}
               </a>
@@ -58,7 +57,7 @@ const Home = () => {
                 )
               }
             >
-              Copiar Enlace <i className="ml-2 text-1xl fas fa-copy"></i>
+              Copiar Enlace <i className="ml-2 text-1xl fas fa-copy sm:text-sm"></i>
             </button>
           </div>
         ) : (

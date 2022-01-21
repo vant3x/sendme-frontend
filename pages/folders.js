@@ -4,9 +4,12 @@ import FoldersItemsContainer from "../components/Folders/FoldersItemsContainer";
 import FolderFilesContainer from "../components/Folders/FolderFilesContainer";
 import DeleteFolderModal from "../components/Folders/DeleteFolderModal";
 import RenameFolderModal from "../components/Folders/RenameFolderModal";
+import InfoFolderDetailsModal from "../components/Folders/InfoFolderDetailsModal";
+import InfoPrivacyFolderModal from "../components/Folders/InfoPrivacyFolderModal";
 
 import authContext from "../context/auth/authContext";
 import axiosClient from "../config/axios";
+import router from "next/router";
 
 const Folders = () => {
   // Extraer el usuario autenticado del storage
@@ -16,13 +19,18 @@ const Folders = () => {
   const [deleteFolder, setDeleteFolder] = useState(false);
   const [updateFolders, setUpdateFolders] = useState(false);
   const [renameFolder, setRenameFolder] = useState(false);
+  const [infoFolderDetails, setInfoFolderDetails] = useState(false);
+  const [infoFolderPrivacy, setInfoFolderPrivacy] = useState(false);
 
   useEffect(() => {
     userAuthtenticate();
   }, []);
 
   useEffect(() => {
-    getRootFiles(user?.id || user?._id);
+    if (user) {
+      console.log(user)
+      getRootFiles(user?.id || user?._id);
+    }
   }, [user]);
 
   /*| useEffect(() => {
@@ -56,6 +64,8 @@ const Folders = () => {
         files={files}
         showFolderDelete={setDeleteFolder}
         showFolderRename={setRenameFolder}
+        showInfoFolderDetailsModal={setInfoFolderDetails}
+        showInfoFolderPrivacyModal={setInfoFolderPrivacy}
         updateListFolders={updateFolders}
       />
       {/* <FolderFilesContainer files={files} /> */}
@@ -74,6 +84,18 @@ const Folders = () => {
           showFolderRename={setRenameFolder}
         />
       )}
+
+      {
+        infoFolderDetails &&(
+        <InfoFolderDetailsModal infoFolder={infoFolderDetails} showInfoFolderDetailsModal={setInfoFolderDetails} />
+        )
+      }
+
+{
+        infoFolderPrivacy &&(
+        <InfoPrivacyFolderModal infoFolderPrivacy={infoFolderPrivacy} showInfoFolderPrivacyModal={setInfoFolderPrivacy} />
+        )
+      }
     </Layout>
   );
 };

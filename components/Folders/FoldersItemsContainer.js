@@ -8,6 +8,8 @@ import MenuFolders from "../../components/common/ContextMenu/Menu";
 const FoldersItemsContainer = ({
   showFolderDelete,
   showFolderRename,
+  showInfoFolderDetailsModal,
+  showInfoFolderPrivacyModal,
   user,
   updateListFolders,
   files,
@@ -50,6 +52,8 @@ const FoldersItemsContainer = ({
                 folder={folder}
                 showFolderDelete={showFolderDelete}
                 showFolderRename={showFolderRename}
+                showInfoFolderPrivacyModal={showInfoFolderPrivacyModal}
+                showInfoFolderDetailsModal={showInfoFolderDetailsModal}
                 styles={styles}
               />
             ))}

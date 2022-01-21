@@ -20,12 +20,14 @@ const DeleteFolderModal = ({ valueModal, deleteFolder, updateListFolders, showFo
       const response = await axiosClient.delete(`/api/folder/delete/${deleteFolder._id}`);
       showFolderDelete(false);
       updateListFolders(true);
+      router.push("/folders");
     } catch (error) {
       console.log(error)
 
     }
   }
 
+  
   return !hideModal ? (
     <div
       className="fixed z-10 inset-0 overflow-y-auto"

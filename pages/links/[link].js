@@ -28,7 +28,7 @@ export async function getServerSidePaths() {
   };
 }
 
-export default ({ link, linkInfo}) => {
+const link = ({ link, linkInfo}) => {
   // definir el context auth
   const AuthContext = useContext(authContext);
   const { user, auth } = AuthContext;
@@ -134,6 +134,9 @@ export default ({ link, linkInfo}) => {
               {link.originalName.includes(".pdf") ? (
                 <i className="my-2 text-5xl  far fa-file-pdf text-red-500 ml-2"></i>
               ) : null}
+                  {link.originalName.includes(".mobi") || link.originalName.includes(".MOBI") ? (
+            <i className="my-2 text-5xl  fas fa-book text-red-500 ml-2 hover:text-red-600"></i>
+          ) : null}
               {link.originalName.includes(".zip") ||
               link.originalName.includes(".rar") ? (
                 <i className="my-2 text-5xl   fas fa-file-archive  text-red-500 ml-2"></i>
@@ -180,3 +183,5 @@ export default ({ link, linkInfo}) => {
     </Layout>
   );
 };
+
+export default link;

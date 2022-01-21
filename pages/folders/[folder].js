@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axiosClient from "../../config/axios";
 import authContext from "./../../context/auth/authContext";
 import Layout from "../../components/Layout/Layout";
@@ -9,6 +9,8 @@ import FolderFilesContainer from "../../components/Folders/FolderFilesContainer"
 import FolderPageOptions from "./../../components/Folders/FolderPageOptions";
 import DeleteFolderModal from "../../components/Folders/DeleteFolderModal";
 import RenameFolderModal from "../../components/Folders/RenameFolderModal";
+import Router from 'next/router'
+import { useRouter } from 'next/router'
 
 export async function getServerSideProps({ params }) {
   const { folder } = params;
@@ -21,15 +23,41 @@ export async function getServerSideProps({ params }) {
   };
 }
 
-export default ({ folder }) => {
+const folder = ({ folder }) => {
   // definir el context
   const AuthContext = useContext(authContext);
-  const { message, auth, user, userOauth, login, errorSession } = AuthContext;
+  const { message, auth, user,  userOauth, login, errorSession } = AuthContext;
   const [deleteFolder, setDeleteFolder] = useState(false);
   const [renameFolder, setRenameFolder] = useState(false);
   const [updateFolders, setUpdateFolders] = useState(false);
+ 
+
+  const router = useRouter()
 
   const folderById = folder.folder;
+    console.log({user: user})
+    console.log({folder: folder})
+    console.log({folderAuthor: folder.author !== user?.id})
+    console.log({folderAuthor: folderById.author})
+    console.log({folderAuthor: user?.id})
+    useEffect(() => {
+      if (!user) {
+          // Make sure we're in the browser
+          if (typeof window !== 'undefined') {
+            console.log(user)
+            console.log(user)
+            console.log(user)
+            console.log(user)
+            console.log(user)
+            if (!user && folderById.privacy < 2) {
+
+            router.push('/login')
+    
+          }
+        }
+      }
+    } , [user])
+
   return (
     <Layout>
       <div className="py-12 bg-white mb-8 rounded-lg md:shadow-lg">
@@ -93,3 +121,5 @@ export default ({ folder }) => {
     </Layout>
   );
 };
+
+export default folder;
