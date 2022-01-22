@@ -62,6 +62,8 @@ const link = ({ link, linkInfo}) => {
       }
     })
   }
+
+  console.log(link) 
   return (
     <Layout>
       {hasPassword && user?.id !== link.author ? (
@@ -149,6 +151,9 @@ const link = ({ link, linkInfo}) => {
                   .{link.originalName.split(".")[1]}
                 </span>
               </p>
+              {
+                link.fileSize && <p>{link.fileSize}</p>
+              }
               <p>
                 <span className="text-red-500"> Limite de descargas: </span>{" "}
                 <span className="text-gray-700">{link.downloadLimit}</span>

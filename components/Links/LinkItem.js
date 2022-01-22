@@ -51,12 +51,16 @@ const LinkItem = ({link}) => {
         </div>
         <div className="text-sm text-gray-500">{date.toLocaleDateString()}</div>
       </td>
+      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium sm:visible invisible">
+            1MB
+        
+      </td>
       <td className="px-6 py-4 whitespace-nowrap sm:visible invisible">
         <span className="px-4 py-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
           {link.downloadLimit}
         </span>
       </td>
-
+ 
       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium sm:visible invisible">
         <a href="#" className="text-blue-400 hover:text-blue-500">
           Editar
