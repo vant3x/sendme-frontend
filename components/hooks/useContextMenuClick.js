@@ -21,8 +21,10 @@ const useContextMenu = () => {
     document.addEventListener("click", handleClick);
     document.addEventListener("contextmenu", handleContextMenu);
     return () => {
+  
       document.removeEventListener("click", handleClick);
       document.removeEventListener("contextmenu", handleContextMenu);
+     
     };
   });
 

@@ -30,7 +30,7 @@ const folder = ({ folder }) => {
   const [deleteFolder, setDeleteFolder] = useState(false);
   const [renameFolder, setRenameFolder] = useState(false);
   const [updateFolders, setUpdateFolders] = useState(false);
- 
+  
 
   const router = useRouter()
 
@@ -54,6 +54,7 @@ const folder = ({ folder }) => {
             router.push('/login')
     
           }
+          
         }
       }
     } , [user])

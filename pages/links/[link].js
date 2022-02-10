@@ -7,6 +7,7 @@ import Alert from "./../../components/Alerts/Alert";
 import { NotFoundError } from "next/error";
 import Link from "next/link";
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 export async function getServerSideProps({ params }) {
   const { link } = params;
@@ -53,6 +54,12 @@ const link = ({ link, linkInfo}) => {
     }
   };
 
+  console.log({
+    data:{
+      link,
+      linkInfo
+    }
+  })
 
   const generateQR = () => {
     router.push({
@@ -63,9 +70,60 @@ const link = ({ link, linkInfo}) => {
     })
   }
 
+
   console.log(link) 
   return (
+    <>
+    
     <Layout>
+        <Head>
+        <title>SendMe - {link.originalName}</title>
+        <link
+          href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
+          rel="stylesheet"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Lobster&family=Megrim&family=Permanent+Marker&family=Roboto:wght@100;300;400;700&display=swap"
+          rel="stylesheet"
+        />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+        />
+
+      <link rel="apple-touch-icon" sizes="180x180" href="/assets/logo-icon/apple-touch-icon.png"/>
+      <link rel="icon" type="image/png" sizes="32x32" href="/assets/logo-icon/favicon-32x32.png"/>
+      <link rel="icon" type="image/png" sizes="16x16" href="/assets/logo-icon/favicon-16x16.png"/>
+      <link rel="manifest" href="/assets/logo-icon/site.webmanifest"/>
+  
+
+        {/* OG for Facebook  */}
+        <meta property="og:url" content="https://sendmefiles.cloud" />
+        <meta property="og:type" content= "website" />
+        <meta property="og:title" content={`SendMeFiles - ${link.originalName}`} />
+        <meta
+          property="og:description"
+          content="Comparte tus archivos de forma fácil, segura y privada, tambien puedes agregar una contraseña y un limite de descargas a tus enlaces"
+        />
+        <meta
+          property="og:image"
+          content="https://sendmefiles.cloud/assets/img/landing-playa-screen.png"
+        />
+
+        {/* -Twitter card */}
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:site" content="@semdmefiles" />
+        <meta name="twitter:creator" content="@salevant3X" />
+        <meta
+          name="twitter:title"
+          content={`SendMeFiles - ${link.originalName}`}
+        />
+        <meta name="twitter:description" content="Comparte tus archivos de forma fácil, segura y privada, tambien puedes agregar una contraseña y un limite de descargas a tus enlaces" />
+        <meta
+          name="twitter:image"
+          content="https://sendmefiles.cloud/assets/img/landing-playa-screen.png"
+        />
+      </Head>
       {hasPassword && user?.id !== link.author ? (
         <div className="text-center ">
           <i className="fas fa-lock text-6xl mb-6  text-red-500 mt-2"></i>
@@ -123,6 +181,9 @@ const link = ({ link, linkInfo}) => {
               link.originalName.includes(".png") ? (
                 <i className=" my-2 text-5xl fas fa-images text-red-500 ml-2"></i>
               ) : null}
+                      {  link.originalName.includes(".svg") ? (
+                  <i className="text-5xl  fas fa-bezier-curve  text-red-500 ml-2"></i>
+                ) : null}
               {link.originalName.includes(".mp4") || link.originalName.includes(".MP4") ||
               link.originalName.includes(".mov") ? (
                 <i className="my-2 text-5xl  fas fa-photo-video text-red-500 ml-2"></i>
@@ -186,6 +247,7 @@ const link = ({ link, linkInfo}) => {
         </div>
       )}
     </Layout>
+    </>
   );
 };
 

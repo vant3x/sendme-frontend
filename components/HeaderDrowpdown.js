@@ -37,7 +37,7 @@ const HeaderDropdowns = (props) => {
 
       {showModal && (
         <div
-          className=" animate__animated animate__fadeIn animate__faster origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100"
+          className=" animate__animated animate__fadeIn animate__faster origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100"
           role="menu"
           aria-orientation="vertical"
           aria-labelledby="options-menu"
@@ -68,22 +68,23 @@ const HeaderDropdowns = (props) => {
               </a>
             </Link>
 
-            <button
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+            <a 
+            
+              className="block cursor-pointer px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               role="menuitem"
               onClick={() => setFolderModal(true)}
             >
               <i className="fas fa-folder-plus"></i> Nueva Carpeta
-            </button>
+            </a>
           </div>
-          <button
+          <a
             onClick={() => props.logout()}
             href="#"
-            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+            className="block px-4  cursor-pointer  py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
             role="menuitem"
           >
             <i className="fas fa-sign-out-alt"></i> Cerrar Sesión
-          </button>
+          </a>
         </div>
       )}
     </div>

@@ -1,12 +1,48 @@
 import React, { useState, useContext, useEffect } from "react";
+import Toast from "./../Toast/Toast";
+import axiosClient from "../../config/axios";
 
 const InfoPrivacyFolderModal = ({
   valueModal,
   showInfoFolderPrivacyModal,
   infoFolderPrivacy,
+  setUpdateListFolders,
 }) => {
-  const [privacyFolder, setPrivacyFolder] = useState(0);
+  const [privacyFolder, setPrivacyFolder] = useState(infoFolderPrivacy.privacy);
   const [privacyFolderEmail, setPrivacyFolderEmail] = useState();
+  const [copyLinkToast, setCopyLinkToast] = useState(false);
+  const [removeLinkToastAnimation, setRemoveLinkToastAnimation] = useState(false);
+
+  console.log(infoFolderPrivacy);
+  const updatePrivacyFolder = async (privacy) => {
+    const data = {
+      privacy,
+    };
+    try {
+      const response = await axiosClient.put(
+        `/api/folder/privacy/${infoFolderPrivacy._id}`,
+        data
+      );
+      console.log(data);
+      console.log(privacy);
+      setUpdateListFolders(true);
+    } catch (error) {
+      console.log(error);
+      // showAlert(error.response.data.message);
+    }
+  };
+
+  const copyFolderLink = (e) => {
+    e.preventDefault();
+    setCopyLinkToast(true);
+    navigator.clipboard.writeText(
+      `${process.env.frontendUrl}/folders/${infoFolderPrivacy._id}`
+    );
+    setTimeout(() => {
+      setCopyLinkToast(false);
+      setRemoveLinkToastAnimation(true);
+    }, 4500);
+  }
 
   return (
     <>
@@ -36,7 +72,7 @@ const InfoPrivacyFolderModal = ({
                   <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
                     <i className="fas fa-share-alt-square text-red-500 text-xl"></i>
                   </div>
-                  <div className="mt-3  w-9/12	 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                  <div className="mt-3  w-10/12	 text-center sm:mt-0 sm:ml-4 sm:text-left">
                     <h3
                       className="text-lg leading-6 font-medium text-gray-900"
                       id="modal-title"
@@ -51,11 +87,26 @@ const InfoPrivacyFolderModal = ({
                         {infoFolderPrivacy.folderName}
                       </p>
                     </div>
-                    <div>
+                    <div className="mb-4s">
                       <div className="mb-4 mt-4 ">
                         <p className="mt-2 text-gray-800 mb-2">
-                          <i className="fas fa-lock mr-2"></i>
-                          Esta carpeta es privada
+                          {privacyFolder === 0 ? (
+                            <i className="fas fa-lock mr-2"></i>
+                          ) : null}
+                          {privacyFolder === 1 ? (
+                            <i className="fas fa-users mr-2"></i>
+                          ) : null}
+                          {privacyFolder === 2 ? (
+                            <i className="fas fa-link mr-2"></i>
+                          ) : null}
+                          {privacyFolder === 0
+                            ? "Esta carpeta es privada"
+                            : null}
+                          {privacyFolder === 1 ? "Invita a un amigo" : null}
+
+                          {privacyFolder === 2
+                            ? "Esta carpeta es pública"
+                            : null}
                         </p>
                         <p
                           className="block text-gray-800 text-sm font-bold mb-2"
@@ -67,7 +118,10 @@ const InfoPrivacyFolderModal = ({
 
                         <div className="">
                           <div
-                            onClick={() => setPrivacyFolder(0)}
+                            onClick={() => {
+                              setPrivacyFolder(0);
+                              updatePrivacyFolder(0);
+                            }}
                             className={` ${
                               privacyFolder === 0 ? "bg-blue-100" : null
                             }   hover:bg-blue-100 rounded-t-md border-solid border-2 border-gray-400 p-2`}
@@ -76,9 +130,11 @@ const InfoPrivacyFolderModal = ({
                               type="radio"
                               id="privacyId1"
                               name="privacy"
-                              value="email"
                               checked={privacyFolder === 0}
-                              onChange={() => setPrivacyFolder(0)}
+                              onChange={() => {
+                                setPrivacyFolder(0);
+                                updatePrivacyFolder(0);
+                              }}
                             />
                             <label
                               htmlFor="privacyId1"
@@ -87,9 +143,9 @@ const InfoPrivacyFolderModal = ({
                               <i className="fas fa-lock mr-2"></i>
                               Privada
                             </label>
-                            {privacyFolder === 0 &&
-                              (<p className="ml-5">Esta carpeta es privada</p>
-                              )}
+                            {privacyFolder === 0 && (
+                              <p className="ml-5">Esta carpeta es privada</p>
+                            )}
                           </div>
                           <div
                             onClick={() => setPrivacyFolder(1)}
@@ -101,9 +157,9 @@ const InfoPrivacyFolderModal = ({
                               type="radio"
                               id="privacyId2"
                               name="privacy"
-                              value="phone"
+                              value="email"
                               checked={privacyFolder === 1}
-                              onChange={() => setPrivacyFolder()}
+                              onChange={() => setPrivacyFolder(1)}
                             />
                             <label
                               htmlFor="privacyId2"
@@ -113,7 +169,7 @@ const InfoPrivacyFolderModal = ({
                             </label>
                             {privacyFolder === 1 && (
                               <input
-                                className="shadow appereance-none  mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full py-2 px-3 shadow-sm sm:text-sm border border-gray-400 rounded-md"
+                                className="mt-2 shadow appereance-none  mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full py-2 px-3 shadow-sm sm:text-sm border border-gray-400 rounded-md"
                                 type="email"
                                 value={privacyFolderEmail}
                                 placeholder="Ingresa un email@"
@@ -122,9 +178,17 @@ const InfoPrivacyFolderModal = ({
                                 }
                               />
                             )}
+                            {privacyFolder === 1 && privacyFolderEmail ? (
+                              <button className="my-4 bg-red-400   hover:bg-red-500 text-white py-2 px-4 ml-2 rounded">
+                                Compartir con amigo
+                              </button>
+                            ) : null}
                           </div>
                           <div
-                            onClick={() => setPrivacyFolder(2)}
+                            onClick={() => {
+                              setPrivacyFolder(2);
+                              updatePrivacyFolder(2);
+                            }}
                             className={` ${
                               privacyFolder === 2 ? "bg-blue-100" : null
                             } border-solid  hover:bg-blue-100 rounded-b-md  border-bottom border-2 border-gray-400 p-2`}
@@ -133,9 +197,12 @@ const InfoPrivacyFolderModal = ({
                               type="radio"
                               id="privacyId3"
                               name="privacy"
-                              value="mail"
+                              value="public"
                               checked={privacyFolder === 2}
-                              onChange={() => setPrivacyFolder(2)}
+                              onChange={() => {
+                                setPrivacyFolder(2);
+                                updatePrivacyFolder(2);
+                              }}
                             />
                             <label
                               htmlFor="privacyId3"
@@ -151,9 +218,12 @@ const InfoPrivacyFolderModal = ({
                           <div className="bg-red-500 text-white font-bold rounded-t px-4 py-2">
                             Comparte este link con tus amigos
                           </div>
-                          <div className="border border-t-0 border-red-200 rounded-b bg-red-100 px-4 py-3 text-red-700">
+                          <div className="border border-t-0 text-center border-red-200 rounded-b bg-red-100 px-4 py-3 text-red-700">
                             <p className="text-sm">{`${process.env.frontendUrl}/folders/${infoFolderPrivacy._id}`}</p>
-                            <button className="bg-red-400 text-white p-2 rounded">
+                            <button
+                              onClick={e=> copyFolderLink(e)}
+                              className="my-4 bg-red-400  hover:bg-red-500 text-white py-2 px-6 rounded"
+                            >
                               Copiar enlace
                             </button>
                           </div>
@@ -165,6 +235,16 @@ const InfoPrivacyFolderModal = ({
                       )
                       */}
                     </div>
+                    {copyLinkToast && (
+                      <div className={`mt-4 ${!copyFolderLink ?  'animate__animated animate__backOutRight' : null}`}>
+                      <Toast
+                        theme="dark"
+                        text="Se copió el enlace"
+                        animationEffect="bounceIn"
+                        closeBtn={setCopyLinkToast}
+                      />
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

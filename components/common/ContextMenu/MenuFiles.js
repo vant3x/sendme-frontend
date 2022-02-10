@@ -3,30 +3,11 @@ import useContextMenu from "../../hooks/useContextMenuClick";
 import styles from "./../../../styles/MenuContext.module.css";
 import Link from "next/link";
 
-const Menu = ({
-  folder,
-  showFolderDelete,
-  showFolderRename,
-  showInfoFolderDetailsModal,
-  showInfoFolderPrivacyModal,
+const MenuFiles = ({
+  file
 }) => {
   const { anchorPoint, show } = useContextMenu();
   //console.log(folder)
-
-  const folderUrl = `${process.env.frontendUrl}/folders/${folder._id}`;
-
-  const downloadFolderFiles = folder => {
-    console.log(folder)
-    folder.files.forEach(file => {
-      let a = document.createElement("a");
-      a.href = `${process.env.apiURL}/api/folder/files/${file.file}`;
-      a.setAttribute("download", Date.now());
-      document.body.appendChild(a);
-
-      a.click();
-      document.body.removeChild(a)
-    })
-  }
 
 
   if (show) {
@@ -35,27 +16,22 @@ const Menu = ({
         className={styles.menu}
         style={{ top: anchorPoint.y, left: anchorPoint.x }}
       >
-        <Link href={`/folders/${folder._id}`}>
           <li className={styles.menu__list}>
-            <i className="fa fa-folder-open mr-2"></i> Abrir Carpeta
+            <i className="fa fa-folder-open mr-2"></i> Abrir archivo
           </li>
-        </Link>
         <li
           className={styles.menu__list}
-          onClick={() => showInfoFolderDetailsModal(folder)}
         >
           <i className="fa fa-info-circle mr-2"></i> Información
         </li>
         <li
           className={styles.menu__list}
-          onClick={() => showInfoFolderDetailsModal(folder)}
         >
           <i className="fas fa-heart mr-2"></i> Favorito
         </li>
         <hr />
         <li
           className={styles.menu__list}
-          onClick={() => navigator.clipboard.writeText(folderUrl)}
         >
           <i className="fas fa-link mr-2"></i> Obtener enlace
         </li>
@@ -68,7 +44,6 @@ const Menu = ({
       </li> */}
         <li
           className={styles.menu__list}
-          onClick={() => showInfoFolderPrivacyModal(folder)}
         >
           <i className="fas fa-share mr-2"></i> Compartir
         </li>
@@ -76,7 +51,7 @@ const Menu = ({
           <i className="fas fa-cloud-download-alt mr-2"></i> Descargar
           <div className={`${styles.menu__submenu_container} ${styles.menu}`}>
             <ol>
-              <li className={styles.menu__list} onClick={()=> downloadFolderFiles(folder)}>
+              <li className={styles.menu__list}>
                 <label>
                   <span></span> Descarga todos los archivos
                 </label>
@@ -102,14 +77,12 @@ const Menu = ({
         <hr />
         <li
           className={styles.menu__list}
-          onClick={() => showFolderRename(folder)}
         >
           <i className="fas fa-edit mr-2"></i> Renombrar
         </li>
         <hr />
         <li
           className={styles.menu__list}
-          onClick={() => showFolderDelete(folder)}
         >
           <i className="fas fa-trash-alt mr-2"></i> Borrar
         </li>
@@ -119,4 +92,4 @@ const Menu = ({
   return <></>;
 };
 
-export default Menu;
+export default MenuFiles;

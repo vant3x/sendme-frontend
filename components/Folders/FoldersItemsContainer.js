@@ -42,10 +42,12 @@ const FoldersItemsContainer = ({
             /
           </span>
         </div>
+        <div className="folder-container flex flex-row justify-start flex-wrap items-start">
+
         {foldersByUser.length < 1 ? (
-          <p className="text-center py-4">Aún no tienes carpetas creadas</p>
+          <p className="text-center py-4 mr-4 mt-4">Aún no tienes carpetas creadas</p>
         ) : (
-          <div className="folder-container flex flex-row justify-start flex-wrap items-start">
+          <>
             {foldersByUser.map((folder, index) => (
               <FolderItem
                 key={index}
@@ -57,15 +59,17 @@ const FoldersItemsContainer = ({
                 styles={styles}
               />
             ))}
-            {files
-              ? files.map((file, index) => (
-                  <FolderFileItem file={file} key={index} />
-                ))
-              : null}
-          </div>
+          </>
         )}
+          {files
+            ? files.map((file, index) => (
+                <FolderFileItem file={file} key={index} />
+              ))
+            : null}
+        </div>
       </div>
       {/* <MenuFolders />*/}
+   
     </div>
   );
 };

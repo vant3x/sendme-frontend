@@ -21,6 +21,7 @@ const Folders = () => {
   const [renameFolder, setRenameFolder] = useState(false);
   const [infoFolderDetails, setInfoFolderDetails] = useState(false);
   const [infoFolderPrivacy, setInfoFolderPrivacy] = useState(false);
+  const [updateFolderInfo, setUpdateFolderInfo] = useState({});
 
   useEffect(() => {
     userAuthtenticate();
@@ -67,6 +68,7 @@ const Folders = () => {
         showInfoFolderDetailsModal={setInfoFolderDetails}
         showInfoFolderPrivacyModal={setInfoFolderPrivacy}
         updateListFolders={updateFolders}
+
       />
       {/* <FolderFilesContainer files={files} /> */}
       {deleteFolder && (
@@ -93,7 +95,8 @@ const Folders = () => {
 
 {
         infoFolderPrivacy &&(
-        <InfoPrivacyFolderModal infoFolderPrivacy={infoFolderPrivacy} showInfoFolderPrivacyModal={setInfoFolderPrivacy} />
+        <InfoPrivacyFolderModal infoFolderPrivacy={infoFolderPrivacy} showInfoFolderPrivacyModal={setInfoFolderPrivacy}  setUpdateListFolders={setUpdateFolders}
+        />
         )
       }
     </Layout>

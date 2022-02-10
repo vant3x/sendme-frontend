@@ -3,7 +3,7 @@ import useContextMenu from "../../hooks/useContextMenuClick";
 import styles from "./../../../styles/MenuContext.module.css";
 import Link from "next/link";
 
-const Menu = ({
+const MenuMain = ({
   folder,
   showFolderDelete,
   showFolderRename,
@@ -14,20 +14,6 @@ const Menu = ({
   //console.log(folder)
 
   const folderUrl = `${process.env.frontendUrl}/folders/${folder._id}`;
-
-  const downloadFolderFiles = folder => {
-    console.log(folder)
-    folder.files.forEach(file => {
-      let a = document.createElement("a");
-      a.href = `${process.env.apiURL}/api/folder/files/${file.file}`;
-      a.setAttribute("download", Date.now());
-      document.body.appendChild(a);
-
-      a.click();
-      document.body.removeChild(a)
-    })
-  }
-
 
   if (show) {
     return (
@@ -60,12 +46,12 @@ const Menu = ({
           <i className="fas fa-link mr-2"></i> Obtener enlace
         </li>
         {/* TODO: eliminr enlace debe mostrarse dinamicamente */}
-      {/*  <li
+        <li
           className={styles.menu__list}
           onClick={() => navigator.clipboard.writeText(folderUrl)}
         >
           <i className="fas fa-unlink mr-2"></i> Eliminar enlace
-      </li> */}
+        </li>
         <li
           className={styles.menu__list}
           onClick={() => showInfoFolderPrivacyModal(folder)}
@@ -76,7 +62,7 @@ const Menu = ({
           <i className="fas fa-cloud-download-alt mr-2"></i> Descargar
           <div className={`${styles.menu__submenu_container} ${styles.menu}`}>
             <ol>
-              <li className={styles.menu__list} onClick={()=> downloadFolderFiles(folder)}>
+              <li className={styles.menu__list}>
                 <label>
                   <span></span> Descarga todos los archivos
                 </label>
@@ -119,4 +105,4 @@ const Menu = ({
   return <></>;
 };
 
-export default Menu;
+export default MenuMain;
