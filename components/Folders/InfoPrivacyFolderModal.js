@@ -69,10 +69,10 @@ const InfoPrivacyFolderModal = ({
             <form>
               <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                 <div className="sm:flex sm:items-start">
-                  <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+                  <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-8 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
                     <i className="fas fa-share-alt-square text-red-500 text-xl"></i>
                   </div>
-                  <div className="mt-3  w-10/12	 text-center sm:mt-0 sm:ml-4 sm:text-left">
+                  <div className="mt-3  w-12/12 sm:w-10/12 lg:w-10/12 xl:w-10/12	 text-center sm:mt-0 sm:ml-4 sm:text-left">
                     <h3
                       className="text-lg leading-6 font-medium text-gray-900"
                       id="modal-title"
@@ -89,7 +89,7 @@ const InfoPrivacyFolderModal = ({
                     </div>
                     <div className="mb-4s">
                       <div className="mb-4 mt-4 ">
-                        <p className="mt-2 text-gray-800 mb-2">
+                        <p className="mt-2 text-gray-800 mb-2 hidden md:hidden  xl:inline-block   lg:inline-block">
                           {privacyFolder === 0 ? (
                             <i className="fas fa-lock mr-2"></i>
                           ) : null}
@@ -109,7 +109,7 @@ const InfoPrivacyFolderModal = ({
                             : null}
                         </p>
                         <p
-                          className="block text-gray-800 text-sm font-bold mb-2"
+                          className="block text-gray-800 text-sm font-bold mb-2 hidden md:hidden  xl:inline-block   lg:inline-block"
                           htmlFor="folderName"
                         >
                           Comparte esta carpeta

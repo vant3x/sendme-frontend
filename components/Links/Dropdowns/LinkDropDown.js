@@ -10,7 +10,7 @@ const LinkDropdown = ({showLinkDropDown, setShowLinkDropdown}) => {
 
 
       {showLinkDropDown && (
-        <div className="asbolute">
+        <div className="absolute z-30">
         <div
           className="animate__animated animate__fadeIn animate__faster origin-top-left relative z-50 right-0 mt-2 w-56   rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100"
           role="menu"
@@ -20,7 +20,7 @@ const LinkDropdown = ({showLinkDropDown, setShowLinkDropdown}) => {
         >
           <div className="py-1">
     
-            <Link href="/links">
+              <Link href="/links">
               <a
                 className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                 role="menuitem"
@@ -38,7 +38,7 @@ const LinkDropdown = ({showLinkDropDown, setShowLinkDropdown}) => {
             </Link>
 
             <button
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              className="block px-4 py-2 text-sm   text-gray-700 hover:bg-gray-100 hover:text-gray-900"
               role="menuitem"
             >
               <i className="fas fa-folder-plus"></i> Nueva Carpeta

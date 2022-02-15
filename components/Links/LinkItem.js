@@ -115,7 +115,7 @@ const LinkItem = ({ link, showLinkDropDown, setShowLinkDropdown, showDropDown, s
             ...
 
           </a>
-          <div className="absolute  ">
+          <div className="absolute">
 
           {showDropDown === link._id    ? (
                 <LinkDropDown
