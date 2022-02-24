@@ -6,7 +6,7 @@ import { ChevronDownIcon } from "@heroicons/react/solid";
 import MenuFolders from "./../common/ContextMenu/Menu";
 import useContextMenu from "../hooks/useContextMenuClick";
 
-const FolderItem = ({ styles, folder, showFolderDelete, showFolderRename, showInfoFolderDetailsModal, showInfoFolderPrivacyModal }) => {
+const FolderItem = ({ styles, folder, showFolderDelete, showFolderRename, showInfoFolderDetailsModal, showInfoFolderPrivacyModal, setCopyLinkToast}) => {
   const { onMouseUp } = useContextMenu();
 
   const [folderOptions, setFolderOptions] = useState(false);
@@ -57,6 +57,7 @@ const FolderItem = ({ styles, folder, showFolderDelete, showFolderRename, showIn
           showFolderRename={showFolderRename}
           showInfoFolderDetailsModal={showInfoFolderDetailsModal}
           showInfoFolderPrivacyModal={showInfoFolderPrivacyModal}
+          setCopyLinkToast={setCopyLinkToast}
         />
       ) : null}
     </article>

@@ -2,6 +2,7 @@ import { useRef, useState, useEffect } from "react";
 import useContextMenu from "../../hooks/useContextMenuClick";
 import styles from "./../../../styles/MenuContext.module.css";
 import Link from "next/link";
+import axiosClient from "../../../config/axios";
 
 const Menu = ({
   folder,
@@ -9,11 +10,21 @@ const Menu = ({
   showFolderRename,
   showInfoFolderDetailsModal,
   showInfoFolderPrivacyModal,
+  setCopyLinkToast
 }) => {
   const { anchorPoint, show } = useContextMenu();
   //console.log(folder)
 
   const folderUrl = `${process.env.frontendUrl}/folders/${folder._id}`;
+
+  const copyFolderLink = () => {
+    setCopyLinkToast(true);
+    navigator.clipboard.writeText(folderUrl);
+    setTimeout(() => {
+      setCopyLinkToast(false);
+     // setRemoveLinkToastAnimation(true);
+    }, 4500);
+  }
 
   const downloadFolderFiles = folder => {
     console.log(folder)
@@ -28,6 +39,17 @@ const Menu = ({
     })
   }
 
+  const downloadCompressedFolderFiles = async folder => {
+    console.log(folder);
+    axiosClient.get(`/api/folder/zip/${folder._id}`);
+    let a = document.createElement("a");
+    a.href = `${process.env.apiURL}/api/folder/zip-download/${folder._id}`;
+    a.setAttribute("download", Date.now());
+    document.body.appendChild(a);
+
+    a.click();
+    document.body.removeChild(a)
+  }
 
   if (show) {
     return (
@@ -55,7 +77,7 @@ const Menu = ({
         <hr />
         <li
           className={styles.menu__list}
-          onClick={() => navigator.clipboard.writeText(folderUrl)}
+          onClick={() => copyFolderLink()}
         >
           <i className="fas fa-link mr-2"></i> Obtener enlace
         </li>
@@ -81,7 +103,7 @@ const Menu = ({
                   <span></span> Descarga todos los archivos
                 </label>
               </li>
-              <li className={styles.menu__list}>
+              <li className={styles.menu__list} onClick={()=> downloadCompressedFolderFiles(folder)}>
                 <label>
                   <span></span> Descarga como Zip
                 </label>

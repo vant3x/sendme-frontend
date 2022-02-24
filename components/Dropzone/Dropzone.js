@@ -90,7 +90,9 @@ const Dropzone = () => {
                         <p className="text-gray-700">Arrasta un archivo aquí</p>
 
                         <button className="bg-blue-700 w-full py-4 rounded-lg text-white my-10 hover:bg-blue-800 flex items-center justify-center" type="button">
-                         Selecciona un archivo para subir  <i className="ml-3 fas fa-file-upload text-4xl"></i>
+                         Selecciona un archivo para subir {/*
+                          <i className="ml-3 fas fa-file-upload text-4xl"></i>*/}
+                           <i className="ml-3 fas fas fa-cloud-upload-alt text-4xl"></i>
                         </button>
                     </div>
                 }

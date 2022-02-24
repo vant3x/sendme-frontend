@@ -22,7 +22,6 @@ const ScanQR = () => {
 
   const router = useRouter();
   useEffect(() => {
-
     const token = localStorage.getItem("token");
     if (token) {
       userOauth();
@@ -49,29 +48,31 @@ const ScanQR = () => {
         <div className=" text-center bg-white rounded shadow-md px-8 pt-6 pb-8 mb-4 max-w-md mb-10">
           <h1 className="mb-4 ">Aquí está tu QR</h1>
           <div className="qr-container" ref={qrRef}>
-
-          <QRCode
-            id="1"
-            value={process.env.frontendUrl + "/links/" + router.query.link}
-            size={240}
-            bgColor="white"
-            className="mb-2"
-            level="Q"
-            imageSettings={{
-            //  src: icon,
-              excavate: true,
-              width:240 * 0.1,
-              height: 240 * 0.1
-            }}
-          />
+            <QRCode
+              id="1"
+              value={process.env.frontendUrl + "/links/" + router.query.link}
+              size={240}
+              bgColor="white"
+              className="mb-2"
+              level="Q"
+              imageSettings={{
+                //  src: icon,
+                excavate: true,
+                width: 240 * 0.1,
+                height: 240 * 0.1,
+              }}
+            />
           </div>
           <form onSubmit={downloadQRCode}>
-          <button className=" btn btn text-center bg-red-500 text-white mt-4 py-2 px-4 mr-2">
-            <i className="fas fa-share-alt"></i> Compartir{" "}
-          </button>
-          <button  type="submit" className="btn btn text-center bg-red-500 text-white mt-4 py-2 px-4">
-            Descargar
-          </button>
+            <button className=" btn btn text-center bg-red-500 text-white mt-4 py-2 px-4 mr-2">
+              <i className="fas fa-share-alt"></i> Compartir{" "}
+            </button>
+            <button
+              type="submit"
+              className="btn btn text-center bg-red-500 text-white mt-4 py-2 px-4"
+            >
+              Descargar
+            </button>
           </form>
         </div>
       </div>

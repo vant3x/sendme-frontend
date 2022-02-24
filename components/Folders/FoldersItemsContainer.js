@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import FolderItem from "./FolderItem";
 import FolderFileItem from "../../components/Folders/FolderFileItem";
 import styles from "./../../styles/Folders.module.css";
-import axiosClient from "../../config/axios";
 import MenuFolders from "../../components/common/ContextMenu/Menu";
+import Toast from "../Toast/Toast";
+
+import axiosClient from "../../config/axios";
 
 const FoldersItemsContainer = ({
   showFolderDelete,
@@ -15,6 +17,7 @@ const FoldersItemsContainer = ({
   files,
 }) => {
   const [foldersByUser, setFolders] = useState([]);
+  const [copyLinkToast, setCopyLinkToast] = useState(false);
 
   useEffect(() => {
     fetchFolders(user);
@@ -43,24 +46,26 @@ const FoldersItemsContainer = ({
           </span>
         </div>
         <div className="folder-container flex flex-row justify-start flex-wrap items-start">
-
-        {foldersByUser.length < 1 ? (
-          <p className="text-center py-4 mr-4 mt-4">Aún no tienes carpetas creadas</p>
-        ) : (
-          <>
-            {foldersByUser.map((folder, index) => (
-              <FolderItem
-                key={index}
-                folder={folder}
-                showFolderDelete={showFolderDelete}
-                showFolderRename={showFolderRename}
-                showInfoFolderPrivacyModal={showInfoFolderPrivacyModal}
-                showInfoFolderDetailsModal={showInfoFolderDetailsModal}
-                styles={styles}
-              />
-            ))}
-          </>
-        )}
+          {foldersByUser.length < 1 ? (
+            <p className="text-center py-4 mr-4 mt-4">
+              Aún no tienes carpetas creadas
+            </p>
+          ) : (
+            <>
+              {foldersByUser.map((folder, index) => (
+                <FolderItem
+                  key={index}
+                  folder={folder}
+                  showFolderDelete={showFolderDelete}
+                  showFolderRename={showFolderRename}
+                  showInfoFolderPrivacyModal={showInfoFolderPrivacyModal}
+                  showInfoFolderDetailsModal={showInfoFolderDetailsModal}
+                  styles={styles}
+                  setCopyLinkToast={setCopyLinkToast}
+                />
+              ))}
+            </>
+          )}
           {files
             ? files.map((file, index) => (
                 <FolderFileItem file={file} key={index} />
@@ -69,7 +74,20 @@ const FoldersItemsContainer = ({
         </div>
       </div>
       {/* <MenuFolders />*/}
-   
+      {copyLinkToast && (
+        <div
+          className={`mt-8 ml-4 ${
+            !copyLinkToast ? "animate__animated animate__backOutRight" : "animate__delay-4s animate__animated animate__backOutLeft" 
+          }`}
+        >
+          <Toast
+            theme="dark"
+            text="Se copió el enlace"
+            animationEffect="bounceIn"
+            closeBtn={setCopyLinkToast}
+          />
+        </div>
+      )}
     </div>
   );
 };
