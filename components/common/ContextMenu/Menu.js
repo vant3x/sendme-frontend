@@ -40,15 +40,20 @@ const Menu = ({
   }
 
   const downloadCompressedFolderFiles = async folder => {
-    console.log(folder);
-    axiosClient.get(`/api/folder/zip/${folder._id}`);
-    let a = document.createElement("a");
-    a.href = `${process.env.apiURL}/api/folder/zip-download/${folder._id}`;
-    a.setAttribute("download", Date.now());
-    document.body.appendChild(a);
+   const response = await axiosClient.get(`/api/folder/zip/${folder._id}`);
+    console.log(response); 
+    console.log(response.status); 
+    console.log(response.data); 
 
-    a.click();
-    document.body.removeChild(a)
+    if (response.status === 200 && response?.data.message) {
+      let a = document.createElement("a");
+      a.href = `${process.env.apiURL}/api/folder/zip-download/${folder._id}`;
+      a.setAttribute("download", Date.now());
+      document.body.appendChild(a);
+  
+      a.click();
+      document.body.removeChild(a);
+    }
   }
 
   if (show) {
