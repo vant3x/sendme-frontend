@@ -82,7 +82,7 @@ const FolderFileItem = ({ styles, file }) => {
             </span>
           </a>
         </Link>
-        {/*file._id === fileId ? <MenuFiles file={file} /> : null*/}
+        {file._id === fileId ? <MenuFiles file={file} /> : null}
     
     </article>
   );

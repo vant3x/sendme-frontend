@@ -28,15 +28,35 @@ const Menu = ({
 
   const downloadFolderFiles = folder => {
     console.log(folder)
-    folder.files.forEach(file => {
-      let a = document.createElement("a");
-      a.href = `${process.env.apiURL}/api/folder/files/${file.file}`;
-      a.setAttribute("download", Date.now());
-      document.body.appendChild(a);
+    let a = document.createElement("a");
 
-      a.click();
-      document.body.removeChild(a)
+    folder.files.forEach((file, idx, array) => {
+     // a.href = `${process.env.apiURL}/api/folder/files/${file.file}`;
+     console.log({
+      superObj: {
+        file,
+        idx,
+        array,
+        arrayLength: array.length
+      }
     })
+    document.body.appendChild(a);
+
+    // let interval =  setInterval(() => {
+      a.setAttribute('href', `${process.env.apiURL}/api/folder/files/${file.file}`);
+      a.setAttribute("download", idx);
+      a.click();
+      document.body.removeChild(a);
+
+
+
+    /*  if (idx === array.length - 1) {
+        clearInterval(interval);
+      }
+     }, 300, array.length);
+    })*/
+  }); 
+
   }
 
   const downloadCompressedFolderFiles = async folder => {

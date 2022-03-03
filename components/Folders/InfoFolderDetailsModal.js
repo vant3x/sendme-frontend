@@ -57,7 +57,10 @@ const InfoFolderDetailsModal = ({
                         <hr />
                         <p className="mt-2 text-gray-800">
                         <i className="fas fa-lock mr-2"></i>
-                          Esta carpeta es privada
+                          {
+                            infoFolder.privacy === 0 ? 'Esta carpeta es privada' : infoFolder.privacy === 1 ? 'Esta carpeta es pública para un amigo' : 'Esta carpeta es pública'
+                          }
+                          
                         </p>
                       </div>
                       {/*
