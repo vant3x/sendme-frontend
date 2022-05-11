@@ -59,11 +59,15 @@ const Header = ({ newFolder }) => {
         onClick={() => redirect()}
         className={`cursor-pointer sm:mb-4 mb-4 md:mb-0 lg:mb-0`}
       >
-        <h1
+       {/* <h1
           className={`${styles.titleLogo} w-64 mb-4 md:mb-0 sm:mb-4 text-gray-800`}
         >
           Send<span className="text-red-500">Me</span>{" "}
-        </h1>
+  </h1> */}
+
+        <div className="logo-container bg-red-500 rounded ">
+          <h1 className={`${styles.titleLogo2} text-white py-0 px-4`}>S</h1>
+        </div>
       </span>
 
       <nav className="sm:mb-0 mb-4"> {/*  ------- TODO: revisar margin en desktop -- */}

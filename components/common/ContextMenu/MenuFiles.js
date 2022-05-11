@@ -4,7 +4,9 @@ import styles from "./../../../styles/MenuContext.module.css";
 import Link from "next/link";
 
 const MenuFiles = ({
-  file
+  file,
+  showFileInfo, setShowFileInfo,
+  setFileMetadataInfo
 }) => {
   const { anchorPoint, show } = useContextMenu();
   //console.log(folder)
@@ -21,6 +23,10 @@ const MenuFiles = ({
           </li>
         <li
           className={styles.menu__list}
+          onClick={() => {
+            setShowFileInfo(true);
+            setFileMetadataInfo(file.file);  
+          }}
         >
           <i className="fa fa-info-circle mr-2"></i> Información
         </li>

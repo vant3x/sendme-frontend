@@ -2,9 +2,6 @@ const Toast = ({ theme, icon, title, text, animationEffect, closeBtn }) => {
 
  const themeBg = theme === "light" ? "bg-white" : theme === "dark" ? "bg-gray-900" : "bg-white";
 
-
-
-
   return (
     <div
       id="toast-default"
@@ -13,7 +10,7 @@ const Toast = ({ theme, icon, title, text, animationEffect, closeBtn }) => {
     >
       <div className="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 text-gray-400 bg-gray-700 rounded-lg dark:bg-blue-800 dark:text-blue-200">
         <span>
-        <i className="fas fa-copy"></i>
+        <i className={icon}></i>
         </span>
       </div>
       <div className="ml-3 text-sm font-normal">{text}.</div>

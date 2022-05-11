@@ -50,6 +50,22 @@ const AppState = ({children}) => {
         }, 5000);
     }
 
+    // toast alerts
+    const showToastAlert = msg => {
+        dispatch({
+            type: SHOW_ALERTS,
+            payload: msg
+        });
+
+        setTimeout(() => {
+            dispatch({
+                type: REMOVE_ALERTS
+            })
+        }, 5000);
+    }
+
+
+
     //subir los archivos al servidor
     const uploadFile =  async (formData, fileName) => {
 

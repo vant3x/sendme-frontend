@@ -54,13 +54,7 @@ const link = ({ link, linkInfo}) => {
     }
   };
 
-  console.log({
-    data:{
-      link,
-      linkInfo
-    }
-  })
-
+ 
   const generateQR = () => {
     router.push({
       pathname: '/escanear-qr',

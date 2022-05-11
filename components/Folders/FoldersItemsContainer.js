@@ -4,6 +4,7 @@ import FolderFileItem from "../../components/Folders/FolderFileItem";
 import styles from "./../../styles/Folders.module.css";
 import MenuFolders from "../../components/common/ContextMenu/Menu";
 import Toast from "../Toast/Toast";
+import FileInfoMetadataSlide from "./../Files/FileInfoMetadataSlide";
 
 import axiosClient from "../../config/axios";
 
@@ -18,6 +19,9 @@ const FoldersItemsContainer = ({
 }) => {
   const [foldersByUser, setFolders] = useState([]);
   const [copyLinkToast, setCopyLinkToast] = useState(false);
+  const [folderZipDownloadToast, setFolderZipDownloadToast] = useState(false);
+  const [showFileInfo, setShowFileInfo] = useState(false);
+  const [fileInfo, setFileInfo] = useState({});
 
   useEffect(() => {
     fetchFolders(user);
@@ -62,13 +66,20 @@ const FoldersItemsContainer = ({
                   showInfoFolderDetailsModal={showInfoFolderDetailsModal}
                   styles={styles}
                   setCopyLinkToast={setCopyLinkToast}
+                  setFolderZipDownloadToast={setFolderZipDownloadToast}
                 />
               ))}
             </>
           )}
           {files
             ? files.map((file, index) => (
-                <FolderFileItem file={file} key={index} />
+                <FolderFileItem
+                  file={file}
+                  setFileMetadataInfo={setFileInfo}
+                  showFileInfo={showFileInfo}
+                  setShowFileInfo={setShowFileInfo}
+                  key={index}
+                />
               ))
             : null}
         </div>
@@ -77,17 +88,43 @@ const FoldersItemsContainer = ({
       {copyLinkToast && (
         <div
           className={`mt-8 ml-4 ${
-            !copyLinkToast ? "animate__animated animate__backOutRight" : "animate__delay-4s animate__animated animate__backOutLeft" 
+            !copyLinkToast
+              ? "animate__animated animate__backOutRight"
+              : "animate__delay-4s animate__animated animate__backOutLeft"
           }`}
         >
           <Toast
             theme="dark"
             text="Se copió el enlace"
             animationEffect="bounceIn"
+            icon="fas fa-copy"
             closeBtn={setCopyLinkToast}
           />
         </div>
       )}
+
+      {folderZipDownloadToast && (
+        <div
+          className={`mt-8 ml-4 ${
+            !folderZipDownloadToast
+              ? "animate__animated animate__backOutRight"
+              : "animate__delay-4s animate__animated animate__backOutLeft"
+          }`}
+        >
+          <Toast
+            theme="dark"
+            text={`Se comenzó la descarga de la carpeta como Zip`}
+            animationEffect="bounceIn"
+            icon="fas fa-cloud-download-alt"
+            closeBtn={setFolderZipDownloadToast}
+          />
+        </div>
+      )}
+      <FileInfoMetadataSlide
+        fileInfo={fileInfo}
+        showFileInfo={showFileInfo}
+        setShowFileInfo={setShowFileInfo}
+      />
     </div>
   );
 };

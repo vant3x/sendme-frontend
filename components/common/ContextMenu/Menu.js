@@ -10,7 +10,8 @@ const Menu = ({
   showFolderRename,
   showInfoFolderDetailsModal,
   showInfoFolderPrivacyModal,
-  setCopyLinkToast
+  setCopyLinkToast,
+  setFolderZipDownloadToast 
 }) => {
   const { anchorPoint, show } = useContextMenu();
   //console.log(folder)
@@ -60,12 +61,13 @@ const Menu = ({
   }
 
   const downloadCompressedFolderFiles = async folder => {
-   const response = await axiosClient.get(`/api/folder/zip/${folder._id}`);
+    showfolderZipToast();
+    const response = await axiosClient.get(`/api/folder/zip/${folder._id}`);
     console.log(response); 
     console.log(response.status); 
     console.log(response.data); 
-
     if (response.status === 200 && response?.data.message) {
+    
       let a = document.createElement("a");
       a.href = `${process.env.apiURL}/api/folder/zip-download/${folder._id}`;
       a.setAttribute("download", Date.now());
@@ -74,6 +76,16 @@ const Menu = ({
       a.click();
       document.body.removeChild(a);
     }
+
+
+  }
+
+  const showfolderZipToast = () => {  
+    setFolderZipDownloadToast(true);
+    setTimeout(() => {
+      setFolderZipDownloadToast(false);
+       // setRemoveLinkToastAnimation(true);
+    }, 4500);
   }
 
   if (show) {
