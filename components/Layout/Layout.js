@@ -1,7 +1,8 @@
 import React, { useState, useContext } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import Header from "./../Header";
+//import Header from "./../Header";
+import Header from "./../HeaderM";
 import NewFolderModal from "../Folders/NewFolderModal";
 import appContext from "../../context/app/appContext";
 
@@ -39,6 +40,8 @@ const Layout = ({ children }) => {
           name="keywords"
           content="Sendme, Sendmefiles, www.sendmefiles.cloud, sendmefiles.cloud, sendme cloud, SendMe, send-me, send-files, Send-Me, Send Me, Send Files, Compartir archivos, nube privada, compartir archivos privados, archivos seguros, limite de descarga, archivos, archivos encriptados"
         />
+        <meta name="viewport" content="initial-scale=1, width=device-width" />
+
         {/* OG for Facebook  */}
         <meta property="og:url" content="https://sendmefiles.cloud" />
         <meta property="og:type" content= "website" />
@@ -66,7 +69,7 @@ const Layout = ({ children }) => {
           content="https://sendmefiles.cloud/assets/img/landing-playa-screen.png"
         />
       </Head>
-      <div className="bg-gray-100 min-h-screen">
+      <div className="bg-gray-200 min-h-screen">
       <Header />
 
         <div className="container mx-auto">
