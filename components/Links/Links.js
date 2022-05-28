@@ -173,6 +173,7 @@ export default function   Links({ linksUser }) {
                           variant="body2"
                           component={NextLink}
                           color="primary"
+                          href={`/links/${row.url}`}
                         >
                           <LinkIcon
                             sx={{

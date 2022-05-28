@@ -8,6 +8,7 @@ import { NotFoundError } from "next/error";
 import Link from "next/link";
 import { useRouter } from 'next/router';
 import Head from 'next/head';
+import FileIconType from './../../components/Files/FileIconType';
 
 export async function getServerSideProps({ params }) {
   const { link } = params;
@@ -170,34 +171,7 @@ const link = ({ link, linkInfo}) => {
             </h1>
             <div className="file-info-container text-center">
               {/* <p><span className="text-red-500"> Tamaño: {}</span></p> */}
-              {link.originalName.includes(".jpg") ||
-              link.originalName.includes(".jpeg") ||
-              link.originalName.includes(".png") ? (
-                <i className=" my-2 text-5xl fas fa-images text-red-500 ml-2"></i>
-              ) : null}
-                      {  link.originalName.includes(".svg") ? (
-                  <i className="text-5xl  fas fa-bezier-curve  text-red-500 ml-2"></i>
-                ) : null}
-              {link.originalName.includes(".mp4") || link.originalName.includes(".MP4") ||
-              link.originalName.includes(".mov") ? (
-                <i className="my-2 text-5xl  fas fa-photo-video text-red-500 ml-2"></i>
-              ) : null}
-              {link.originalName.includes(".mp3") ||
-              link.originalName.includes(".wav") ||
-              link.originalName.includes(".mid") ||
-              link.originalName.includes(".ac3") ? (
-                <i className="text-xl  fas fa-music text-red-500 ml-2"></i>
-              ) : null}
-              {link.originalName.includes(".pdf") ? (
-                <i className="my-2 text-5xl  far fa-file-pdf text-red-500 ml-2"></i>
-              ) : null}
-                  {link.originalName.includes(".mobi") || link.originalName.includes(".MOBI") ? (
-            <i className="my-2 text-5xl  fas fa-book text-red-500 ml-2 hover:text-red-600"></i>
-          ) : null}
-              {link.originalName.includes(".zip") ||
-              link.originalName.includes(".rar") ? (
-                <i className="my-2 text-5xl   fas fa-file-archive  text-red-500 ml-2"></i>
-              ) : null}
+              <FileIconType originalName={link.originalName} textSize="text-5xl" />
               <p className="mt-2 mb-2">
                 <span className="text-gray-700">
                   {link.originalName.split(".")[0].slice(0, 30)}
@@ -246,3 +220,5 @@ const link = ({ link, linkInfo}) => {
 };
 
 export default link;
+
+/* 5xl todos menos mp3 y musica que es xl */

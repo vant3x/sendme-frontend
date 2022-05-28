@@ -44,7 +44,7 @@ const LinkItem = ({ link, showLinkDropDown, setShowLinkDropdown, showDropDown, s
             </div>
             <div className="ml-4">
               <div className="text-sm font-medium text-gray-900">
-                <FileIconType originalName={ link.originalName } />
+                <FileIconType originalName={ link.originalName } textSize="text-xsl" />
               </div>
               <Link href={`/links/${link.url}`}>
                 <a className="text-sm text-red-500 underline hover:text-blue-500">
@@ -107,40 +107,3 @@ const LinkItem = ({ link, showLinkDropDown, setShowLinkDropdown, showDropDown, s
 };
 
 export default LinkItem;
-
-
-/*
-
-  {link.originalName}
-                {link.originalName.includes(".jpg") ||
-                link.originalName.includes(".jpeg") ||
-                link.originalName.includes(".png") ? (
-                  <i className="text-xl fas fa-images text-red-500 ml-2"></i>
-                ) : null}
-                        {  link.originalName.includes(".svg") ? (
-                  <i className="text-xl  fas fa-bezier-curve  text-red-500 ml-2"></i>
-                ) : null}
-
-                {link.originalName.includes(".mp4") ||
-                link.originalName.includes(".mov") ||
-                link.originalName.includes(".MP4") ? (
-                  <i className="text-xl  fas fa-photo-video text-red-500 ml-2"></i>
-                ) : null}
-                {link.originalName.includes(".mp3") ||
-                link.originalName.includes(".wav") ||
-                link.originalName.includes(".mid") ||
-                link.originalName.includes(".ac3") ? (
-                  <i className="text-xl  fas fa-music text-red-500 ml-2"></i>
-                ) : null}
-                {link.originalName.includes(".pdf") ? (
-                  <i className="text-xl   far fa-file-pdf text-red-500 ml-2"></i>
-                ) : null}
-
-                {link.originalName.includes(".zip") ||
-                link.originalName.includes(".rar") ? (
-                  <i className="text-xl  fas fa-file-archive  text-red-500 ml-2"></i>
-                ) : null}
-
-
-
-*/
