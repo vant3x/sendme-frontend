@@ -1,5 +1,6 @@
 import React, { useState, useContext } from 'react';
 import appContext from '../context/app/appContext';
+import Checkbox from '@mui/material/Checkbox';
 
 const PasswordFileForm = () => {
 
@@ -13,9 +14,14 @@ const PasswordFileForm = () => {
         <div>
          <div className="flex justify-betweens items-center mt-4">
             <label className="text-lg text-gray-800 mr-2">Proteger con Contraseña:</label>
-            <input 
-                onChange={(()=> setHasPassword(!hasPassword))}
-                type="checkbox"
+        
+                      <Checkbox
+            sx={{
+              "&.Mui-checked": {
+                color: "customc.main",
+              },
+            }}
+            onChange={(()=> setHasPassword(!hasPassword))}
             />
         </div>
 

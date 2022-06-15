@@ -45,7 +45,14 @@ function EnhancedTableHead(props) {
           disablePadding: false,
           label: 'Acciones',
         },
+        {
+          id: 'download',
+          numeric: true,
+          disablePadding: false,
+          label: ''
+        }
       ];
+
   
     return (
       <TableHead>

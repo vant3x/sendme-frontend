@@ -1,9 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 import axiosClient from "../../config/axios";
 import { useRouter } from "next/router";
+import Button from "@mui/material/Button";
+
 import appContext from "../../context/app/appContext";
 
-const NewFolderModal = ({valueModal}) => {
+const NewFolderModal = ({ valueModal }) => {
   const [hideModal, setModal] = useState(false);
   const [folderName, setFolderName] = useState("");
   const [disabledNewFolder, setDisabledNewFolder] = useState(false);
@@ -26,27 +28,26 @@ const NewFolderModal = ({valueModal}) => {
     };
     try {
       const response = await axiosClient.post(`/api/folders`, data);
-  
+
       setDisabledNewFolder(false);
       router.push("/folders");
       hideFolderModal();
     } catch (error) {
-       console.log(error)
-       console.log(error.response.data)
-       setError(error.response.data);
-       console.log({stateError: errorState})
+      console.log(error);
+      console.log(error.response.data);
+      setError(error.response.data);
+      console.log({ stateError: errorState });
       // showAlert(error.response.data.message);
     }
 
-      setTimeout(() => {
-        setDisabledNewFolder(false);
-      } , 2000);
-
+    setTimeout(() => {
+      setDisabledNewFolder(false);
+    }, 2000);
   };
 
   useEffect(() => {
     console.log(valueModal);
-   }, [valueModal]);
+  }, [valueModal]);
 
   return !hideModal ? (
     <div
@@ -63,7 +64,7 @@ const NewFolderModal = ({valueModal}) => {
         x{" "}
         <span
           className="hidden sm:inline-block sm:align-middle sm:h-screen"
-          aria-hidden="true"  
+          aria-hidden="true"
         >
           &#8203;
         </span>
@@ -100,37 +101,38 @@ const NewFolderModal = ({valueModal}) => {
                         name="folderName"
                         id="folderName"
                         value={folderName}
-                        onChange={(e) => {setFolderName(e.target.value);  setError(false); }}
+                        onChange={(e) => {
+                          setFolderName(e.target.value);
+                          setError(false);
+                        }}
                         className="shadow appereance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         placeholder="Ingresa un nombre"
                       />
                     </div>
-                    {
-                      errorState && errorState.statusCode === 403 && (
-                        <div className="text-red-500 text-sm">{errorState.message}</div>
-                      )
-                    }
+                    {errorState && errorState.statusCode === 403 && (
+                      <div className="text-red-500 text-sm">
+                        {errorState.message}
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
             </div>
             <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse ">
-              <button
+              <Button
+                variant="contained"
+                color="primary"
+                sx={{ mr: 2, ml: 2 }}
                 disabled={disabledNewFolder}
                 type="submit"
-                className={`w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 ${
-                  !disabledNewFolder ? "bg-red-600" : "bg-gray-400"
-                }  ${
-                  !disabledNewFolder ? "cursor-pointer" : "cursor-not-allowed"
-                } text-base font-medium text-white  ${
-                  !disabledNewFolder ? "hover:bg-red-700" : "hover:bg-gray-400"} focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm`}
               >
                 Crear Carpeta
-              </button>
+              </Button>
+
               <button
                 type="button"
                 onClick={() => {
-                  setFolderModal(false)
+                  setFolderModal(false);
                 }}
                 className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
               >

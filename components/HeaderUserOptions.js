@@ -15,6 +15,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LinkIcon from "@mui/icons-material/Link";
 import FolderIcon from "@mui/icons-material/Folder";
 import CreateNewFolderIcon from "@mui/icons-material/CreateNewFolder";
+import CloudCircleIcon from '@mui/icons-material/CloudCircle';
 import LogoutIcon from "@mui/icons-material/Logout";
 
 import appContext from "../context/app/appContext";
@@ -61,6 +62,15 @@ const HeaderUserOptions = ({
       customClick: setFolderModal
     },
     {
+      title: "Actualiza a premium",
+      icon: (
+        <CloudCircleIcon
+          sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+        />
+      ),
+      customClick: setFolderModal
+    },
+    {
       title: "Logout",
       icon: <LogoutIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />,
       customClick: logout,
@@ -69,6 +79,7 @@ const HeaderUserOptions = ({
 
   return (
     <Box sx={{ flexGrow: 0 }}>
+      
       <span className="mr-2">
         Hola{" "}
         {user.name

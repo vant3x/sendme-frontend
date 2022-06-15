@@ -12,6 +12,10 @@ import Link from "@mui/material/Link";
 
 import Paper from "@mui/material/Paper";
 import Checkbox from "@mui/material/Checkbox";
+import Button from "@mui/material/Button";
+import DownloadIcon from '@mui/icons-material/Download';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
 
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
@@ -19,10 +23,14 @@ import Switch from "@mui/material/Switch";
 import EnhancedTableHead from "./LinksTable/EnhancedTableHead";
 import EnhancedTableToolbar from "./LinksTable/EnhancedTableToolbar";
 import LinkIcon from "@mui/icons-material/Link";
+import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 
 import authContext from "../../context/auth/authContext";
 import LinkItem from "./LinkItem";
 import LinkDropDown from "./Dropdowns/LinkDropDown";
+import FileIconType from "../Files/FileIconType";
+
+import LinkOptionsMenu from "./Dropdowns/LinkOptionsMenu";
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -52,7 +60,7 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-export default function   Links({ linksUser }) {
+export default function Links({ linksUser }) {
   const [order, setOrder] = React.useState("desc");
   const [orderBy, setOrderBy] = React.useState("created_at");
   const [selected, setSelected] = React.useState([]);
@@ -94,7 +102,6 @@ export default function   Links({ linksUser }) {
         selected.slice(selectedIndex + 1)
       );
     }
-
     setSelected(newSelected);
   };
 
@@ -113,13 +120,12 @@ export default function   Links({ linksUser }) {
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
-  // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
 
   return (
-    <Box sx={{ width: "100%", mt: 2 }}>
-      <Paper sx={{ width: "100%", mb: 2 }}>
+    <Box sx={{ width: "100%", mt: 4 }}>
+      <Paper sx={{ width: "100%", mb: 2, pr: 2 }}>
         <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
           <Table
@@ -147,14 +153,16 @@ export default function   Links({ linksUser }) {
                   return (
                     <TableRow
                       hover
-                      onClick={(event) => handleClick(event, row._id)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
                       key={row._id}
                       selected={isItemSelected}
                     >
-                      <TableCell padding="checkbox">
+                      <TableCell
+                        padding="checkbox"
+                        onClick={(event) => handleClick(event, row._id)}
+                      >
                         <Checkbox
                           color="primary"
                           checked={isItemSelected}
@@ -184,6 +192,10 @@ export default function   Links({ linksUser }) {
                           />
 
                           {row.originalName}
+                          <FileIconType
+                            originalName={row.originalName}
+                            textSize="text-xl"
+                          />
                         </Link>
                       </TableCell>
                       <TableCell align="right">
@@ -192,8 +204,17 @@ export default function   Links({ linksUser }) {
                       <TableCell align="right">{row.fileSize}</TableCell>
                       <TableCell align="right">{row.downloadLimit}</TableCell>
                       <TableCell align="right">
-                        <button>Más</button>
+                        <Tooltip title="Descargar">
+                          <IconButton color="primary">
+                            <DownloadIcon />
+                          </IconButton>
+                        </Tooltip>
+                        </TableCell>
+                      <TableCell align="right">
+                           
+                        <LinkOptionsMenu />
                       </TableCell>
+                  
                     </TableRow>
                   );
                 })}
@@ -222,7 +243,7 @@ export default function   Links({ linksUser }) {
       </Paper>
       <FormControlLabel
         control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
+        label="Cambiar densidad de las tablas"
       />
     </Box>
   );

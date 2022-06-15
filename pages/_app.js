@@ -2,7 +2,7 @@ import React from 'react';
 import AuthState from '../context/auth/authState';
 import AppState from '../context/app/appState';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { green, pink } from '@mui/material/colors';
+import { pink, blueGrey, blue } from '@mui/material/colors';
 
 import './../styles/globals.css';
 
@@ -15,8 +15,12 @@ const theme = createTheme({
       main: pink[500],
     },
     secondary: {
-      main: green[500],
+      main: blueGrey[50],
     },
+    customc: {
+      main: blue[700],
+      
+    }
   },
 });
 

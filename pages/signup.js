@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import authContext from "./../context/auth/authContext";
 import Alert from "./../components/Alerts/Alert";
 import BtnSocialAuth from "../components/LoginAndSignupButtons/SocialAuthBtn";
+import Button from "@mui/material/Button";
 
 const Signup = () => {
   // Acceder al state
@@ -204,11 +205,15 @@ const Signup = () => {
                 ) : null}
               </div>
 
-              <input
+              <Button
+                variant="contained"
+                color="primary"
+                fullWidth
                 type="submit"
-                className="bg-red-500  mt-4 hover:bg-gray-900 w-full p-2 text-white uppercase font-bold cursor-pointer"
-                value="Registarse"
-              />
+                sx={{ mr: 2, mt:2 }}
+              >
+                  Registrarse 
+                </Button>
             </form>
           </div>
         </div>

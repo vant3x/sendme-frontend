@@ -9,6 +9,10 @@ import Link from "next/link";
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import FileIconType from './../../components/Files/FileIconType';
+import Box from '@mui/material/Box';
+import Container from '@mui/material/Container';
+import Button from "@mui/material/Button";
+import QrCodeIcon from '@mui/icons-material/QrCode';
 
 export async function getServerSideProps({ params }) {
   const { link } = params;
@@ -119,7 +123,9 @@ const link = ({ link, linkInfo}) => {
           content="https://sendmefiles.cloud/assets/img/landing-playa-screen.png"
         />
       </Head>
-      {hasPassword && user?.id !== link.author ? (
+      <Container maxWidth="sm">
+        <Box sx={{mt:"20px"}} component="div">
+        {hasPassword && user?.id !== link.author ? (
         <div className="text-center ">
           <i className="fas fa-lock text-6xl mb-6  text-red-500 mt-2"></i>
           <p className="text-center text-2xl'">
@@ -151,7 +157,6 @@ const link = ({ link, linkInfo}) => {
                 </div>
 
                 <button
-                  type="text"
                   type="submit"
                   className="bg-red-500 hover:bg-gray-900 w-full p-2 text-white uppercase font-bold"
                   value="Validar Contraseña"
@@ -164,6 +169,8 @@ const link = ({ link, linkInfo}) => {
           </div>
         </div>
       ) : (
+        <Box sx={{mt: "20px"}} component="div">
+
         <div className="flex justify-center">
           <div className=" bg-white rounded shadow-md px-8 pt-6 pb-8 mb-4 max-w-md mb-10">
             <h1 className="text-4xl text-center text-gray-700">
@@ -206,14 +213,16 @@ const link = ({ link, linkInfo}) => {
               <div></div>
             </div>
             <div className="mt-6 text-center">
-              <a onClick={generateQR} className="text-center py-4 px-12 text-red-500 rounded uppercase font-bold cursor-pointer shadow hover:bg-gray-200">
+              <Button onClick={generateQR} endIcon={<QrCodeIcon/> } className="text-center py-4 px-12 text-red-500 rounded uppercase font-bold cursor-pointer shadow hover:bg-gray-200">
                 Generar QR
-                  <i className="ml-2 fas fa-qrcode"></i>
-              </a>
+              </Button>
             </div>
           </div>
         </div>
+        </Box>
       )}
+        </Box>
+      </Container>
     </Layout>
     </>
   );

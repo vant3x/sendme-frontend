@@ -2,10 +2,14 @@ import React, { useContext, useEffect } from "react";
 import Layout from "./../components/Layout/Layout";
 import Alert from "./../components/Alerts/Alert";
 import Dropzone from "./../components/Dropzone/Dropzone";
+import HomeCopyLink from './../components/HomeFiles/HomeCopyLink';
 import Feature from "./../components/Feature";
 import authContext from "../context/auth/authContext";
 import appContext from "../context/app/appContext";
-import Link from "next/link";
+import { Link as NextLink } from "next/link";
+import Link from "@mui/material/Link";
+
+import Typography from "@mui/material/Typography";
 
 const Home = () => {
   // Extraer el usuario autenticado del storage
@@ -33,33 +37,7 @@ const Home = () => {
     <Layout>
       <div className="md:w-4/5 xl:w-3/5 mx-auto mb-12">
         {url ? (
-          <div className="bg-white rounded shadow-md px-8 pt-6 pb-8 mb-4">
-            <p className="text-center mt-10 mb-4 flex justify-center items-center">
-              <span className="text-red-500 font-bold text-3xl uppercase mr-2  ">
-                Tu Url es:{" "}
-              </span>
-            </p>
-            <p className="text-center mb-4">
-              <a
-                href={`${process.env.frontendUrl}/links/${url}`}
-                className="lg:text-2xl underline hover:text-red-500"
-              >
-                {`${process.env.frontendUrl}/links/${url}`}{" "}
-              </a>
-            </p>
-
-            <button
-              type="button"
-              className="bg-red-500  mt-4 hover:bg-gray-900 w-full p-2 text-white uppercase font-bold cursor-pointer rounded"
-              onClick={() =>
-                navigator.clipboard.writeText(
-                  `${process.env.frontendUrl}/links/${url}`
-                )
-              }
-            >
-              Copiar Enlace <i className="ml-2 text-1xl fas fa-copy sm:text-sm"></i>
-            </button>
-          </div>
+          <HomeCopyLink url={url} />
         ) : (
           <div>
             {fileMessage && <Alert />}
@@ -69,8 +47,18 @@ const Home = () => {
                 <h2 className="md:text-4xl text-2xl font-sans font-bold text-gray-800 my-4">
                   Compartir archivos de forma fácil y privada
                 </h2>
-                <p className="text-lg leading-looseñ">
-                  <span className="text-red-500 font-bold">SendMe</span> te
+                <p className="text-lg leading-loose">
+                <Typography
+              variant="span"
+              noWrap
+              component="span"
+              sx={{
+                fontWeight: "bold",
+                color: "primary.main",
+                textDecoration: "none",
+              }}
+            >
+            SendMe</Typography>  te
                   permite compartir archivos de forma segura,
                   archivos protegidos por contraseña, archivos con un limite de
                   descargas y mucho más
@@ -78,18 +66,13 @@ const Home = () => {
                 {!user ? (
                   <>
                   <p className="mt-2">
-                  <Link href="/signup">
-                   
-                      <a className=" hover:text-red-600 underline  text-red-500 font-bold ">
+                  <Link sx={{fontWeight: 'bold'}} href="/signup" component={NextLink} color="primary" >
                         Crea una cuenta para obtener todos los beneficios
-                      </a>
                   </Link>
                 </p>
                     <p className="mt-2">
-                      <Link href="/features">
-                          <a className=" hover:text-red-600 underline  text-red-500 font-bold">
+                      <Link  href="/features" component={NextLink} color="primary" sx={{fontWeight: 'bold'}}>
                             Conoce todos los beneficios
-                          </a>
                       </Link>
                     </p>
                     {

@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
+import TextField from "@mui/material/TextField";
+import Autocomplete from "@mui/material/Autocomplete";
+import Checkbox from "@mui/material/Checkbox";
 import appContext from "../context/app/appContext";
 import axiosClient from "../config/axios";
 
@@ -9,6 +12,8 @@ const FolderFileContainerInput = ({ user }) => {
 
   const [hasFolder, setHasFolder] = useState(false);
   const [foldersByUser, setFolders] = useState([]);
+  const [value,  setValue] = useState(foldersByUser[0]?.folderName);
+  const [inputValue, setInputValue] = useState('');
 
   useEffect(() => {
     fetchFolders(user);
@@ -16,7 +21,9 @@ const FolderFileContainerInput = ({ user }) => {
 
   const fetchFolders = async (usuario) => {
     try {
-      const response = await axiosClient.get(`/api/folders/${user.id ? user.id : user._id}`);
+      const response = await axiosClient.get(
+        `/api/folders/${user.id ? user.id : user._id}`
+      );
       setFolders(response.data.folders);
     } catch (error) {
       // console.error(error);
@@ -25,31 +32,36 @@ const FolderFileContainerInput = ({ user }) => {
 
   return (
     <div>
-     <div>
-     <div className="flex justify-betweens items-center mt-4">
-        <label className="text-lg text-gray-800 mr-2">
-          Selecciona un folder para el archivo:
-        </label>
-      
-        <input onChange={() => setHasFolder(!hasFolder)} type="checkbox" />
+      <div>
+        <div className="flex justify-betweens items-center mt-4">
+          <label className="text-lg text-gray-800 mr-2">
+            Selecciona un folder para el archivo:
+          </label>
 
-      </div>
-      <p  className="text-lg text-gray-800 mr-2">
-          Por defecto los archivos se suben al folder principal  
+          <Checkbox
+            sx={{
+              "&.Mui-checked": {
+                color: "customc.main",
+              },
+            }}
+            onChange={() => setHasFolder(!hasFolder)}
+          />
+        </div>
+        <p className="text-lg text-gray-800 mr-2">
+          Por defecto los archivos se suben al folder principal
         </p>
-     </div>
-
+      </div>
 
       {hasFolder ? (
         <>
-          {/*  <input
+          {/*  <input 
             placeholder="/home"
             type="text" 
             className="appearance-none w-full mt-2 bg-white border border-gray-400 text-black py-3 px-4 pr-8 rounded leading-none focus:outline focus:border-gray-500" 
             onChange={e => setFolder(e.target.value)}
           /> */}
 
-          <select
+          {/*<select
             onChange={(e) => setFolder(e.target.value)}
             className="py-3 px-4 pr-4 appearance-none w-full bg-white mt-4  mr- border border-gray-400 text-black  rounded leading-none focus:outline-none focus:border-gray-500"
           >
@@ -64,7 +76,39 @@ const FolderFileContainerInput = ({ user }) => {
                   </option>
                 ))
               : null}
-          </select>
+              </select>*/}
+          <Autocomplete
+            disablePortal
+            id="foldersOptions"
+            options={foldersByUser.map((option) => {
+              return {
+                label: option.folderName,
+                _id: option._id,
+              };
+            })}
+            value={value}
+            onChange={(event, newValue) => {
+              setValue(newValue);
+              console.log(newValue+1);
+              console.log({
+                event,
+                newValue,
+              });
+            }}
+            inputValue={inputValue}
+            onInputChange={(e, newInputValue) => {
+              setInputValue(newInputValue);
+              console.log(newInputValue+2);
+              console.log({
+                e,
+                newInputValue,
+              });
+            }}
+            sx={{ width: 300, mt: 2, mb: 1 }}
+            renderInput={(params) => (
+              <TextField {...params}  label="Selecciona una carpeta" />
+            )}
+          />
         </>
       ) : null}
     </div>
