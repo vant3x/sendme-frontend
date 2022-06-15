@@ -13,7 +13,8 @@ const FolderFileContainerInput = ({ user }) => {
   const [hasFolder, setHasFolder] = useState(false);
   const [foldersByUser, setFolders] = useState([]);
   const [value,  setValue] = useState(foldersByUser[0]?.folderName);
-  const [inputValue, setInputValue] = useState('');
+  const [id,  setId] = useState(null);
+  const [folderName, setFolderName] = useState(null);
 
   useEffect(() => {
     fetchFolders(user);
@@ -80,22 +81,20 @@ const FolderFileContainerInput = ({ user }) => {
           <Autocomplete
             disablePortal
             id="foldersOptions"
-            options={foldersByUser.map((option) => {
-              return {
-                label: option.folderName,
-                _id: option._id,
-              };
-            })}
+            options={foldersByUser}
+            getOptionLabel={(option) => option.folderName}
             value={value}
             onChange={(event, newValue) => {
+              console.log(newValue);
+              if (newValue) {
+
               setValue(newValue);
-              console.log(newValue+1);
-              console.log({
-                event,
-                newValue,
-              });
+              setId(newValue._id);
+              setFolderName(newValue.folderName);  
+              setFolder(newValue._id);
+            }
             }}
-            inputValue={inputValue}
+          /*  inputValue={inputValue}
             onInputChange={(e, newInputValue) => {
               setInputValue(newInputValue);
               console.log(newInputValue+2);
@@ -103,7 +102,7 @@ const FolderFileContainerInput = ({ user }) => {
                 e,
                 newInputValue,
               });
-            }}
+            }}*/
             sx={{ width: 300, mt: 2, mb: 1 }}
             renderInput={(params) => (
               <TextField {...params}  label="Selecciona una carpeta" />
