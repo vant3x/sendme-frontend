@@ -8,6 +8,11 @@ import appContext from "../context/app/appContext";
 import Link from "next/link";
 import QRCode from "qrcode.react";
 import { useRouter } from "next/router";
+import Button from "@mui/material/Button";
+import ShareIcon from '@mui/icons-material/Share';
+import DownloadIcon from '@mui/icons-material/Download';
+import Grid from '@mui/material/Grid';
+import Stack from '@mui/material/Stack';
 
 const ScanQR = () => {
   // Extraer el usuario autenticado del storage
@@ -44,7 +49,11 @@ const ScanQR = () => {
 
   return (
     <Layout>
-      <div className="flex justify-center">
+      <Stack
+  direction="row"
+  justifyContent="center"
+  alignItems="center"
+>
         <div className=" text-center bg-white rounded shadow-md px-8 pt-6 pb-8 mb-4 max-w-md mb-10">
           <h1 className="mb-4 ">Aquí está tu QR</h1>
           <div className="qr-container" ref={qrRef}>
@@ -64,18 +73,29 @@ const ScanQR = () => {
             />
           </div>
           <form onSubmit={downloadQRCode}>
-            <button className=" btn btn text-center bg-red-500 text-white mt-4 py-2 px-4 mr-2">
-              <i className="fas fa-share-alt"></i> Compartir{" "}
-            </button>
-            <button
+          <Button
+              variant="contained"
+              color="primary"
+              endIcon={<ShareIcon />}
+              sx={{ mt: 3, mb: 4, py:1.5, px: 4, color: "white", mr: 2 }}
+           
+            >
+              Compartir
+            </Button>
+        
+            <Button
               type="submit"
-              className="btn btn text-center bg-red-500 text-white mt-4 py-2 px-4"
+              variant="contained"
+              color="primary"
+              endIcon={<DownloadIcon />}
+              sx={{ mt: 3, mb: 4, py:1.5, px: 4, color: "white" }}
+           
             >
               Descargar
-            </button>
+            </Button>
           </form>
         </div>
-      </div>
+      </Stack>
     </Layout>
   );
 };

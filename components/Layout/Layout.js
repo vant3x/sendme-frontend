@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from 'next/router';
@@ -25,13 +25,12 @@ const Layout = ({ children }) => {
   const AuthContext = useContext(authContext);
   const { user, auth } = AuthContext;
   const { setFolderModal, folderModal } = AppContext;
-  const [open, setOpen] = useState(user ? true : false);
+  const [open, setOpen] = useState(false);
   const toggleDrawer = () => {
     setOpen(!open);
   };
 
-  const router = useRouter();
-
+  const router = useRouter();  
 
   return (
     <>
