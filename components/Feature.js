@@ -20,7 +20,7 @@ const Feature = () => {
             </p>
 
             <div className="my-4 flex justify-center">
-                <img src="https://sendmefiles.cloud/assets/gifs/app/gif-speed.gif" width="640" alt="SendMeFiles"/>
+                <img src="https://i.imgur.com/tbjGhgK.png" width="640" alt="SendMeFiles"/>
             </div>
             </div>
  

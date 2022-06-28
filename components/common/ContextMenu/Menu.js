@@ -3,13 +3,30 @@ import useContextMenu from "../../hooks/useContextMenuClick";
 import styles from "./../../../styles/MenuContext.module.css";
 import Link from "next/link";
 import axiosClient from "../../../config/axios";
+import Menu from "@mui/material/Menu";
+import MenuItem from "@mui/material/MenuItem";
+import FileOpenIcon from "@mui/icons-material/FileOpen";
+import InfoIcon from "@mui/icons-material/Info";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import LinkIcon from "@mui/icons-material/Link";
+import ShareIcon from "@mui/icons-material/Share";
+import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
+import FolderOpenIcon from '@mui/icons-material/FolderOpen';
+import { DownloadIcon } from "@mui/icons-material/Download";
+import Divider from "@mui/material/Divider";
+import {NestedMenuItem} from 'mui-nested-menu';
+import { useRouter } from "next/router";
 
-const Menu = ({
+const MenuFolders = ({
   folder,
   showFolderDelete,
   showFolderRename,
   showInfoFolderDetailsModal,
   showInfoFolderPrivacyModal,
+  contextMenu,
+  handleClose,
   setCopyLinkToast,
   setFolderZipDownloadToast 
 }) => {
@@ -30,7 +47,7 @@ const Menu = ({
   const downloadFolderFiles = folder => {
     console.log(folder)
     let a = document.createElement("a");
-
+    handleClose();
     folder.files.forEach((file, idx, array) => {
      // a.href = `${process.env.apiURL}/api/folder/files/${file.file}`;
      console.log({
@@ -48,9 +65,6 @@ const Menu = ({
       a.setAttribute("download", idx);
       a.click();
       document.body.removeChild(a);
-
-
-
     /*  if (idx === array.length - 1) {
         clearInterval(interval);
       }
@@ -62,6 +76,7 @@ const Menu = ({
 
   const downloadCompressedFolderFiles = async folder => {
     showfolderZipToast();
+    handleClose();
     const response = await axiosClient.get(`/api/folder/zip/${folder._id}`);
     console.log(response); 
     console.log(response.status); 
@@ -76,8 +91,6 @@ const Menu = ({
       a.click();
       document.body.removeChild(a);
     }
-
-
   }
 
   const showfolderZipToast = () => {  
@@ -88,94 +101,74 @@ const Menu = ({
     }, 4500);
   }
 
-  if (show) {
-    return (
-      <ul
-        className={styles.menu}
-        style={{ top: anchorPoint.y, left: anchorPoint.x }}
-      >
-        <Link href={`/folders/${folder._id}`}>
-          <li className={styles.menu__list}>
-            <i className="fa fa-folder-open mr-2"></i> Abrir Carpeta
-          </li>
-        </Link>
-        <li
-          className={styles.menu__list}
-          onClick={() => showInfoFolderDetailsModal(folder)}
-        >
-          <i className="fa fa-info-circle mr-2"></i> Información
-        </li>
-        <li
-          className={styles.menu__list}
-          onClick={() => showInfoFolderDetailsModal(folder)}
-        >
-          <i className="fas fa-heart mr-2"></i> Favorito
-        </li>
-        <hr />
-        <li
-          className={styles.menu__list}
-          onClick={() => copyFolderLink()}
-        >
-          <i className="fas fa-link mr-2"></i> Obtener enlace
-        </li>
-        {/* TODO: eliminr enlace debe mostrarse dinamicamente */}
-      {/*  <li
-          className={styles.menu__list}
-          onClick={() => navigator.clipboard.writeText(folderUrl)}
-        >
-          <i className="fas fa-unlink mr-2"></i> Eliminar enlace
-      </li> */}
-        <li
-          className={styles.menu__list}
-          onClick={() => showInfoFolderPrivacyModal(folder)}
-        >
-          <i className="fas fa-share mr-2"></i> Compartir
-        </li>
-        <li className={styles.menu__list}>
-          <i className="fas fa-cloud-download-alt mr-2"></i> Descargar
-          <div className={`${styles.menu__submenu_container} ${styles.menu}`}>
-            <ol>
-              <li className={styles.menu__list} onClick={()=> downloadFolderFiles(folder)}>
-                <label>
-                  <span></span> Descarga todos los archivos
-                </label>
-              </li>
-              <li className={styles.menu__list} onClick={()=> downloadCompressedFolderFiles(folder)}>
-                <label>
-                  <span></span> Descarga como Zip
-                </label>
-              </li>
-             {/* <li className={styles.menu__list}>
-                <label>
-                  <span></span> Descarga como Rar
-                </label>
-    </li>*/}
-            </ol>
-          </div>
-        </li>
-        {/*    <li className={styles.menu__list}>
-        <i className="fas fa-qrcode mr-2"></i> Compartir con QR
+  const showFolderInfo = () => {
+   showInfoFolderDetailsModal(folder);
+   handleClose();
 
-        </li>
-    */}
-        <hr />
-        <li
-          className={styles.menu__list}
-          onClick={() => showFolderRename(folder)}
-        >
-          <i className="fas fa-edit mr-2"></i> Renombrar
-        </li>
-        <hr />
-        <li
-          className={styles.menu__list}
-          onClick={() => showFolderDelete(folder)}
-        >
-          <i className="fas fa-trash-alt mr-2"></i> Borrar
-        </li>
-      </ul>
-    );
   }
-  return <></>;
+
+  const router = useRouter();
+  
+  const openFolder = () => {
+    router.push(`/folders/${folder._id}`);
+  }
+
+    return (  
+      <Menu
+      open={contextMenu !== null}
+      onClose={handleClose}
+      anchorReference="anchorPosition"
+      anchorPosition={
+        contextMenu !== null
+          ? { top: contextMenu.mouseY, left: contextMenu.mouseX }
+          : undefined
+      }
+    >
+      <MenuItem
+        sx={{ pr: 4, mt: 1, fontSize: ".9rem", width:'240px' }}
+        onClick={() => openFolder()}
+      >
+        <FolderOpenIcon fontSize="small" sx={{ mr: 1 }} /> Abrir carpeta{" "}
+      </MenuItem>
+      <MenuItem sx={{ fontSize: ".9rem" }} onClick={()=>showFolderInfo()}>
+        <InfoIcon fontSize="small" sx={{ mr: 1 }} /> Información
+      </MenuItem>
+      <MenuItem sx={{ fontSize: ".9rem" }} onClick={handleClose}>
+        <FavoriteIcon fontSize="small" sx={{ mr: 1 }} /> Favorito
+      </MenuItem>
+      <Divider light />
+      <MenuItem
+        sx={{ fontSize: ".9rem", paddingRight: "40px" }}
+        onClick={handleClose}
+      >
+        <LinkIcon fontSize="small" sx={{ mr: 1 }} /> Obtener enlace
+      </MenuItem>
+      <MenuItem sx={{ fontSize: ".9rem" }} onClick={()=> {handleClose();  showInfoFolderPrivacyModal(folder);}}>
+        <ShareIcon fontSize="small" sx={{ mr: 1 }} /> Compartir
+      </MenuItem>
+      <NestedMenuItem
+        leftIcon={<CloudDownloadIcon sx={{ml:2}} />}
+        label="Descargar"
+        parentMenuOpen={open}
+      >
+ 
+        <MenuItem sx={{ fontSize: ".9rem" }} onClick={()=> downloadFolderFiles(folder)}>
+          Descarga todos los archivos
+        </MenuItem>
+        <MenuItem sx={{ fontSize: ".9rem" }} onClick={()=> downloadCompressedFolderFiles(folder)}>
+          Descargar como Zip
+        </MenuItem>
+        </NestedMenuItem>
+
+      <MenuItem sx={{ fontSize: ".9rem" }} onClick={()=> {handleClose();showFolderRename(folder); }}>
+        <EditIcon fontSize="small" sx={{ mr: 1 }} /> Renombrar
+      </MenuItem>
+      <MenuItem sx={{ fontSize: ".9rem" }} onClick={()=> {handleClose(); showFolderDelete(folder);}}>
+        <DeleteIcon fontSize="small" sx={{ mr: 1 }} /> Borrar
+      </MenuItem>
+    </Menu>
+    
+    );
 };
 
-export default Menu;
+export default MenuFolders;

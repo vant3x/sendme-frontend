@@ -1,15 +1,11 @@
 import React, { useContext, useState, useEffect } from "react";
 import Layout from "../components/Layout/Layout";
-import FoldersItemsContainer from "../components/Folders/FoldersItemsContainern";
+import FoldersItemsContainer from "../components/Folders/FoldersItemsContainer";
 import FolderFilesContainer from "../components/Folders/FolderFilesContainer";
 import DeleteFolderModal from "../components/Folders/DeleteFolderModal";
 import RenameFolderModal from "../components/Folders/RenameFolderModal";
 import InfoFolderDetailsModal from "../components/Folders/InfoFolderDetailsModal";
 import InfoPrivacyFolderModal from "../components/Folders/InfoPrivacyFolderModal";
-
-import Stack from "@mui/material/Stack";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
 
 import authContext from "../context/auth/authContext";
 import axiosClient from "../config/axios";
@@ -33,7 +29,7 @@ const Folders = () => {
 
   useEffect(() => {
     if (user) {
-      console.log(user);
+      console.log(user)
       getRootFiles(user?.id || user?._id);
     }
   }, [user]);
@@ -57,12 +53,12 @@ const Folders = () => {
 
   return (
     <Layout>
-      <Stack direction="row" justifyContent="center" alignItems="center">
+      <div className="flex justify-center">
         <h2 className="font-bold text-2xl mb-4 text-gray-800 ">
           {/*  <i className="fas fa-folder  text-red-400 text-4xl mb-4 mr-2"></i> */}
           Mis Carpetas
         </h2>
-      </Stack>
+      </div>
 
       <FoldersItemsContainer
         user={user}
@@ -72,7 +68,9 @@ const Folders = () => {
         showInfoFolderDetailsModal={setInfoFolderDetails}
         showInfoFolderPrivacyModal={setInfoFolderPrivacy}
         updateListFolders={updateFolders}
+
       />
+      {/* <FolderFilesContainer files={files} /> */}
       {deleteFolder && (
         <DeleteFolderModal
           deleteFolder={deleteFolder}
@@ -89,20 +87,18 @@ const Folders = () => {
         />
       )}
 
-      {infoFolderDetails && (
-        <InfoFolderDetailsModal
-          infoFolder={infoFolderDetails}
-          showInfoFolderDetailsModal={setInfoFolderDetails}
-        />
-      )}
+      {
+        infoFolderDetails &&(
+        <InfoFolderDetailsModal infoFolder={infoFolderDetails} showInfoFolderDetailsModal={setInfoFolderDetails} />
+        )
+      }
 
-      {infoFolderPrivacy && (
-        <InfoPrivacyFolderModal
-          infoFolderPrivacy={infoFolderPrivacy}
-          showInfoFolderPrivacyModal={setInfoFolderPrivacy}
-          setUpdateListFolders={setUpdateFolders}
+{
+        infoFolderPrivacy &&(
+        <InfoPrivacyFolderModal infoFolderPrivacy={infoFolderPrivacy} showInfoFolderPrivacyModal={setInfoFolderPrivacy}  setUpdateListFolders={setUpdateFolders}
         />
-      )}
+        )
+      }
     </Layout>
   );
 };

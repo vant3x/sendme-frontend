@@ -3581,6 +3581,11 @@
   "resolved" "https://registry.npmjs.org/ms/-/ms-2.0.0.tgz"
   "version" "2.0.0"
 
+"mui-nested-menu@^2.0.2":
+  "integrity" "sha512-sVLUGzym5KREOUE6O5TBDdwwkTjMyrzHRiOeZRemwZx0IDPnanmYvehwmJfdp5okHUFXwV+wY2Sgf6wxCVzGKA=="
+  "resolved" "https://registry.npmjs.org/mui-nested-menu/-/mui-nested-menu-2.0.2.tgz"
+  "version" "2.0.2"
+
 "mz@^2.4.0":
   "integrity" "sha512-z81GNO7nnYMEhrGh9LeymoE4+Yr0Wn5McHIZMK5cfQCl+NDX08sCZgUc9/6MHni9IWuFLm1Z3HTCXu2z9fN62Q=="
   "resolved" "https://registry.npmjs.org/mz/-/mz-2.7.0.tgz"

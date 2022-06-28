@@ -166,6 +166,7 @@ const Layout = ({ children }) => {
                     cursor: "pointer",
                     fontSize: "1rem",
                   }}
+                  
                 >
                   &copy; 2022 by Alevante &#127464;&#127476;
                 </Typography>

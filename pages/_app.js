@@ -17,6 +17,10 @@ const theme = createTheme({
     secondary: {
       main: blueGrey[50],
     },
+    pinkLight: {
+      main: pink[400],
+
+    },
     customc: {
       main: blue[700],
       

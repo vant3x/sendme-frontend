@@ -48,9 +48,11 @@ const FolderFileContainerInput = ({ user }) => {
             onChange={() => setHasFolder(!hasFolder)}
           />
         </div>
-        <p className="text-lg text-gray-800 mr-2">
+        {
+          hasFolder && <p className="text-lg text-gray-800 mr-2 mt-2">
           Por defecto los archivos se suben al folder principal
         </p>
+        }
       </div>
 
       {hasFolder ? (

@@ -1,15 +1,35 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import axiosClient from "../../config/axios";
 import { useRouter } from "next/router";
 import Button from "@mui/material/Button";
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+
 
 import appContext from "../../context/app/appContext";
+
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 const NewFolderModal = ({ valueModal }) => {
   const [hideModal, setModal] = useState(false);
   const [folderName, setFolderName] = useState("");
   const [disabledNewFolder, setDisabledNewFolder] = useState(false);
   const [errorState, setError] = useState({});
+
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   const AppContext = useContext(appContext);
   const { setFolderModal, folderModal } = AppContext;
@@ -49,7 +69,10 @@ const NewFolderModal = ({ valueModal }) => {
     console.log(valueModal);
   }, [valueModal]);
 
-  return !hideModal ? (
+  const rootRef = useRef(null);
+
+  
+ {/* return !hideModal ? (
     <div
       className="fixed z-10 inset-0 overflow-y-auto"
       aria-labelledby="modal-title"
@@ -143,7 +166,58 @@ const NewFolderModal = ({ valueModal }) => {
         </div>
       </div>
     </div>
-  ) : null;
+              ) : null;}*/}
+  return (
+    <Box
+    sx={{
+      height: 300,
+      flexGrow: 1,
+      minWidth: 300,
+      transform: 'translateZ(0)',
+      // The position fixed scoping doesn't work in IE11.
+      // Disable this demo to preserve the others.
+      '@media all and (-ms-high-contrast: none)': {
+        display: 'none',
+      },
+    }}
+    ref={rootRef}
+  >
+    <Modal
+      disablePortal
+      disableEnforceFocus
+      disableAutoFocus
+      open={folderModal}
+      onClose={()=>setFolderModal(false)}
+      aria-labelledby="server-modal-title"
+      aria-describedby="server-modal-description"
+      sx={{
+        display: 'flex',
+        p: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+      container={() => rootRef.current}
+    >
+      <Box
+        sx={{
+          position: 'relative',
+          width: 400,
+          bgcolor: 'background.paper',
+          border: '2px solid #000',
+          boxShadow: (theme) => theme.shadows[5],
+          p: 4,
+        }}
+      >
+        <Typography id="server-modal-title" variant="h6" component="h2">
+          Server-side modal
+        </Typography>
+        <Typography id="server-modal-description" sx={{ pt: 2 }}>
+          If you disable JavaScript, you will still see me.
+        </Typography>
+      </Box>
+    </Modal>
+  </Box>
+  );
 };
 
 export default NewFolderModal;

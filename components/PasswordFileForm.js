@@ -1,8 +1,10 @@
 import React, { useState, useContext } from 'react';
 import appContext from '../context/app/appContext';
 import Checkbox from '@mui/material/Checkbox';
+import TextField from '@mui/material/TextField';
 
 const PasswordFileForm = () => {
+
 
     // context de la app
     const AppContext = useContext(appContext);
@@ -26,12 +28,11 @@ const PasswordFileForm = () => {
         </div>
 
         { hasPassword ? (
-          <input
-            placeholder="Ingresa una contraseña"
-            type="password" 
-            className="appearance-none w-full mt-2 bg-white border border-gray-400 text-black py-3 px-4 pr-8 rounded leading-none focus:outline focus:border-gray-500" 
-            onChange={e => setPassword(e.target.value)}
-            />
+   
+            <TextField     sx={{my:2}}  fullWidth      onChange={e => setPassword(e.target.value)}
+            id="password" type="password" label="Password" placeholder='Ingresa una contraseña' variant="outlined" />
+
+            
         ) : null }
 
         </div>

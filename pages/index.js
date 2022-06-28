@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import Layout from "./../components/Layout/Layout";
 import Alert from "./../components/Alerts/Alert";
 import Dropzone from "./../components/Dropzone/Dropzone";
-import HomeCopyLink from './../components/HomeFiles/HomeCopyLink';
+import HomeCopyLink from "./../components/HomeFiles/HomeCopyLink";
 import Feature from "./../components/Feature";
 import authContext from "../context/auth/authContext";
 import appContext from "../context/app/appContext";
@@ -14,22 +14,19 @@ import Typography from "@mui/material/Typography";
 const Home = () => {
   // Extraer el usuario autenticado del storage
   const AuthContext = useContext(authContext);
-  const { userOauth,  userAuthtenticate,  user } = AuthContext;
+  const { userOauth, userAuthtenticate, user } = AuthContext;
 
   // extraer el mensaje de error del archivo
   const AppContext = useContext(appContext);
   const { fileMessage, url } = AppContext;
 
   useEffect(() => {
-
     const token = localStorage.getItem("token");
     if (token) {
       userOauth();
 
       userAuthtenticate();
-
     } else {
-
     }
   }, []);
 
@@ -48,35 +45,45 @@ const Home = () => {
                   Compartir archivos de forma fácil y privada
                 </h2>
                 <p className="text-lg leading-loose">
-                <Typography
-              variant="span"
-              noWrap
-              component="span"
-              sx={{
-                fontWeight: "bold",
-                color: "primary.main",
-                textDecoration: "none",
-              }}
-            >
-            SendMe</Typography>  te
-                  permite compartir archivos de forma segura,
-                  archivos protegidos por contraseña, archivos con un limite de
-                  descargas y mucho más
+                  <Typography
+                    variant="span"
+                    noWrap
+                    component="span"
+                    sx={{
+                      fontWeight: "bold",
+                      color: "primary.main",
+                      textDecoration: "none",
+                    }}
+                  >
+                    SendMe
+                  </Typography>{" "}
+                  te permite compartir archivos de forma segura, archivos
+                  protegidos por contraseña, archivos con un limite de descargas
+                  y mucho más
                 </p>
                 {!user ? (
                   <>
-                  <p className="mt-2">
-                  <Link sx={{fontWeight: 'bold'}} href="/signup" component={NextLink} color="primary" >
-                        Crea una cuenta para obtener todos los beneficios
-                  </Link>
-                </p>
                     <p className="mt-2">
-                      <Link  href="/features" component={NextLink} color="primary" sx={{fontWeight: 'bold'}}>
-                            Conoce todos los beneficios
+                      <Link
+                        sx={{ fontWeight: "bold" }}
+                        href="/signup"
+                        component={NextLink}
+                        color="primary"
+                      >
+                        Crea una cuenta para obtener todos los beneficios
                       </Link>
                     </p>
-                    {
-                      /*
+                    <p className="mt-2">
+                      <Link
+                        href="/features"
+                        component={NextLink}
+                        color="primary"
+                        sx={{ fontWeight: "bold" }}
+                      >
+                        Conoce todos los beneficios
+                      </Link>
+                    </p>
+                    {/*
                           ---- versiones de links con buttons bonitos tipo jumbotron
 
                              <p className="mt-2">
@@ -98,8 +105,7 @@ const Home = () => {
                       </Link>
                     </p>
 
-                      */
-                    }
+                      */}
                   </>
                 ) : null}
               </div>

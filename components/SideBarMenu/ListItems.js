@@ -15,6 +15,7 @@ import HomeIcon from '@mui/icons-material/Home';
 import SendAndArchiveIcon from '@mui/icons-material/SendAndArchive';
 import Link from "next/link";
 import appContext from "../../context/app/appContext";
+import Tooltip from '@mui/material/Tooltip';
 
 //const AppContext = useContext(appContext);
 
@@ -29,12 +30,15 @@ export const mainListItems = (
       <ListItemText primary="Dashboard" />
     </ListItemButton>
     <Link href="/" onClick={()=> {/*resetState()*/}}>
+    <Tooltip title="Inicio" placement="right" >
+
     <ListItemButton>
       <ListItemIcon>
         <HomeIcon />
       </ListItemIcon>
       <ListItemText primary="Inicio" />
     </ListItemButton>
+    </Tooltip>
   </Link>
     <ListItemButton>
       <ListItemIcon>

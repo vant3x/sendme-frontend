@@ -16,6 +16,10 @@ import QrCodeIcon from "@mui/icons-material/QrCode";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
 import Link from "@mui/material/Link";
 import { bgcolor } from "@mui/system";
+import LockIcon from "@mui/icons-material/Lock";
+import LockOpenIcon from "@mui/icons-material/LockOpen";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
 
 export async function getServerSideProps({ params }) {
   const { link } = params;
@@ -143,48 +147,57 @@ const link = ({ link, linkInfo }) => {
           />
         </Head>
         <Container maxWidth="sm">
-          <Box sx={{ mt: "20px" }} component="div">
+          <Box sx={{ mt: "20px", pb: 4 }} component="div">
             {hasPassword && user?.id !== link.author ? (
               <div className="text-center ">
-                <i className="fas fa-lock text-6xl mb-6  text-red-500 mt-2"></i>
-                <p className="text-center text-2xl'">
-                  Este enlace se encuentra protegido por una contraseña
-                </p>
+                {/*  <i className="fas fa-lock text-6xl mb-6  text-red-500 mt-2"></i>*/}
+                <LockIcon color="primary" sx={{ fontSize: "4.5rem", mb: 2 }} />
+
                 {fileMessage && <Alert error={true} />}
 
                 <div className="flex justify-center mt-5">
                   <div className="w-full max-w-lg">
-                    <form
+                    <Box
+                      component="form"
+                      sx={{ py: "20rem" }}
                       className="bg-white rounded shadow-md px-8 pt-6 pb-8 mb-4"
                       onSubmit={(e) => verifyPassword(e)}
                     >
+                      <Typography
+                        variant="p"
+                        noWrap
+                        component="p"
+                        sx={{
+                          my: 2,
+                        }}
+                      >
+                        Este enlace se encuentra protegido por una contraseña
+                      </Typography>
                       <div className="mb-4">
-                        <label
-                          className="block text-black text-sm font-bold mb-2"
-                          htmlFor="name"
-                        >
-                          Password
-                        </label>
-                        <input
+                        <TextField
                           type="password"
-                          id="password"
-                          className="shadow appereance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                          placeholder="Ingresa la contraseña del enlace"
+                          fullWidth
                           value={password}
+                          sx={{ mt: 2 }}
                           onChange={(e) => setPassword(e.target.value)}
+                          id="password"
+                          label="Ingresa la contraseña del enlace"
+                          variant="outlined"
                         />
                       </div>
 
-                      <button
+                      <Button
                         type="submit"
-                        className="bg-red-500 hover:bg-gray-900 w-full p-2 text-white uppercase font-bold"
+                        variant="contained"
                         value="Validar Contraseña"
+                        fullWidth
+                        color="primary"
+                        endIcon={<LockOpenIcon />}
+                        sx={{ mr: 2, my: 2 }}
                       >
-                        {" "}
-                        Desbloquear Enlace{" "}
-                        <i className="ml-2 fas fa-unlock"></i>
-                      </button>
-                    </form>
+                        Desbloquear Enlace
+                      </Button>
+                    </Box>
                   </div>
                 </div>
               </div>
@@ -235,9 +248,12 @@ const link = ({ link, linkInfo }) => {
                           px: 8,
                           py: 2,
                           borderRadius: 2,
+                          "&:hover": {
+                            backgroundColor: "pinkLight.main",
+                          },
                         }}
                       >
-                        Aquí <CloudDownloadIcon sx={{ml:1}} />
+                        Aquí <CloudDownloadIcon sx={{ ml: 1 }} />
                       </Button>
 
                       {/*   <a  

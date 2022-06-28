@@ -17,7 +17,7 @@ import FolderIcon from "@mui/icons-material/Folder";
 import CreateNewFolderIcon from "@mui/icons-material/CreateNewFolder";
 import CloudCircleIcon from '@mui/icons-material/CloudCircle';
 import LogoutIcon from "@mui/icons-material/Logout";
-
+import SettingsIcon from '@mui/icons-material/Settings';
 import appContext from "../context/app/appContext";
 
 const HeaderUserOptions = ({
@@ -32,12 +32,24 @@ const HeaderUserOptions = ({
   const { setFolderModal, folderModal } = AppContext;
   const router = useRouter();
 
+  const openNewFolderModal = () => {
+    setFolderModal(true);
+  }
   const settings = [
     {
       title: "Perfil",
       path: `/account/${user.username}`,
       icon: (
         <AccountCircleIcon
+          sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
+        />
+      ),
+    },
+    {
+      title: "Ajustes",
+      path: `/ajustes`,
+      icon: (
+        <SettingsIcon
           sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
         />
       ),
@@ -59,8 +71,8 @@ const HeaderUserOptions = ({
           sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
         />
       ),
-      customClick: setFolderModal
-    },
+      customClick:  openNewFolderModal
+    },/*
     {
       title: "Actualiza a premium",
       icon: (
@@ -69,7 +81,7 @@ const HeaderUserOptions = ({
         />
       ),
       customClick: setFolderModal
-    },
+    },*/
     {
       title: "Logout",
       icon: <LogoutIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />,
