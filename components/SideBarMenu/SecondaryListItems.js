@@ -16,62 +16,34 @@ import SendAndArchiveIcon from '@mui/icons-material/SendAndArchive';
 import Link from "next/link";
 import appContext from "../../context/app/appContext";
 import Tooltip from '@mui/material/Tooltip';
+import { useRouter } from 'next/router';
 
-//const AppContext = useContext(appContext);
+const SecondaryListItems = () => { 
+  const AppContext = useContext(appContext);
 
-//const { resetState } = AppContext;
+  const { resetState } = AppContext;
+  const router = useRouter();
 
-export const mainListItems = (
-  <Fragment>
-    <ListItemButton>
-      <ListItemIcon>
-        <DashboardIcon />
-      </ListItemIcon>
-      <ListItemText primary="Dashboard" />
-    </ListItemButton>
-    <Link href="/" onClick={()=> {/*resetState()*/}}>
-    <Tooltip title="Inicio" placement="right" >
+  const goHomeFolder = () => {
+    router.push('/folders');
+    //    resetState();
+  }
 
-    <ListItemButton>
-      <ListItemIcon>
-        <HomeIcon />
-      </ListItemIcon>
-      <ListItemText primary="Inicio" />
-    </ListItemButton>
-    </Tooltip>
-  </Link>
-    <ListItemButton>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <ListItemText primary="Comaprtido" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Estadisticas" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <SendAndArchiveIcon />
-      </ListItemIcon>
-      <ListItemText primary="Transferencias" />
-    </ListItemButton>
-  </Fragment>
-);
+   return (
 
-export const secondaryListItems = (
   <Fragment>
     <ListSubheader component="div" inset>
       Carpetas
     </ListSubheader>
-    <ListItemButton>
+    <Tooltip title="Carpeta principal" placement="right" >
+
+    <ListItemButton onClick={()=> {goHomeFolder()}}>
       <ListItemIcon>
         <FolderIcon/>
       </ListItemIcon>
       <ListItemText primary="Principal" />
     </ListItemButton>
+    </Tooltip>
     <ListItemButton>
       <ListItemIcon>
         <FolderSpecialIcon/>
@@ -85,4 +57,6 @@ export const secondaryListItems = (
       <ListItemText primary="Publico" />
     </ListItemButton>
   </Fragment>
-);
+)};
+
+export  default SecondaryListItems;

@@ -218,16 +218,29 @@ const link = ({ link, linkInfo }) => {
                         <span className="text-gray-700">
                           {link.originalName.split(".")[0].slice(0, 30)}
                         </span>
-                        <span className="text-red-500">
-                          .{link.originalName.split(".")[1]}
-                        </span>
+                        <Typography
+                        variant="span"
+                        noWrap
+                        component="span"
+                        sx={{marginLeft: '-2px'}}
+                        color="primary.main"
+              
+                      >                            .{link.originalName.split(".")[1]}
+                        </Typography>
                       </p>
                       {link.fileSize && <p>{link.fileSize}</p>}
                       <p>
-                        <span className="text-red-500">
-                          {" "}
+                      <Typography
+                        variant="span"
+                        noWrap
+                        component="span"
+                        color="primary.main"
+                        sx={{
+                          my: 2,
+                        }}
+                      >                          {" "}
                           Limite de descargas:{" "}
-                        </span>{" "}
+                        </Typography>{" "}
                         <span className="text-gray-700">
                           {link.downloadLimit}
                         </span>
@@ -247,6 +260,7 @@ const link = ({ link, linkInfo }) => {
                           color: "white",
                           px: 8,
                           py: 2,
+                          boxShadow: '0 1px 3px 0 rgb(0 0 0 / 10%), 0 1px 2px 0 rgb(0 0 0 / 6%)',
                           borderRadius: 2,
                           "&:hover": {
                             backgroundColor: "pinkLight.main",

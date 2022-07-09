@@ -8,6 +8,8 @@ import Button from "@mui/material/Button";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import Typography from "@mui/material/Typography";
 import SnackbarAlert from "./../../components/Alerts/SnackbarAlert";
+import Image from "next/image";
+
 
 const HomeCopyLink = ({ url }) => {
   const [open, setOpen] = useState(false);
@@ -54,15 +56,20 @@ const HomeCopyLink = ({ url }) => {
         }}
       >
         <div className="bg-white rounded shadow-md px-8 pt-6 pb-8 mb-4">
-          <Typography
-            variant="h5"
-            noWrap
-            color="pinkLight.main"
-            component="p"
-            sx={{ my: 2 }}
-          >
-            Tu URL es:
-          </Typography>
+          <div className="flex justify-content items-end">
+
+<Typography
+  variant="h5"
+  noWrap
+  color="pinkLight.main"
+  component="span"
+  sx={{ my: 2, mb:5 }}
+>
+  Tu URL es:
+</Typography>
+<img src="/assets/img-vectors/undraw-Real-time-sync.png" width="270px" alt="SendMeFiles"/>
+
+          </div>
           <p className="text-center mb-4">
             <a
               href={`${process.env.frontendUrl}/links/${url}`}

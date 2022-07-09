@@ -7,9 +7,19 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import MenuFolders from "./../common/ContextMenu/Menu";
 import useContextMenu from "../hooks/useContextMenuClick";
-import Typography from '@mui/material/Typography';
+import Typography from "@mui/material/Typography";
+import FolderIcon from "@mui/icons-material/Folder";
 
-const FolderItem = ({ styles, folder, showFolderDelete, showFolderRename, showInfoFolderDetailsModal, showInfoFolderPrivacyModal, setCopyLinkToast, setFolderZipDownloadToast}) => {
+const FolderItem = ({
+  styles,
+  folder,
+  showFolderDelete,
+  showFolderRename,
+  showInfoFolderDetailsModal,
+  showInfoFolderPrivacyModal,
+  setCopyLinkToast,
+  setFolderZipDownloadToast,
+}) => {
   const { onMouseUp } = useContextMenu();
 
   const [folderOptions, setFolderOptions] = useState(false);
@@ -47,25 +57,47 @@ const FolderItem = ({ styles, folder, showFolderDelete, showFolderRename, showIn
   };
 
   return (
-    <Box component="article"  sx={{ flexDirection: 'column' }}       onMouseEnter={() => showFolderOptions(true)}
+    <Box
+      component="article"
+      sx={{ flexDirection: "column" }}
+      onMouseEnter={() => showFolderOptions(true)}
       onContextMenu={handleContextMenu}
     >
-
-    {/*<article
+      {/*<article
       className="flex flex-col  hover:text-red-500 mb-4 mt-2 mr-2"
 
   >*/}
-      <Link href={`/folders/${folder._id}`} >
-        <a onMouseEnter={()=>setFolderHover(true)} onMouseLeave={()=>setFolderHover(false)}>
-          <i
-            className={`${styles.text10xl} fas fa-folder cursor-pointer text-red-400  hover:text-red-500   mx-4`}
+      <Link href={`/folders/${folder._id}`}>
+        <a
+          onMouseEnter={() => setFolderHover(true)}
+          onMouseLeave={() => setFolderHover(false)}
+        >
+          {/*
+            <i
+            className={`${styles.text10xl} fas fa-folders cursor-pointer text-red-400  hover:text-red-500   mx-4`}
           ></i>
+          */}
+          <FolderIcon
+            sx={{ fontSize: "6rem", marginX: "8px", color: "pinkLight.main",     
+               "&:hover": {
+              color: "primary.main",
+            }, }}
+          />
         </a>
       </Link>
       <div>
         <p className="ml-4 cursor-pointer  hover:text-red-500 hover">
           <Link href={`/folders/${folder._id}`}>
-            <Typography sx={{ color: folderHover ? "primary.main" : "",  "&:hover": {color:'primary.main' }}} component="a" variant="a">{folder.folderName}</Typography>
+            <Typography
+              sx={{
+                color: folderHover ? "primary.main" : "",
+                "&:hover": { color: "primary.main" },
+              }}
+              component="a"
+              variant="a"
+            >
+              {folder.folderName}
+            </Typography>
           </Link>
           {
             /* folderOptions ? (
@@ -88,8 +120,8 @@ const FolderItem = ({ styles, folder, showFolderDelete, showFolderRename, showIn
           setFolderZipDownloadToast={setFolderZipDownloadToast}
         />
       ) : null}
-   {/* </article>*/}
-    </Box>  
+      {/* </article>*/}
+    </Box>
   );
 };
 
