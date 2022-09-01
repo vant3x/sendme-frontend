@@ -53,9 +53,10 @@ const NewFolderModal = ({ valueModal }) => {
       router.push("/folders");
       hideFolderModal();
     } catch (error) {
-      console.log(error);
+      console.log(error); 
       console.log(error.response.data);
       setError(error.response.data);
+      console.log({errorState});
       console.log({ stateError: errorState });
       // showAlert(error.response.data.message);
     }
@@ -131,7 +132,21 @@ const NewFolderModal = ({ valueModal }) => {
             className="shadow appereance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
             placeholder="Ingresa un nombre"
           />
+            {/*errorState && errorState.statusCode === 403 {
+              errorState.errores.forEach(error => {
+              
+              {error.msg}
+              
+            })}};*/}
+
+            {              errorState && errorState.statusCode === 403 && (
+                <div className="text-red-500 text-sm">
+                  {errorState.message}
+                </div>
+              )
+              }
         </div>
+      
         <Button
           variant="contained"
           color="primary"
@@ -142,7 +157,7 @@ const NewFolderModal = ({ valueModal }) => {
           Crear Carpeta
         </Button>
 
-        <Button
+        <Button 
           type="button"
           onClick={() => {
             setFolderModal(false);

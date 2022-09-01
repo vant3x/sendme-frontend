@@ -2,6 +2,8 @@ import React, { useContext, useEffect } from 'react';
 import authContext from '../../context/auth//authContext';
 import appContext from '../../context/app/appContext';
 import styles from '../../styles/Alert.module.css';
+import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
 
 const AlertExpired = ({statusCode}) => {
   // extraer mensaje de error para usuarios
@@ -19,14 +21,13 @@ const AlertExpired = ({statusCode}) => {
    }, []);
   
     return (
-        <div role="alert">
-        <div className="bg-red-500 text-white font-bold rounded-t px-4 py-2">
-          La sesión expiró
-        </div>
-        <div className="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
-          <p>Tu sesión expiró, debes volver a iniciar sesión.</p>
-        </div>
-      </div>
+      <Stack sx={{ width: "100%" }} spacing={2}>
+      <Alert severity="error">
+        {" "}
+        <h5> La sesión expiró</h5>
+        Tu sesión expiró, debes volver a iniciar sesión.
+      </Alert>
+    </Stack>
     );
 }
 

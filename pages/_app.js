@@ -24,6 +24,14 @@ const theme = createTheme({
     customc: {
       main: blue[700],
       
+    },
+    light: {
+      main: '#fff',
+
+    }
+    ,
+    lightGrey:  {
+      main: '#f5f5f5'
     }
   },
 });

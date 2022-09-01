@@ -76,7 +76,7 @@ const MenuFiles = ({
       <NestedMenuItem
         leftIcon={<CloudDownloadIcon sx={{ml:2}} />}
         label="Descargar"
-        parentMenuOpen={open }
+        parentMenuOpen={typeof open   !== 'undefined'  ? open : true }
       >
  
         <MenuItem sx={{ fontSize: ".9rem" }} onClick={handleClose}>

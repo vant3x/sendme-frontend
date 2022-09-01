@@ -15,6 +15,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Badge from "@mui/material/Badge";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import SearchIcon from '@mui/icons-material/Search';
+import useScrollTrigger from '@mui/material/useScrollTrigger';
 
 import { useRouter } from "next/router";
 import styles from "./../styles/Header.module.css";
@@ -23,7 +24,21 @@ import appContext from "../context/app/appContext";
 import HeaderUserOptions from "./HeaderUserOptions";
 import axiosClient from "../config/axios";
 
+function ElevationScroll(props) {
+  const { children, window } = props;
+  // Note that you normally won't need to set the window ref as useScrollTrigger
+  // will default to window.
+  // This is only being set here because the demo is in an iframe.
+  const trigger = useScrollTrigger({
+    disableHysteresis: true,
+    threshold: 0,
+    target: window ? window() : undefined,
+  });
 
+  return React.cloneElement(children, {
+    elevation: trigger ? 4 : 0,
+  });
+}
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -86,7 +101,8 @@ const AppBar = styled(MuiAppBar, {
 
 const drawerWidth = 240;
 
-const Header = ({ newFolder, open, toggleDrawer }) => {
+const Header = (props,{ newFolder, open, toggleDrawer }) => {
+
   // routing
   const router = useRouter();
   // Extraer el usuario autenticado del storage
@@ -158,7 +174,11 @@ const Header = ({ newFolder, open, toggleDrawer }) => {
   };
 
   return (
-    <AppBar position="fixed" open={open}>
+    <>
+        <ElevationScroll {...props}>
+
+    {/*_<AppBar position="fixed" open={open} color={`${user ? 'primary' : 'lightGrey'}`}>*/}
+    <AppBar position="fixed" open={open} color={`${user ? 'primary' : 'lightGrey'}`}>
       <Container maxWidth="xl">
         <Toolbar disableGutters        sx={{
               mr: '24px', 
@@ -189,7 +209,9 @@ const Header = ({ newFolder, open, toggleDrawer }) => {
                 fontFamily: "Lobster",
                 fontWeight: 700,
                 letterSpacing: ".3rem",
-                color: "inherit",
+              color: `${ user ? 'inherit' : 'pinkLight.main'}
+                
+                `,
                 textDecoration: "none",
                 cursor: "pointer",
               }}
@@ -234,7 +256,7 @@ const Header = ({ newFolder, open, toggleDrawer }) => {
                   <MenuItem key={page.path} onClick={handleCloseNavMenu}>
                     <Link href={page.path}>
                       <Typography textAlign="center">
-                        <Box sx={{ textTransform: "capitalize" }}>
+                        <Box sx={{ textTransform: "capitalize", color:  '#000'}}>
                           {page.title}
                         </Box>
                       </Typography>
@@ -272,7 +294,7 @@ const Header = ({ newFolder, open, toggleDrawer }) => {
                   <Button
                     key={page.path}
                     onClick={handleCloseNavMenu}
-                    sx={{ my: 2, color: "white", display: "block" }}
+                    sx={{ my: 2, color: "primary", display: "block" }}
                   >
                     {page.title}
                   </Button>
@@ -319,6 +341,9 @@ const Header = ({ newFolder, open, toggleDrawer }) => {
         </Toolbar>
       </Container>
     </AppBar>
+    </ElevationScroll>
+
+    </>
   );
 };
 export default Header;

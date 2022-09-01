@@ -46,9 +46,6 @@ const folder = ({ folder }) => {
           if (typeof window !== 'undefined') {
             console.log(user)
             console.log(user)
-            console.log(user)
-            console.log(user)
-            console.log(user)
             if (!user && folderById.privacy < 2) {
 
             router.push('/login')

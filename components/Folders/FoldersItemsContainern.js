@@ -71,7 +71,7 @@ const FoldersItemsContainer = ({
               <p className="text-center py-4 mr-4 mt-4">
                 Aún no tienes carpetas creadas
               </p>
-            ) : (
+            ) : ( 
               <>
                 {foldersByUser.map((folder, index) => (
                   <FolderItem
