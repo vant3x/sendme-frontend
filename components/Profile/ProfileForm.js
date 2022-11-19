@@ -26,13 +26,17 @@ const ProfileForm = ({ user }) => {
   const refAvatarImg = useRef("");
 
   useEffect(async () => {
-    const userInfo = await axiosClient.get(
-      `/api/user/profile/${
-        user && user.id ? user.id : user && user._id ? user._id : null
-      }`
-    );
-    setUserProfile(userInfo.data.user);
-    setLoading(false);
+    console.log(user?.id)
+    if (user) {
+      const userInfo = await axiosClient.get(
+        `/api/user/profile/${
+          user && user?.id ? user?.id : user && user?._id ? user?._id : null
+        }`
+      );
+      setUserProfile(userInfo.data.user);
+      setLoading(false);
+    }
+
   }, [user]);
 
   const uploadProfilePicture = (e) => {

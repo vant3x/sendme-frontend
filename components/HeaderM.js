@@ -207,9 +207,10 @@ const Header = (props,{ newFolder, open, toggleDrawer }) => {
                 ml: 4,
                 display: { xs: "none", md: "flex" },
                 fontFamily: "Lobster",
+                fontSize: `${ user ? '' : '40px'} `,
                 fontWeight: 700,
                 letterSpacing: ".3rem",
-              color: `${ user ? 'inherit' : 'pinkLight.main'}
+              color: `${ user ? 'inherit' : '#e91e63'}
                 
                 `,
                 textDecoration: "none",

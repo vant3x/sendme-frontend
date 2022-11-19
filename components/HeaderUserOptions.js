@@ -32,6 +32,11 @@ const HeaderUserOptions = ({
   const { setFolderModal, folderModal } = AppContext;
   const router = useRouter();
 
+  const logoutUser = () => {
+    logout(),
+    router.push('/');
+  }
+
   const openNewFolderModal = () => {
     setFolderModal(true);
   }
@@ -85,7 +90,7 @@ const HeaderUserOptions = ({
     {
       title: "Logout",
       icon: <LogoutIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />,
-      customClick: logout,
+      customClick: logoutUser,
     },
   ];
 
