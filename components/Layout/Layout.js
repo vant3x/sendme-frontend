@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import Head from "next/head";
 import Link from "next/link";
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 //mui
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
@@ -11,7 +11,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
-import Toolbar from '@mui/material/Toolbar';
+import Toolbar from "@mui/material/Toolbar";
 
 //import Header from "./../Header";
 import Header from "./../HeaderM";
@@ -30,7 +30,7 @@ const Layout = ({ children }) => {
     setOpen(!open);
   };
 
-  const router = useRouter();  
+  const router = useRouter();
 
   return (
     <>
@@ -111,9 +111,12 @@ const Layout = ({ children }) => {
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <Header open={open} toggleDrawer={toggleDrawer} />
-       { user && <>
-        <SideBarMenuComponent  open={open} toggleDrawer={toggleDrawer} />
-       </>}<Box
+        {user && (
+          <>
+            <SideBarMenuComponent open={open} toggleDrawer={toggleDrawer} />
+          </>
+        )}
+        <Box
           component="main"
           sx={{
             backgroundColor: (theme) =>
@@ -122,7 +125,7 @@ const Layout = ({ children }) => {
                 : theme.palette.grey[900],
             flexGrow: 1,
             marginTop: "36px",
-            height: "100%",
+            height: "100vh",
             overflow: "visible",
           }}
         >
@@ -146,39 +149,47 @@ const Layout = ({ children }) => {
               </Fab>
             </Stack>) : null
             */}
-            <Box sx={{ mb: 6, mt: 2 }}>
-              <footer className="text-center mb-4 ">
-                {/*  <a
+            <Box
+              sx={{
+                mb: 6,
+                mt: 2,
+              }}
+              
+            >
+              <Container maxWidth="sm">
+                <footer className="text-center mb-4 ">
+                    {/*  <a
                     href="https://twitter.com/alevant3X"
                     target="_blank"
                     className="text-red-500 hover:text-red-700"
                   >
                     {" "}
                     {/* &copy; 2022 by Alevante  	&#127464;&#127476;*/}
-                <Typography
-                  variant="p"
-                  noWrap
-                  component="span"
-                  sx={{
-                    fontWeight: 700,
-                    color: "primary.main",
-                    textDecoration: "none",
-                    cursor: "pointer",
-                    fontSize: "1rem",
-                  }}
-                  
-                >
-                  &copy; 2022 by Alevante &#127464;&#127476;
-                </Typography>
-                {/* </a> */}
+                    <Typography
+                      variant="p"
+                      noWrap
+                      component="span"
+                      sx={{
+                        fontWeight: 700,
+                        color: "primary.main",
+                        textDecoration: "none",
+                        cursor: "pointer",
+                        fontSize: "1rem",
+                      }}
+                    >
+                      &copy; 2022 by Alevante
+                    </Typography>
+                    {/* </a> */}
 
-                <br />
-                <Link href="/privacidad">
-                  <a className="underline mt-2 text-gray-800 hover:text-red-500">
-                    Políticas de Privacidad
-                  </a>
-                </Link>
-              </footer>
+                    <br />
+                    <Link href="/privacidad">
+                      <a className="underline mt-2 text-gray-800 hover:text-red-500">
+                        Políticas de Privacidad
+                      </a>
+                    </Link>
+                 
+                </footer>
+              </Container>
             </Box>
             {folderModal && <NewFolderModal />}
           </Container>

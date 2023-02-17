@@ -69,20 +69,22 @@ const Signup = () => {
 
   return (
     <Layout>
-                <Container maxWidth="xs" sx={{ mt: 4, mb: 4 }} disableGutters={true}>
+                <Container  maxWidth="md" sx={{ mt: 4, mb: 4 }} disableGutters={true}>
 
       <Box
+     
         sx={{
           marginTop: 8,
           display: "flex",
           flexDirection: "column",
-          alignItems: "center",
+          alignItems: "center"
+     
         }}
       >
         <Avatar sx={{ m: 1, bgcolor: "primary.main" }}>
           <LockOutlinedIcon />
         </Avatar>
-        <h2 className="text-4xl font-sans font-bold text-gray-800 text-center my-4">
+        <h2 className="text-3xl font-sans font-bold text-gray-800 text-center my-4">
           Crear Cuenta
         </h2>
         <div className="lg:flex lg:justify-center ">

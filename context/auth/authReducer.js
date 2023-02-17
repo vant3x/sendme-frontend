@@ -15,7 +15,7 @@ const authReducer = (state, action) => {
     case LOGIN_ERROR:
       return {
         ...state,
-        message: action.payload,
+        message: action.payload
       };
     case SESSION_ERROR: 
       return {

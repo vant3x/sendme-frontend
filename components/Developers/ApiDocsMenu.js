@@ -1,0 +1,89 @@
+import { useState } from 'react';
+import PropTypes from 'prop-types';
+import { styled } from '@mui/material/styles';
+import TreeView from '@mui/lab/TreeView';
+import TreeItem from '@mui/lab/TreeItem';
+import Typography from '@mui/material/Typography';
+import MailIcon from '@mui/icons-material/Mail';
+import DeleteIcon from '@mui/icons-material/Delete';
+import Label from '@mui/icons-material/Label';
+import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
+import InfoIcon from '@mui/icons-material/Info';
+import ForumIcon from '@mui/icons-material/Forum';
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
+import Button from '@mui/material/Button';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+
+import Box from '@mui/material/Box';
+
+
+  
+
+const ApiDocsMenu = (props) => {
+
+  const [expanded, setExpanded] = useState([]);
+  const [selected, setSelected] = useState([]);
+
+  const handleToggle = (event, nodeIds) => {
+    setExpanded(nodeIds);
+  };
+
+  const handleSelect = (event, nodeIds) => {
+    setSelected(nodeIds);
+  };
+
+  const handleExpandClick = () => {
+    setExpanded((oldExpanded) =>
+      oldExpanded.length === 0 ? ['1', '5', '6', '7'] : [],
+    );
+  };
+
+  const handleSelectClick = () => {
+    setSelected((oldSelected) =>
+      oldSelected.length === 0 ? ['1', '2', '3', '4', '5', '6', '7', '8', '9'] : [],
+    );
+  };
+    return (
+      <Box sx={{ height: 270, flexGrow: 1, maxWidth: 400, overflowY: 'auto' }}>
+      <Box sx={{ mb: 1 }}>
+        <Button onClick={handleExpandClick}>
+          {expanded.length === 0 ? 'Expand all' : 'Collapse all'}
+        </Button>
+        <Button onClick={handleSelectClick}>
+          {selected.length === 0 ? 'Select all' : 'Unselect all'}
+        </Button>
+      </Box>
+      <TreeView
+        aria-label="controlled"
+        defaultCollapseIcon={<ExpandMoreIcon />}
+        defaultExpandIcon={<ChevronRightIcon />}
+        expanded={expanded}
+        selected={selected}
+        onNodeToggle={handleToggle}
+        onNodeSelect={handleSelect}
+        multiSelect
+      >
+        <TreeItem nodeId="1" label="Applications">
+          <TreeItem nodeId="2" label="Calendar" />
+          <TreeItem nodeId="3" label="Chrome" />
+          <TreeItem nodeId="4" label="Webstorm" />
+        </TreeItem>
+        <TreeItem nodeId="5" label="Documents">
+          <TreeItem nodeId="6" label="MUI">
+            <TreeItem nodeId="7" label="src">
+              <TreeItem nodeId="8" label="index.js" />
+              <TreeItem nodeId="9" label="tree-view.js" />
+            </TreeItem>
+          </TreeItem>
+        </TreeItem>
+      </TreeView>
+    </Box>
+   
+    );  
+ }
+
+
+ export default ApiDocsMenu;
