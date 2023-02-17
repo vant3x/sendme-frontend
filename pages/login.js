@@ -137,7 +137,7 @@ const Login = () => {
                 </label>
                 <input
                   type="email"
-                  id="email"
+                  id="email"  
                   className="shadow appereance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   placeholder="Ingresa tu email *"
                   value={formik.values.email}
